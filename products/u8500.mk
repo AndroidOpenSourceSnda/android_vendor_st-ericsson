@@ -4,10 +4,12 @@
 $(call inherit-product, build/target/product/generic.mk)
 
 # Overrides
-PRODUCT_BRAND := ste
-PRODUCT_NAME := ste_u8500
+PRODUCT_BRAND := Bambookphone
+PRODUCT_NAME := u8500
 PRODUCT_DEVICE := u8500
-PRODUCT_MANUFACTURER := ste
+PRODUCT_MANUFACTURER := Bambookphone
+PRODUCT_MODEL := Bambook S1
+
 PRODUCT_LOCALES := en_US zh_CN zh_TW
 
 PRODUCT_PACKAGE_OVERLAYS := vendor/st-ericsson/u8500/overlay
