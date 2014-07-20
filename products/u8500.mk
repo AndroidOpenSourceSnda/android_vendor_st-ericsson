@@ -12,6 +12,13 @@ PRODUCT_MODEL := Bambook S1
 
 PRODUCT_LOCALES := en_US zh_CN zh_TW
 
+# This device is hdpi.  However the platform doesn't
+# currently contain all of the bitmaps at hdpi density so
+# we do this little trick to fall back to the hdpi version
+# if the hdpi doesn't exist.
+PRODUCT_AAPT_CONFIG := normal hdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
+
 PRODUCT_PACKAGE_OVERLAYS := vendor/st-ericsson/u8500/overlay
 PRODUCT_PROPERTY_OVERRIDES := \
  ro.com.google.clientidbase=android-ste
