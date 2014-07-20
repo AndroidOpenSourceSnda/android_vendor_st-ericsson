@@ -8,34 +8,7 @@ PRODUCT_BRAND := ste
 PRODUCT_NAME := ste_u8500
 PRODUCT_DEVICE := u8500
 PRODUCT_MANUFACTURER := ste
-PRODUCT_LOCALES := \
-	en_US \
-	en_GB \
-	en_CA \
-	en_AU \
-	en_NZ \
-	en_SG \
-	ja_JP \
-	fr_FR \
-	fr_BE \
-	fr_CA \
-	fr_CH \
-	it_IT \
-	it_CH \
-	es_ES \
-	de_DE \
-	de_AT \
-	de_CH \
-	de_LI \
-	nl_NL \
-	nl_BE \
-	cs_CZ \
-	pl_PL \
-	zh_CN \
-	zh_TW \
-	ru_RU \
-	ko_KR \
-	hdpi
+PRODUCT_LOCALES := en_US zh_CN zh_TW
 
 PRODUCT_PACKAGE_OVERLAYS := vendor/st-ericsson/u8500/overlay
 PRODUCT_PROPERTY_OVERRIDES := \
