@@ -1,8 +1,0 @@
-bin
-build
-res/test_archive.zip
-cobertura.ser
-kpi
-lib/junit-4.6.jar
-res/test_preflash.bin
-tool_version.txt
