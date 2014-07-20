@@ -51,7 +51,6 @@ LOCAL_SHARED_LIBRARIES := \
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/include \
     $(LOCAL_PATH)/ \
-    $(TOP)/external/sqlite/dist/  \
-    $(TOP)/external/tinyalsa/include/
+    $(TOP)/external/sqlite/dist/
 
 include $(BUILD_SHARED_LIBRARY)
