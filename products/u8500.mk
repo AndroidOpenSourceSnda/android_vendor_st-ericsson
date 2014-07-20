@@ -1,8 +1,3 @@
-
-
-# Superclass
-$(call inherit-product, build/target/product/generic.mk)
-
 # Overrides
 PRODUCT_BRAND := Bambookphone
 PRODUCT_NAME := u8500
