@@ -1,0 +1,1 @@
+../../common/inc/JPEGDec_ARMNMF_ParamAndConfig.h
