@@ -1,5 +1,7 @@
 #Android makefile to build u-boot as a part of Android Build
 
+ifeq ($(ENABLE_BUILD_UBOOT),true)
+
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -85,3 +87,5 @@ installclean: installclean-uboot
 
 installclean-uboot:
 	rm -f u-boot.bin u-boot.map u-boot.srec
+
+endif#ENABLE_BUILD_UBOOT

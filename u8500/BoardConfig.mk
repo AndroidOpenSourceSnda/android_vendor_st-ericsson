@@ -237,6 +237,8 @@ CAMERA_PRIMARY_TYPE= YUV
 CAMERA_SECONDARY_TYPE= YUV
 
 # Select u-boot configuration
+ENABLE_BUILD_UBOOT := false
+
 ifeq ($(ENABLE_FEATURE_BUILD_HBTS),true)
 UBOOT_DEFCONFIG := u8500_hbts_config
 else
