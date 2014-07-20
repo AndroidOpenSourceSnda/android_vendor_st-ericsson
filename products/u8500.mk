@@ -289,8 +289,6 @@ PRODUCT_PACKAGES += \
     VisualizationWallpapers \
     ATService \
     Stk \
-    com.stericsson.ril.oem \
-    com.stericsson.ril.oem.xml \
     STMPE-keypad.kcm \
     tc3589x-keypad.kcm \
     ux500-ske-keypad.kcm \
@@ -338,6 +336,8 @@ PRODUCT_PACKAGES += \
     make_ext4fs \
     libsrec_jni
 
+#    com.stericsson.ril.oem \
+#    com.stericsson.ril.oem.xml \
 #    uImage \
 #    u-boot.bin \
 #    u-boot-env.bin \
