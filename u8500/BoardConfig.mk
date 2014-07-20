@@ -84,7 +84,7 @@ CONNECTIVITY_PATH := $(TOP)/vendor/st-ericsson/connectivity
 MULTIMEDIA_PATH := $(TOPDIR)vendor/st-ericsson/multimedia
 PROCESSING_PATH := $(TOP)/vendor/st-ericsson/processing
 STORAGE_PATH := $(TOP)/vendor/st-ericsson/storage
-BOOT_PATH := $(TOP)/vendor/st-ericsson/boot
+#BOOT_PATH := $(TOP)/vendor/st-ericsson/boot
 BASE_UTILITIES_PATH := $(TOP)/vendor/st-ericsson/base_utilities
 TOOLS_PATH := $(TOP)/vendor/st-ericsson/tools
 BUILD_PATH := $(TOP)/vendor/st-ericsson/build
@@ -101,11 +101,11 @@ GRALLOC_PATH := $(HARDWARE_PATH)/libgralloc
 
 #KERNEL_OUTPUT_RELATIVE := $(TARGET_OUT_INTERMEDIATES)/kernel
 #KERNEL_OUTPUT := $(abspath $(KERNEL_OUTPUT_RELATIVE))
-UBOOT_OUTPUT := $(TARGET_OUT_INTERMEDIATES)/uboot
-LK_OUTPUT := $(TARGET_OUT_INTERMEDIATES)/lk
+#UBOOT_OUTPUT := $(TARGET_OUT_INTERMEDIATES)/uboot
+#LK_OUTPUT := $(TARGET_OUT_INTERMEDIATES)/lk
 # If the UBOOT_SPLASH_IMAGE_OUTPUT variable is changed the copy
 # in ste_uxx00.mk (vendor/st-ericsson/products) also needs to be updated
-UBOOT_SPLASH_IMAGE_OUTPUT := splash.bin
+#UBOOT_SPLASH_IMAGE_OUTPUT := splash.bin
 WLAN_OUTPUT = $(abspath $(TARGET_OUT_INTERMEDIATES)/wlan)
 ####################################################################
 
@@ -202,14 +202,14 @@ BOARD_HAVE_STE_BLUETOOTH := true
 #<MODULE_NAME>_ENABLE_FEATURE_<FEATURE_NAME_u8500> := true
 
 # Enable signature verification features necessary for production fused hw
-ifeq (true,$(ENABLE_FEATURE_SIGNATURE_VERIFICATION))
+#ifeq (true,$(ENABLE_FEATURE_SIGNATURE_VERIFICATION))
 #Add signature verification related module flags
-ISSW_ENABLE_FEATURE_SIGN_IMAGES := true
-UBOOT_ENABLE_FEATURE_SECBOOT := true
-endif
+#ISSW_ENABLE_FEATURE_SIGN_IMAGES := true
+#UBOOT_ENABLE_FEATURE_SECBOOT := true
+#endif
 
 # Kernel configuration
-KERNEL_DEFCONFIG ?= ux500_ux540_defconfig
+#KERNEL_DEFCONFIG ?= ux500_ux540_defconfig
 
 # Kernel firmware settings
 KERNEL_FIRMWARE_ENABLE_FEATURE_BT := true
@@ -253,15 +253,15 @@ UBOOT_DEFCONFIG := u8500_hbts_config
 else
 UBOOT_DEFCONFIG ?= u8500_def_config
 endif
-UBOOT_SET_SPLASH_IMAGE := $(BOOT_PATH)/u-boot/tools/logos/stericsson.bmp
+#UBOOT_SET_SPLASH_IMAGE := $(BOOT_PATH)/u-boot/tools/logos/stericsson.bmp
 # Set input and output variables for u-boot environment parameter image
-BUILD_UBOOT_ENV_IMG_INPUT := $(TOP)/vendor/st-ericsson/u8500/uboot_envparameters_android.cfg
-BUILD_UBOOT_ENV_IMG_OUTPUT := $(UBOOT_OUTPUT)/u-boot-env.bin
+#BUILD_UBOOT_ENV_IMG_INPUT := $(TOP)/vendor/st-ericsson/u8500/uboot_envparameters_android.cfg
+#BUILD_UBOOT_ENV_IMG_OUTPUT := $(UBOOT_OUTPUT)/u-boot-env.bin
 
 # Set input and output variables for lk environment parameter image
-BUILD_LK_ENV_IMG_INPUT := $(TOP)/vendor/st-ericsson/u8500/lk_envparameters_android.cfg
-BUILD_LK_ENV_IMG_OUTPUT := $(LK_OUTPUT)/lk_env.bin
-BUILD_LK_TARGET := href500
+#BUILD_LK_ENV_IMG_INPUT := $(TOP)/vendor/st-ericsson/u8500/lk_envparameters_android.cfg
+#BUILD_LK_ENV_IMG_OUTPUT := $(LK_OUTPUT)/lk_env.bin
+#BUILD_LK_TARGET := href500
 
 # RIL configuration
 RIL_ENABLE_FEATURE_RIL := true
