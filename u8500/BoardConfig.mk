@@ -1,4 +1,8 @@
 ENABLE_ST_ERICSSON_BUILD := true
+
+# Include path
+TARGET_SPECIFIC_HEADER_PATH := vendor/st-ericsson/include
+
 # U8500 uses STEricsson's bootloader, not one from source
 #
 TARGET_BOARD_PLATFORM := montblanc
