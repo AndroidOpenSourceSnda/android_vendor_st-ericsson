@@ -34,6 +34,14 @@ ENABLE_FEATURE_SIGNATURE_VERIFICATION ?= false
 # Module names for lights, sensors, gps, gralloc, overlay, copybit, audio_policy, and
 # audio.primary should always be hard coded to match TARGET_BOARD_PLATFORM in
 # vendor/st-ericsson/u8500/BoardConfig.mk
+
+# Display
+PRODUCT_PACKAGES +=  \
+    copybit.montblanc \
+    gralloc.montblanc \
+    overlay.montblanc \
+    hwcomposer.montblanc \
+
 PRODUCT_PACKAGES += STEBluetooth \
                     LiveWallpapersPicker \
                     LiveWallpapers \
@@ -42,7 +50,6 @@ PRODUCT_PACKAGES += STEBluetooth \
                     libRS \
                     librs_jni \
                     lights.montblanc \
-                    copybit.montblanc \
                     STMPE-keypad.kcm \
                     tc3589x-keypad.kcm \
                     ux500-ske-keypad.kcm \
@@ -154,9 +161,6 @@ PRODUCT_PACKAGES += STEBluetooth \
                     cspsa2qstore \
                     STEBluetooth \
                     libnl \
-                    gralloc.montblanc \
-                    overlay.montblanc \
-                    hwcomposer.montblanc \
                     msa \
                     libste_adm \
                     admsrv \
