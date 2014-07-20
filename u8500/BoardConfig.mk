@@ -111,15 +111,15 @@ WLAN_OUTPUT = $(abspath $(TARGET_OUT_INTERMEDIATES)/wlan)
 
 ###############################################################################
 ## FLASHKIT SETTINGS
-FLASHKIT_ENABLE_ST_ERICSSON_FLASHKIT := true
-FLASHKIT_INSTALL_PATH := $(PRODUCT_OUT)
-FLASHKIT_INSTALL_BASE := $(abspath $(FLASHKIT_INSTALL_PATH))
-FLASHKIT_RELATIVE_SPLASHPATH := $(UBOOT_SPLASH_IMAGE_OUTPUT)
-FLASHKIT_RELATIVE_MODEMDIRPATH := ../../modem_images/
-FLASHKIT_ENABLE_MODEMINFILELIST := true
-FLASHKIT_CONFIG_PATH ?= $(TOP)/vendor/st-ericsson/u8500/flashconfig
-ANT_HOME=$(abspath $(TOOLS_PATH)/community/apache_ant)
-ANT4ECLIPSE_HOME=$(abspath $(TOOLS_PATH)/community/ant4eclipse)
+#FLASHKIT_ENABLE_ST_ERICSSON_FLASHKIT := true
+#FLASHKIT_INSTALL_PATH := $(PRODUCT_OUT)
+#FLASHKIT_INSTALL_BASE := $(abspath $(FLASHKIT_INSTALL_PATH))
+#FLASHKIT_RELATIVE_SPLASHPATH := $(UBOOT_SPLASH_IMAGE_OUTPUT)
+#FLASHKIT_RELATIVE_MODEMDIRPATH := ../../modem_images/
+#FLASHKIT_ENABLE_MODEMINFILELIST := true
+#FLASHKIT_CONFIG_PATH ?= $(TOP)/vendor/st-ericsson/u8500/flashconfig
+#ANT_HOME=$(abspath $(TOOLS_PATH)/community/apache_ant)
+#ANT4ECLIPSE_HOME=$(abspath $(TOOLS_PATH)/community/ant4eclipse)
 ################################################################################
 
 ## Build ALSA-utils
@@ -476,111 +476,111 @@ BLUETOOTH_ENABLE_FEATURE_SAP_BACKEND := MAL
 #####################################################################
 # Add/remove/etc. files just prior to generating Android's file system images
 
-PATCHTOP := $(BUILD_PATH)/ste_image/fs_patches
-APPLY_FS_PATCHES := $(BUILD_PATH)/ste_image/apply_fs_patches.sh
+#PATCHTOP := $(BUILD_PATH)/ste_image/fs_patches
+#APPLY_FS_PATCHES := $(BUILD_PATH)/ste_image/apply_fs_patches.sh
 
-PATCH_VARS += TOPLEVEL=$(realpath $(TOP)) KERNELDIR=kernel INSTALL_MOD_PATH=$(PRODUCT_OUT)/system KERNEL_OUTPUT=$(KERNEL_OUTPUT)
+#PATCH_VARS += TOPLEVEL=$(realpath $(TOP)) KERNELDIR=kernel INSTALL_MOD_PATH=$(PRODUCT_OUT)/system KERNEL_OUTPUT=$(KERNEL_OUTPUT)
 
-patch-systemimage:
-	$(hide) $(APPLY_FS_PATCHES) PATCHDIR=$(PATCHTOP)/system VOLUMEDIR=$(PRODUCT_OUT)/system $(PATCH_VARS)
+#patch-systemimage:
+#	$(hide) $(APPLY_FS_PATCHES) PATCHDIR=$(PATCHTOP)/system VOLUMEDIR=$(PRODUCT_OUT)/system $(PATCH_VARS)
 
-patch-userdataimage:
-	$(hide) $(APPLY_FS_PATCHES) PATCHDIR=$(PATCHTOP)/userdata VOLUMEDIR=$(PRODUCT_OUT)/userdata $(PATCH_VARS)
+#patch-userdataimage:
+#	$(hide) $(APPLY_FS_PATCHES) PATCHDIR=$(PATCHTOP)/userdata VOLUMEDIR=$(PRODUCT_OUT)/userdata $(PATCH_VARS)
 
-patch-ramdiskimage:
-	$(hide) $(APPLY_FS_PATCHES) PATCHDIR=$(PATCHTOP)/ramdisk VOLUMEDIR=$(PRODUCT_OUT)/ramdisk $(PATCH_VARS)
-
-patch-cacheimage:
-	$(hide) $(APPLY_FS_PATCHES) PATCHDIR=$(PATCHTOP)/cache VOLUMEDIR=$(PRODUCT_OUT)/cache $(PATCH_VARS)
+#patch-ramdiskimage:
+#	$(hide) $(APPLY_FS_PATCHES) PATCHDIR=$(PATCHTOP)/ramdisk VOLUMEDIR=$(PRODUCT_OUT)/ramdisk $(PATCH_VARS)
+#
+#patch-cacheimage:
+#	$(hide) $(APPLY_FS_PATCHES) PATCHDIR=$(PATCHTOP)/cache VOLUMEDIR=$(PRODUCT_OUT)/cache $(PATCH_VARS)
 
 #####################################################################
 
 # Create cache.img and misc.img
-droidcore: cacheimage miscimage
+#droidcore: cacheimage miscimage
 
 # Create misc.img
-.PHONY: miscimage
-miscimage: $(PRODUCT_OUT)/misc.img
+#.PHONY: miscimage
+#miscimage: $(PRODUCT_OUT)/misc.img
 
-$(PRODUCT_OUT)/misc.img:
-	dd if=/dev/zero of=$(PRODUCT_OUT)/misc.img bs=$(BOARD_MISCIMAGE_PARTITION_SIZE) count=1
+#$(PRODUCT_OUT)/misc.img:
+#	dd if=/dev/zero of=$(PRODUCT_OUT)/misc.img bs=$(BOARD_MISCIMAGE_PARTITION_SIZE) count=1
 
 # setup flash configuration files
-CREATE_FILELISTS := $(FLASHKIT_CONFIG_PATH)/createfilelists.sh
-CREATE_FILELISTS_FLASHER := $(FLASHKIT_CONFIG_PATH)/createfilelists-flasher.sh
+#CREATE_FILELISTS := $(FLASHKIT_CONFIG_PATH)/createfilelists.sh
+#CREATE_FILELISTS_FLASHER := $(FLASHKIT_CONFIG_PATH)/createfilelists-flasher.sh
 
-.PHONY: setup-flashconfig
-setup-flashconfig:
-	cp -f $(FLASHKIT_CONFIG_PATH)/config.list $(FLASHKIT_INSTALL_BASE)/
-	cp -f $(FLASHKIT_CONFIG_PATH)/flasharchive.xml $(FLASHKIT_INSTALL_BASE)/
-	cp -f $(FLASHKIT_CONFIG_PATH)/flashlayout.txt $(FLASHKIT_INSTALL_BASE)/
+#.PHONY: setup-flashconfig
+#setup-flashconfig:
+#	cp -f $(FLASHKIT_CONFIG_PATH)/config.list $(FLASHKIT_INSTALL_BASE)/
+#	cp -f $(FLASHKIT_CONFIG_PATH)/flasharchive.xml $(FLASHKIT_INSTALL_BASE)/
+#	cp -f $(FLASHKIT_CONFIG_PATH)/flashlayout.txt $(FLASHKIT_INSTALL_BASE)/
 #Create paths for flashkit, first for old flashkit scripts solution and then for new "flasher" script.
 #The paths only differ in that the old scripts needs "../../" first
-	$(CREATE_FILELISTS) -d $(FLASHKIT_INSTALL_BASE) -p ../../$(FLASHKIT_RELATIVE_SPLASHPATH) -n $(FLASHKIT_ENABLE_MODEMINFILELIST) -a ../../$(filter %.bin,$(CSPSA_SET_DEFAULT_CSPSA_IMAGES))
-	$(CREATE_FILELISTS_FLASHER) -d $(FLASHKIT_INSTALL_BASE) -p ./$(FLASHKIT_RELATIVE_SPLASHPATH) -n $(FLASHKIT_ENABLE_MODEMINFILELIST) -a $(filter %.bin,$(CSPSA_SET_DEFAULT_CSPSA_IMAGES))
+#	$(CREATE_FILELISTS) -d $(FLASHKIT_INSTALL_BASE) -p ../../$(FLASHKIT_RELATIVE_SPLASHPATH) -n $(FLASHKIT_ENABLE_MODEMINFILELIST) -a ../../$(filter %.bin,$(CSPSA_SET_DEFAULT_CSPSA_IMAGES))
+#	$(CREATE_FILELISTS_FLASHER) -d $(FLASHKIT_INSTALL_BASE) -p ./$(FLASHKIT_RELATIVE_SPLASHPATH) -n $(FLASHKIT_ENABLE_MODEMINFILELIST) -a $(filter %.bin,$(CSPSA_SET_DEFAULT_CSPSA_IMAGES))
 
-st-ericsson-flashkit: setup-flashconfig
+#st-ericsson-flashkit: setup-flashconfig
 
-ifeq ($(FLASHKIT_ENABLE_ST_ERICSSON_FLASHKIT), true)
-systemimage: st-ericsson-flashkit
-endif
+#ifeq ($(FLASHKIT_ENABLE_ST_ERICSSON_FLASHKIT), true)
+#systemimage: st-ericsson-flashkit
+#endif
 
-$(PRODUCT_OUT)/kernel: $(PRODUCT_OUT)/uImage
-	ln -sf zImage $@
+#$(PRODUCT_OUT)/kernel: $(PRODUCT_OUT)/uImage
+#	ln -sf zImage $@
 
 # Collect loadmodules and flashkit and place them nicely in a common directory
 
-systemimage: collect-loadmodules
+#systemimage: collect-loadmodules
 
-files: init-symlinks
-init-symlinks:
-	@echo "Symlink: $(TARGET_ROOT_OUT)/ueventd.st-ericssonmop500platform.rc -> ./ueventd.st-ericsson.rc"
-	@mkdir -p $(TARGET_ROOT_OUT)
-	$(hide) ln -sf ./ueventd.st-ericsson.rc $(TARGET_ROOT_OUT)/ueventd.st-ericssonmop500platform.rc
-	@echo "Symlink: $(TARGET_ROOT_OUT)/ueventd.st-ericssonu8500platformhrefv60.rc -> ./ueventd.st-ericsson.rc"
-	$(hide) ln -sf ./ueventd.st-ericsson.rc $(TARGET_ROOT_OUT)/ueventd.st-ericssonu8500platformhrefv60.rc
-	@echo "Symlink: $(TARGET_ROOT_OUT)/ueventd.st-ericssona9500platform.rc -> ./ueventd.st-ericsson.rc"
-	$(hide) ln -sf ./ueventd.st-ericsson.rc $(TARGET_ROOT_OUT)/ueventd.st-ericssona9500platform.rc
-	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssonmop500platform.rc -> ./init.st-ericsson.rc"
-	$(hide) ln -sf ./init.st-ericsson.rc $(TARGET_ROOT_OUT)/init.st-ericssonmop500platform.rc
-	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssonu8500platformhrefv60.rc -> ./init.st-ericsson.rc"
-	$(hide) ln -sf ./init.st-ericsson.rc $(TARGET_ROOT_OUT)/init.st-ericssonu8500platformhrefv60.rc
-	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssona9500platform.rc -> ./init.st-ericsson.rc"
-	$(hide) ln -sf ./init.st-ericsson.rc $(TARGET_ROOT_OUT)/init.st-ericssona9500platform.rc
-	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssonmop500platform.usb.rc -> ./init.st-ericsson.usb.rc"
-	$(hide) ln -sf ./init.st-ericsson.usb.rc $(TARGET_ROOT_OUT)/init.st-ericssonmop500platform.usb.rc
-	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssonu8500platformhrefv60.usb.rc -> ./init.st-ericsson.usb.rc"
-	$(hide) ln -sf ./init.st-ericsson.usb.rc $(TARGET_ROOT_OUT)/init.st-ericssonu8500platformhrefv60.usb.rc
-	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssona9500platform.usb.rc -> ./init.st-ericsson.usb.rc"
-	$(hide) ln -sf ./init.st-ericsson.usb.rc $(TARGET_ROOT_OUT)/init.st-ericssona9500platform.usb.rc
+#files: init-symlinks
+#init-symlinks:
+#	@echo "Symlink: $(TARGET_ROOT_OUT)/ueventd.st-ericssonmop500platform.rc -> ./ueventd.st-ericsson.rc"
+#	@mkdir -p $(TARGET_ROOT_OUT)
+#	$(hide) ln -sf ./ueventd.st-ericsson.rc $(TARGET_ROOT_OUT)/ueventd.st-ericssonmop500platform.rc
+#	@echo "Symlink: $(TARGET_ROOT_OUT)/ueventd.st-ericssonu8500platformhrefv60.rc -> ./ueventd.st-ericsson.rc"
+#	$(hide) ln -sf ./ueventd.st-ericsson.rc $(TARGET_ROOT_OUT)/ueventd.st-ericssonu8500platformhrefv60.rc
+#	@echo "Symlink: $(TARGET_ROOT_OUT)/ueventd.st-ericssona9500platform.rc -> ./ueventd.st-ericsson.rc"
+#	$(hide) ln -sf ./ueventd.st-ericsson.rc $(TARGET_ROOT_OUT)/ueventd.st-ericssona9500platform.rc
+#	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssonmop500platform.rc -> ./init.st-ericsson.rc"
+#	$(hide) ln -sf ./init.st-ericsson.rc $(TARGET_ROOT_OUT)/init.st-ericssonmop500platform.rc
+#	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssonu8500platformhrefv60.rc -> ./init.st-ericsson.rc"
+#	$(hide) ln -sf ./init.st-ericsson.rc $(TARGET_ROOT_OUT)/init.st-ericssonu8500platformhrefv60.rc
+#	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssona9500platform.rc -> ./init.st-ericsson.rc"
+#	$(hide) ln -sf ./init.st-ericsson.rc $(TARGET_ROOT_OUT)/init.st-ericssona9500platform.rc
+#	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssonmop500platform.usb.rc -> ./init.st-ericsson.usb.rc"
+#	$(hide) ln -sf ./init.st-ericsson.usb.rc $(TARGET_ROOT_OUT)/init.st-ericssonmop500platform.usb.rc
+#	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssonu8500platformhrefv60.usb.rc -> ./init.st-ericsson.usb.rc"
+#	$(hide) ln -sf ./init.st-ericsson.usb.rc $(TARGET_ROOT_OUT)/init.st-ericssonu8500platformhrefv60.usb.rc
+#	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssona9500platform.usb.rc -> ./init.st-ericsson.usb.rc"
+#	$(hide) ln -sf ./init.st-ericsson.usb.rc $(TARGET_ROOT_OUT)/init.st-ericssona9500platform.usb.rc
 
 
 
-COLLECT_LOADMODULES := $(BUILD_PATH)/ste_image/collect-loadmodules.sh
-COLLECT_LOADMODULES_DELIMITER := :
+#COLLECT_LOADMODULES := $(BUILD_PATH)/ste_image/collect-loadmodules.sh
+#COLLECT_LOADMODULES_DELIMITER := :
 
-.PHONY: collect-loadmodules
-collect-loadmodules: $(PRODUCT_OUT)/system.img $(PRODUCT_OUT)/boot.img $(PRODUCT_OUT)/recovery.img $(PRODUCT_OUT)/misc.img
-	$(hide) $(COLLECT_LOADMODULES) PRODUCT_OUT=$(PRODUCT_OUT) TOP=$(TOP) \
-	 KERNEL_OUTPUT=$(KERNEL_OUTPUT_RELATIVE) \
-	 UBOOT_OUTPUT=$(UBOOT_OUTPUT) \
-	 LK_OUTPUT=$(LK_OUTPUT) \
-	 KERNEL_DEFCONFIG=$(KERNEL_DEFCONFIG) \
-	 FLASHKIT_INSTALL_PATH=$(FLASHKIT_INSTALL_PATH) \
-	 SPLASH_IMAGE_PATH=${UBOOT_SPLASH_IMAGE_OUTPUT} \
-	 USB_PC_DRIVERS_SET_DRIVERS=$(USB_PC_DRIVERS_SET_DRIVERS) \
-	 DEFAULT_CSPSA_IMAGES=$(subst $(COLLECT_LOADMODULES_DELIMITER) ,$(COLLECT_LOADMODULES_DELIMITER),$(addsuffix $(COLLECT_LOADMODULES_DELIMITER),$(CSPSA_SET_DEFAULT_CSPSA_IMAGES))) \
-	 DELIMITER=$(COLLECT_LOADMODULES_DELIMITER)
+#.PHONY: collect-loadmodules
+#collect-loadmodules: $(PRODUCT_OUT)/system.img $(PRODUCT_OUT)/boot.img $(PRODUCT_OUT)/recovery.img $(PRODUCT_OUT)/misc.img
+#	$(hide) $(COLLECT_LOADMODULES) PRODUCT_OUT=$(PRODUCT_OUT) TOP=$(TOP) \
+#	 KERNEL_OUTPUT=$(KERNEL_OUTPUT_RELATIVE) \
+#	 UBOOT_OUTPUT=$(UBOOT_OUTPUT) \
+#	 LK_OUTPUT=$(LK_OUTPUT) \
+#	 KERNEL_DEFCONFIG=$(KERNEL_DEFCONFIG) \
+#	 FLASHKIT_INSTALL_PATH=$(FLASHKIT_INSTALL_PATH) \
+#	 SPLASH_IMAGE_PATH=${UBOOT_SPLASH_IMAGE_OUTPUT} \
+#	 USB_PC_DRIVERS_SET_DRIVERS=$(USB_PC_DRIVERS_SET_DRIVERS) \
+#	 DEFAULT_CSPSA_IMAGES=$(subst $(COLLECT_LOADMODULES_DELIMITER) ,$(COLLECT_LOADMODULES_DELIMITER),$(addsuffix $(COLLECT_LOADMODULES_DELIMITER),$(CSPSA_SET_DEFAULT_CSPSA_IMAGES))) \
+#	 DELIMITER=$(COLLECT_LOADMODULES_DELIMITER)
 
-.PHONY: collect-loadmodules-nodeps
-collect-loadmodules-nodeps: systemimage-nodeps
-	$(hide) $(COLLECT_LOADMODULES) PRODUCT_OUT=$(PRODUCT_OUT) TOP=$(TOP) \
-	 KERNEL_OUTPUT=$(KERNEL_OUTPUT_RELATIVE) \
-	 UBOOT_OUTPUT=$(UBOOT_OUTPUT) \
-	 LK_OUTPUT=$(LK_OUTPUT) \
-	 KERNEL_DEFCONFIG=$(KERNEL_DEFCONFIG) \
-	 FLASHKIT_INSTALL_PATH=$(FLASHKIT_INSTALL_PATH) \
-	 SPLASH_IMAGE_PATH=${UBOOT_SPLASH_IMAGE_OUTPUT} \
-	 USB_PC_DRIVERS_SET_DRIVERS=$(USB_PC_DRIVERS_SET_DRIVERS) \
-	 DEFAULT_CSPSA_IMAGES=$(subst $(COLLECT_LOADMODULES_DELIMITER) ,$(COLLECT_LOADMODULES_DELIMITER),$(addsuffix $(COLLECT_LOADMODULES_DELIMITER),$(CSPSA_SET_DEFAULT_CSPSA_IMAGES))) \
-	 DELIMITER=$(COLLECT_LOADMODULES_DELIMITER)
+#.PHONY: collect-loadmodules-nodeps
+#collect-loadmodules-nodeps: systemimage-nodeps
+#	$(hide) $(COLLECT_LOADMODULES) PRODUCT_OUT=$(PRODUCT_OUT) TOP=$(TOP) \
+#	 KERNEL_OUTPUT=$(KERNEL_OUTPUT_RELATIVE) \
+#	 UBOOT_OUTPUT=$(UBOOT_OUTPUT) \
+#	 LK_OUTPUT=$(LK_OUTPUT) \
+#	 KERNEL_DEFCONFIG=$(KERNEL_DEFCONFIG) \
+#	 FLASHKIT_INSTALL_PATH=$(FLASHKIT_INSTALL_PATH) \
+#	 SPLASH_IMAGE_PATH=${UBOOT_SPLASH_IMAGE_OUTPUT} \
+#	 USB_PC_DRIVERS_SET_DRIVERS=$(USB_PC_DRIVERS_SET_DRIVERS) \
+#	 DEFAULT_CSPSA_IMAGES=$(subst $(COLLECT_LOADMODULES_DELIMITER) ,$(COLLECT_LOADMODULES_DELIMITER),$(addsuffix $(COLLECT_LOADMODULES_DELIMITER),$(CSPSA_SET_DEFAULT_CSPSA_IMAGES))) \
+#	 DELIMITER=$(COLLECT_LOADMODULES_DELIMITER)
