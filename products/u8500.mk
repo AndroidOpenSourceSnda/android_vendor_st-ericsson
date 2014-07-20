@@ -1,12 +1,3 @@
-# Overrides
-PRODUCT_BRAND := Bambookphone
-PRODUCT_NAME := u8500
-PRODUCT_DEVICE := u8500
-PRODUCT_MANUFACTURER := Bambookphone
-PRODUCT_MODEL := Bambook S1
-
-PRODUCT_LOCALES := en_US zh_CN zh_TW
-
 # This device is hdpi.  However the platform doesn't
 # currently contain all of the bitmaps at hdpi density so
 # we do this little trick to fall back to the hdpi version
@@ -15,13 +6,14 @@ PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 PRODUCT_PACKAGE_OVERLAYS := vendor/st-ericsson/u8500/overlay
+
 PRODUCT_PROPERTY_OVERRIDES := \
- ro.com.google.clientidbase=android-ste
+    ro.com.google.clientidbase=android-ste
 
 # Enable AAC 5.1 channel output
 PRODUCT_PROPERTY_OVERRIDES += \
- media.aac_51_output_enabled=1 \
- qemu.hw.mainkeys=1
+    media.aac_51_output_enabled=1 \
+    qemu.hw.mainkeys=1
 
 ## Product configration flags ##
 
@@ -36,7 +28,7 @@ ENABLE_FEATURE_SIGNATURE_VERIFICATION ?= false
 # vendor/st-ericsson/u8500/BoardConfig.mk
 
 # Audio
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     admsrv \
     adm.sqlite \
     adm.sqlite-u8500_ab8500 \
@@ -59,7 +51,7 @@ PRODUCT_PACKAGES +=  \
     preload_adm.txt
 
 # Display
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     copybit.montblanc \
     gralloc.montblanc \
     overlay.montblanc \
@@ -67,25 +59,25 @@ PRODUCT_PACKAGES +=  \
     libblt_hw
 
 # Sensors
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     sensors.montblanc
 
 # Power
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     power.montblanc
 
 # Lights
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     lights.montblanc \
 
 # Camera
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     camera.montblanc \
     tuning_server \
     Camera
 
 # GPS
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     gps.montblanc \
     libclientgps \
     liblbstestengine \
@@ -93,30 +85,30 @@ PRODUCT_PACKAGES +=  \
     lbsd \
 
 # Media
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     libstagefrighthw \
     libstagefright_soft_ste_aacdec \
     libstagefright_soft_ste_mp3dec \
     libstagefright_soft_ste_wmapro_v10
 
 # RIL
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     libu300-ril \
     libu300-parser \
     ril_config
 
 # Firmware
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     kernel-firmware \
 
 # Bass app
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     libbassapp \
-    libtee
+    libtee \
     smcl_ta
 
 # Cops
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     copsdaemon \
     cops_cmd \
     cops_data \
@@ -125,11 +117,11 @@ PRODUCT_PACKAGES +=  \
     cops_ta
 
 # filesystem
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     msa
 
 # cspsa
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     cspsa-server \
     cspsa.conf \
     cspsa-cmd \
@@ -144,7 +136,7 @@ PRODUCT_PACKAGES +=  \
     cspsa_image
 
 # Modem lib
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     libmalcs \
     libmalcs.so \
     libmalgpds \
@@ -188,21 +180,21 @@ PRODUCT_PACKAGES +=  \
     libmlr \
 
 # AT-Core
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     at_core \
     system_id.cfg \
     manuf_id.cfg \
     model_id.cfg \
 
 # Call-Network
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     libcn \
     cn_server \
     plmn.operator.list \
     plmn.latam.list
 
 # SIM
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     libsim \
     libsimcom \
     libsimpb \
@@ -219,14 +211,14 @@ PRODUCT_PACKAGES +=  \
     uicc \
 
 # SMS
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     libsms_server \
     sms_server \
     sms_test_harness \
     sms_stub \
 
 # Psdata
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     libmpl \
     libnlcom \
     libpscc \
@@ -244,26 +236,26 @@ PRODUCT_PACKAGES +=  \
     sterc_script_disconnect_dun
 
 # Tools
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     stedump \
     autologcat \
     autologcat.conf \
     modem_log_relay
 
 # Network
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     libnl \
 
 # Common
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     libstecom \
 
 # CG2900 GPS/WIFI/FM UART
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     ste-cg29xx_ctrl \
 
 # CRDA
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     crda \
     intersect \
     regdbdump \
@@ -271,18 +263,18 @@ PRODUCT_PACKAGES +=  \
     85-regulatory.rules
 
 # Rs
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     libRS \
     librs_jni
 
 # External
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     libasf \
     libarchive \
     libarchive_fe \
 
 
-PRODUCT_PACKAGES +=  \
+PRODUCT_PACKAGES += \
     libasound_module_pcm_steiop \
     libasound_module_pcm_bluetooth \
     libasound_module_ctl_bluetooth \
