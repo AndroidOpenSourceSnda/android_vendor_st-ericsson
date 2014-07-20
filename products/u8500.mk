@@ -320,9 +320,6 @@ PRODUCT_PACKAGES += \
     libthermal \
     ThermalService \
     rtc_calibration \
-    uImage \
-    u-boot.bin \
-    u-boot-env.bin \
     st-ericsson-multimedia-package \
     cw1200_wlan.ko \
     modemfs.img \
@@ -340,6 +337,10 @@ PRODUCT_PACKAGES += \
     RXN_IntApp \
     make_ext4fs \
     libsrec_jni
+
+#    uImage \
+#    u-boot.bin \
+#    u-boot-env.bin \
 
 #Include the libaudiopolicy for legacy Audio HAL
 ifneq ($(BOARD_USES_C_AUDIO_HAL), true)
