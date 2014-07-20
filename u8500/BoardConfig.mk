@@ -21,7 +21,7 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE :=
 BOARD_FORCE_RAMDISK_ADDRESS := 0x02000000
 
-MM_PACKAGE ?= $(ANDROID_BUILD_TOP)/vendor/st-ericsson/u8500/restricted
+#MM_PACKAGE ?= $(ANDROID_BUILD_TOP)/vendor/st-ericsson/u8500/restricted
 
 TARGET_SHELL := ash
 
@@ -246,13 +246,13 @@ CAMERA_PRIMARY_TYPE= YUV
 CAMERA_SECONDARY_TYPE= YUV
 
 # Select u-boot configuration
-ENABLE_BUILD_UBOOT := false
+#ENABLE_BUILD_UBOOT := false
 
-ifeq ($(ENABLE_FEATURE_BUILD_HBTS),true)
-UBOOT_DEFCONFIG := u8500_hbts_config
-else
-UBOOT_DEFCONFIG ?= u8500_def_config
-endif
+#ifeq ($(ENABLE_FEATURE_BUILD_HBTS),true)
+#UBOOT_DEFCONFIG := u8500_hbts_config
+#else
+#UBOOT_DEFCONFIG ?= u8500_def_config
+#endif
 #UBOOT_SET_SPLASH_IMAGE := $(BOOT_PATH)/u-boot/tools/logos/stericsson.bmp
 # Set input and output variables for u-boot environment parameter image
 #BUILD_UBOOT_ENV_IMG_INPUT := $(TOP)/vendor/st-ericsson/u8500/uboot_envparameters_android.cfg
@@ -411,10 +411,10 @@ SF_ENABLE_FEATURE_FB_ROTATION := true
 BOARD_NUM_FRAME_BUFFERS := 3
 
 # Set hwconfig to use in flashkit
-FLASHKIT_SET_HWCONFIG := u8500
+#FLASHKIT_SET_HWCONFIG := u8500
 
 # set TARGET_HW to use in sign_tool_cli
-TARGET_HW:=hrefp_v22_v1x_db8500b0_secst_1ghz_glacier_hz3
+#TARGET_HW:=hrefp_v22_v1x_db8500b0_secst_1ghz_glacier_hz3
 
 # Enable build of fm radio vendor library
 FMRADIO_CG2900_ENABLE_FEATURE_VENDOR_DRIVE := true
@@ -444,23 +444,23 @@ WLAN_ENABLE_FEATURE_CSPSA := true
 WLAN_SET_DUALBAND := false
 
 # ISSW Configuration
-ISSW_ENABLE_FEATURE_SIGN_IMAGES ?= false
+#ISSW_ENABLE_FEATURE_SIGN_IMAGES ?= false
 
 # XLOADER settings
-XLOADER_SET_PLATFORM := u8500
+#XLOADER_SET_PLATFORM := u8500
 
 # SOC-SETTINGS settings
-SOC_SETTINGS_SET_PLATFORM := u8500
+#SOC_SETTINGS_SET_PLATFORM := u8500
 
 # Documentation settings
-REFMAN_ENABLE_FEATURE_REFMAN_GEN := true
-REFMAN_SET_UML_EXPORT_XML := $(abspath $(TOP)/vendor/st-ericsson/u8500/uml-export/ste-uml-export.xml)
+#REFMAN_ENABLE_FEATURE_REFMAN_GEN := true
+#REFMAN_SET_UML_EXPORT_XML := $(abspath $(TOP)/vendor/st-ericsson/u8500/uml-export/ste-uml-export.xml)
 
 # CG29XX Configuration
 STE_CG29XX_CTRL_ENABLE_FEATURE_STE_CG29XX_CTRL := true
 
 # Windows USB Host Drivers
-USB_PC_DRIVERS_SET_DRIVERS := STE-Linux-platform-usb-drivers-windows.zip
+#USB_PC_DRIVERS_SET_DRIVERS := STE-Linux-platform-usb-drivers-windows.zip
 
 # CSPSA settings
 CSPSA_SET_DEFAULT_CSPSA_IMAGES := u8500_default_cspsa.bin u8500_default_cspsa.gdf
