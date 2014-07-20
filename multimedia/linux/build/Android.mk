@@ -122,6 +122,17 @@ include $(BUILD_PREBUILT)
 
 ifeq ($(ONE_SHOT_MAKEFILE),)
 
+# need uImage
+include $(CLEAR_VARS)
+KERNEL_LIBPATH := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/arch/arm/boot
+LOCAL_PATH := $(KERNEL_LIBPATH)
+LOCAL_SRC_FILES := zImage
+LOCAL_MODULE := uImage
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := EXECUTABLES
+LOCAL_MODULE_PATH := $(PRODUCT_OUT)
+include $(BUILD_PREBUILT)
+
 STE_MM_BUILD_DEPS := libc liblog libutils libcutils libui libandroid_runtime libstlport libalsactrl
 STE_MM_BUILD_DEPS += libbassapp libhardware libm libmmprobe uImage libtinyalsa
 ifeq ($(CSCALL_ENABLE_SILENT_REBOOT_SUPPORT), true)
