@@ -8,7 +8,7 @@ include $(MM_MAKEFILES_DIR)/SharedConfig.mk
 
 CPPFLAGS+= -I./include
 CPPFLAGS+= -I../../../imaging/include/ -I../common
-CPPFLAGS+= -I$(ANDROID_BSP_ROOT)/kernel/include
+CPPFLAGS+= -I$(ANDROID_BSP_ROOT)/kernel/snda/u8500/include
 
 ## static library
 LIBNAME     = camera_flash

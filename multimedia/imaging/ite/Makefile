@@ -7,7 +7,7 @@ include $(MM_MAKEFILES_DIR)/SharedConfig.mk
 ifeq ($(MMSYSTEM),android)
 CPPFLAGS+= -I$(KERNEL_BUILD_DIR)/include
   ## To find needed headers in case kernel objects are not generated in kernel source tree
-CPPFLAGS+= -I$(ANDROID_BSP_ROOT)/kernel/include
+CPPFLAGS+= -I$(ANDROID_BSP_ROOT)/kernel/snda/u8500/include
 endif
 
 LIBNAME = ite_common

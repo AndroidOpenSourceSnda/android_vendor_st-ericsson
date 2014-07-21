@@ -1501,7 +1501,7 @@ int MMIO_Camera::dumpTrace(void* trace_log_addr)
     DBGT_EPILOG();
     return 0;
 }
-
+/*
 OMX_ERRORTYPE MMIO_Camera::downloadFirmware()
 {
     OMX_ERRORTYPE ret = OMX_ErrorNone;
@@ -1562,3 +1562,4 @@ check_err:
     DBGT_EPILOG();
     return error;
 }
+*/

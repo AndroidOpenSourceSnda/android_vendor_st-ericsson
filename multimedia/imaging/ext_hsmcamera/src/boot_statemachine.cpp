@@ -80,7 +80,7 @@ SCF_STATE  CAM_SM::InitingYUVCameraModule(s_scf_event const *e)
 
                         return 0;
                     } else {
-                        Cam->cam_Ctrllib->Camera_CtrlLib_FirmwareDownload();
+                        //Cam->cam_Ctrllib->Camera_CtrlLib_FirmwareDownload();
 
                         bSuccess = Cam->cam_Ctrllib->Camera_CtrlLib_Initialize(Cam->cam_h, &DelayTime);
                         if (!bSuccess) {

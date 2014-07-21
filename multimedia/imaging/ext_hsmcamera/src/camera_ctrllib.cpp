@@ -267,7 +267,7 @@ int Camera_Ctrllib::Camera_CtrlLib_IsAlive(
 
     return((ok));
 }
-
+/*
 void Camera_Ctrllib::Camera_CtrlLib_FirmwareDownload()
 {
     OMX_ERRORTYPE download_err;
@@ -277,7 +277,7 @@ void Camera_Ctrllib::Camera_CtrlLib_FirmwareDownload()
         DBGT_CRITICAL("ISP firmware download failed");
     }
 }
-
+*/
 
 #if SUPPORT_OTP_CAMERA
 #define OTP_FLAG_DONE        0x4F54

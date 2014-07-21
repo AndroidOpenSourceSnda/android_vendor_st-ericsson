@@ -133,13 +133,13 @@ void Camera::fillBufferDoneVPB0(
         t1.tv_sec = t1.tv_nsec = 0;
         t1.tv_sec = t2.tv_nsec = 0;
         clock_gettime(CLOCK_MONOTONIC, &t1);
-
+/*
         MMIO_Camera::deinterlaceFrame( (char*)pOmxBufHdr->pBuffer,
             info->src_hwmem_buf_name,
             info->dst_hwmem_buf_name,
             info->width,
             info->height );
-
+*/
         clock_gettime(CLOCK_MONOTONIC, &t2);
         DBGT_PDEBUG("deinterlace %dx%d time %lld ns", info->width, info->height,
             (unsigned long long)(t2.tv_sec-t1.tv_sec)*1000000000LL +  t2.tv_nsec - t1.tv_nsec);
