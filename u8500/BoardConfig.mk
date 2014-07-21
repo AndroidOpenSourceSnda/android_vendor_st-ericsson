@@ -3,35 +3,125 @@ ENABLE_ST_ERICSSON_BUILD := true
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := vendor/st-ericsson/include
 
-# U8500 uses STEricsson's bootloader, not one from source
-#
+# Bootloader
+TARGET_BOOTLOADER_BOARD_NAME := montblanc
+
+# Platform
 TARGET_BOARD_PLATFORM := montblanc
+TARGET_NO_BOOTLOADER := true
+TARGET_NO_RADIOIMAGE := true
+
+# Architecture
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_RADIOIMAGE := true
-TARGET_ARCH_VARIANT := armv7-a-neon
-#TARGET_USE_ST_ERICSSON_KERNEL := true
-TARGET_USE_VENDOR_RIL := true
-
+TARGET_CPU_VARIANT := cortex-a9
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
 # Kernel information
-TARGET_KERNEL_SOURCE := kernel/snda/u8500
-TARGET_KERNEL_CONFIG := cm_u8500_defconfig
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_KERNEL_CMDLINE :=
+BOARD_KERNEL_CMDLINE := androidboot.hardware=st-ericsson
 BOARD_FORCE_RAMDISK_ADDRESS := 0x02000000
+TARGET_KERNEL_SOURCE := kernel/snda/u8500
+TARGET_KERNEL_CONFIG := cm_u8500_defconfig
+#TARGET_USE_ST_ERICSSON_KERNEL := true
 
 # ST-Ericsson Hardware
 BOARD_USES_STE_HARDWARE := true
 COMMON_GLOBAL_CFLAGS += -DSTE_HARDWARE
+
+# Audio
+BUILD_WITH_ALSA_UTILS := true
+BOARD_USES_ALSA := true
+BOARD_USES_ALSA_AUDIO := true
+BOARD_USES_LD_ANM := true
+BOARD_USES_C_AUDIO_HAL := true
+A2DP_USES_STANDARD_ANDROID_PATH := true
 COMMON_GLOBAL_CFLAGS += -DSTE_AUDIO
 
+# Bluetooth
+BOARD_HAVE_BLUETOOTH := true
+#BOARD_HAVE_STE_BLUETOOTH := true
+
+# Camera
+USE_CAMERA_STUB := false
+STE_CAMERA_ENABLE_FEATURE_PLATFORM := u8500
+CAMERA_SET_PRIMARY_SENSOR ?= MT9P111
+CAMERA_SET_SECONDARY_SENSOR ?= MT9V113
+CAMERA_PRIMARY_TYPE = YUV
+CAMERA_SECONDARY_TYPE = YUV
+
+# FM
 BOARD_USES_STE_FM := true
 COMMON_GLOBAL_CFLAGS += -DSTE_FM
+
+# Graphics
+USE_OPENGL_RENDERER := true
+# Build OpenGLES emulation guest and host libraries
+#BUILD_EMULATOR_OPENGL := true
+
+# Lights
+LIBLIGHTS_SET_PLATFORM := u8500
+
+# Media
+TARGET_USE_ST_ERICSSON_MULTIMEDIA := true
+
+# Sensors
+LIBSENSORS_SET_PLATFORM := u8500
+
+# GPS
+BOARD_GPS_LIBRARIES := libgps
+
+# Enable STE WiFi Tethering/SoftAPController
+#WLAN_ENABLE_STE_WIFI_TETHERING := true
+
+# WiFi Configuration
+WPA_SUPPLICANT_VERSION := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+
+# Wifi Mac Fixed from cspsa
+WIFI_MAC_ADDR_CSPSA := true
+
+# Wifi drivers
+WIFI_DRIVER_MODULE_NAME := cw1200_wlan
+WIFI_DRIVER_MODULE_PATH := /system/lib/modules/cw1200_wlan.ko
+WIFI_DRIVER_LOADER_DELAY := 1000000
+
+#WLAN_ENABLE_OPEN_MAC_SOLUTION := true
+#STE_WLAN_DRIVER := true
+#WLAN_ENABLE_WAPI := true
+#WLAN_SET_PLATFORM := u8500
+#WLAN_SET_DRIVER_MODULE_CORE_NAME := cw1200_core
+#WIFI_TEST_INTERFACE := wlan0
+#WLAN_ENABLE_FEATURE_CSPSA := true
+#WLAN_SET_DUALBAND := false
+
+# Filesystem
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_PARTITIONS_USE_TOC := true
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_FLASH_BLOCK_SIZE := 4096
+
+# Flash Partition sizes
+BOARD_RAMDISKIMAGE_PARTITION_SIZE := 10485760
+BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 340787200
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 1170210816
+BOARD_CACHEIMAGE_PARTITION_SIZE := 134217728
+BOARD_MODEMIMAGE_PARTITION_SIZE := 8388608
+BOARD_MISCIMAGE_PARTITION_SIZE := 4096
+
+# RIL
+TARGET_USE_VENDOR_RIL := true
+
+# Init
+TARGET_PROVIDES_INIT_RC := true
+
+# Recovery information
+TARGET_PROVIDES_RECOVERY_INIT_RC := true
 
 MM_PACKAGE ?= $(ANDROID_BUILD_TOP)/vendor/st-ericsson/u8500/restricted
 
@@ -40,18 +130,6 @@ TARGET_SHELL := ash
 ifeq ($(HOST_OS),linux)
 WITH_DEXPREOPT := false
 endif
-
-# Build OpenGLES emulation guest and host libraries
-#BUILD_EMULATOR_OPENGL := true
-
-USE_OPENGL_RENDERER := true
-
-#ifeq ($(ENABLE_FEATURE_BUILD_HBTS),true)
-#TARGET_USE_ST_ERICSSON_MULTIMEDIA := false
-#else
-# Set to true where MM is to be build
-TARGET_USE_ST_ERICSSON_MULTIMEDIA := true
-#endif
 
 # Set to true for platforms with 32 byte L2 cache line.
 # Set to false for platforms with 64 byte L2 cache line.
@@ -81,13 +159,6 @@ LIBCUTILS_MEMSET32_NEON_DIVIDER := 158
 
 CROSS_COMPILE := arm-eabi-
 
-# USE U8500 init.rc
-TARGET_PROVIDES_INIT_RC := true
-
-# USE U8500 recovery init.rc
-TARGET_PROVIDES_RECOVERY_INIT_RC := true
-
-
 #####################################################################
 # STELP paths
 
@@ -106,49 +177,6 @@ EXTERNAL_PATH := $(TOP)/vendor/st-ericsson/external
 MODEM_PATH :=$(TOP)/modem/u8500
 GRALLOC_PATH := $(HARDWARE_PATH)/libgralloc
 
-####################################################################
-
-####################################################################
-# KERNEL, WLAN, UBOOT & LK OUTPUT dirs
-
-#KERNEL_OUTPUT_RELATIVE := $(TARGET_OUT_INTERMEDIATES)/kernel
-#KERNEL_OUTPUT := $(abspath $(KERNEL_OUTPUT_RELATIVE))
-#UBOOT_OUTPUT := $(TARGET_OUT_INTERMEDIATES)/uboot
-#LK_OUTPUT := $(TARGET_OUT_INTERMEDIATES)/lk
-# If the UBOOT_SPLASH_IMAGE_OUTPUT variable is changed the copy
-# in ste_uxx00.mk (vendor/st-ericsson/products) also needs to be updated
-#UBOOT_SPLASH_IMAGE_OUTPUT := splash.bin
-#WLAN_OUTPUT = $(abspath $(TARGET_OUT_INTERMEDIATES)/wlan)
-####################################################################
-
-###############################################################################
-## FLASHKIT SETTINGS
-#FLASHKIT_ENABLE_ST_ERICSSON_FLASHKIT := true
-#FLASHKIT_INSTALL_PATH := $(PRODUCT_OUT)
-#FLASHKIT_INSTALL_BASE := $(abspath $(FLASHKIT_INSTALL_PATH))
-#FLASHKIT_RELATIVE_SPLASHPATH := $(UBOOT_SPLASH_IMAGE_OUTPUT)
-#FLASHKIT_RELATIVE_MODEMDIRPATH := ../../modem_images/
-#FLASHKIT_ENABLE_MODEMINFILELIST := true
-#FLASHKIT_CONFIG_PATH ?= $(TOP)/vendor/st-ericsson/u8500/flashconfig
-#ANT_HOME=$(abspath $(TOOLS_PATH)/community/apache_ant)
-#ANT4ECLIPSE_HOME=$(abspath $(TOOLS_PATH)/community/ant4eclipse)
-################################################################################
-
-## Build ALSA-utils
-BUILD_WITH_ALSA_UTILS := true
-BOARD_USES_ALSA := true
-
-## Build ALSA-lib
-BOARD_USES_ALSA_AUDIO := true
-
-## Below line will select Lunds ANM/ADM as AudioHardwareInterface
-BOARD_USES_LD_ANM := true
-A2DP_USES_STANDARD_ANDROID_PATH := true
-
-## Builds/Uses C Audio HAL
-BOARD_USES_C_AUDIO_HAL := true
-
-################################################################################
 # Dumpstate
 BOARD_LIB_DUMPSTATE=libdumpstate
 
@@ -166,62 +194,8 @@ STE_CODECS_IN_STAGEFRIGHT:=true
 
 ################################################################################
 
-# Kernel/Bootloader machine name
-#
-TARGET_BOOTLOADER_BOARD_NAME := montblanc
-
 # To enable AT parser plugin
 AT_PLUGIN_ON := false
-
-BOARD_GPS_LIBRARIES := libgps
-
-# Flash Partition sizes
-BOARD_RAMDISKIMAGE_PARTITION_SIZE := 10485760
-BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
-
-#BOARD_SYSTEMIMAGE_PARTITION_SIZE := 520093696
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 340787200
-BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
-#BOARD_USERDATAIMAGE_PARTITION_SIZE := 197132288
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 1170210816
-
-BOARD_CACHEIMAGE_PARTITION_SIZE := 134217728
-BOARD_MODEMIMAGE_PARTITION_SIZE := 8388608
-BOARD_MISCIMAGE_PARTITION_SIZE := 4096
-
-TARGET_USERIMAGES_USE_EXT4 := true
-
-TARGET_PARTITIONS_USE_TOC := true
-
-# Erase Unit size
-BOARD_FLASH_BLOCK_SIZE := 4096
-
-# For boot.img:
-# Kernel will be loaded to this address + 0x00008000
-# Ramdisk will be loaded to this address + 0x02000000
-#BOARD_KERNEL_BASE := 0
-
-BOARD_HAVE_BLUETOOTH := true
-
-# For enbaling/disabling support for Latest BlueZ present
-# in vendor/st-ericsson/connectivity/bluetooth/bluez
-BOARD_HAVE_STE_BLUETOOTH := true
-
-###############################################################################
-
-## Module configuration flags ##
-
-#<MODULE_NAME>_ENABLE_FEATURE_<FEATURE_NAME_u8500> := true
-
-# Enable signature verification features necessary for production fused hw
-#ifeq (true,$(ENABLE_FEATURE_SIGNATURE_VERIFICATION))
-#Add signature verification related module flags
-#ISSW_ENABLE_FEATURE_SIGN_IMAGES := true
-#UBOOT_ENABLE_FEATURE_SECBOOT := true
-#endif
-
-# Kernel configuration
-#KERNEL_DEFCONFIG ?= ux500_ux540_defconfig
 
 # Kernel firmware settings
 KERNEL_FIRMWARE_ENABLE_FEATURE_BT := true
@@ -238,42 +212,6 @@ ifeq ($(TARGET_USE_ST_ERICSSON_MULTIMEDIA),true)
   include $(MULTIMEDIA_PATH)/linux/build/Defs.mk
 
 endif
-
-# Set Liblights platform
-LIBLIGHTS_SET_PLATFORM := u8500
-
-# Set Libsensors platform
-LIBSENSORS_SET_PLATFORM := u8500
-
-# Camera settings
-# Enable/Disable ST-Ericsson Camera
-USE_CAMERA_STUB := false
-# Camera product configuration
-STE_CAMERA_ENABLE_FEATURE_PLATFORM := u8500
-# Select Camera Sensor
-CAMERA_SET_PRIMARY_SENSOR ?= MT9P111
-CAMERA_SET_SECONDARY_SENSOR ?= MT9V113
-# Select Camera Sensor Type
-CAMERA_PRIMARY_TYPE= YUV
-CAMERA_SECONDARY_TYPE= YUV
-
-# Select u-boot configuration
-#ENABLE_BUILD_UBOOT := false
-
-#ifeq ($(ENABLE_FEATURE_BUILD_HBTS),true)
-#UBOOT_DEFCONFIG := u8500_hbts_config
-#else
-#UBOOT_DEFCONFIG ?= u8500_def_config
-#endif
-#UBOOT_SET_SPLASH_IMAGE := $(BOOT_PATH)/u-boot/tools/logos/stericsson.bmp
-# Set input and output variables for u-boot environment parameter image
-#BUILD_UBOOT_ENV_IMG_INPUT := $(TOP)/vendor/st-ericsson/u8500/uboot_envparameters_android.cfg
-#BUILD_UBOOT_ENV_IMG_OUTPUT := $(UBOOT_OUTPUT)/u-boot-env.bin
-
-# Set input and output variables for lk environment parameter image
-#BUILD_LK_ENV_IMG_INPUT := $(TOP)/vendor/st-ericsson/u8500/lk_envparameters_android.cfg
-#BUILD_LK_ENV_IMG_OUTPUT := $(LK_OUTPUT)/lk_env.bin
-#BUILD_LK_TARGET := href500
 
 # RIL configuration
 RIL_ENABLE_FEATURE_RIL := true
@@ -431,29 +369,7 @@ BOARD_NUM_FRAME_BUFFERS := 3
 # Enable build of fm radio vendor library
 FMRADIO_CG2900_ENABLE_FEATURE_VENDOR_DRIVE := true
 
-# Enable STE WiFi Tethering/SoftAPController
-WLAN_ENABLE_STE_WIFI_TETHERING := true
 
-# WiFi Configuration
-WLAN_ENABLE_OPEN_MAC_SOLUTION := true
-WPA_SUPPLICANT_VERSION := VER_0_8_X
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-STE_WLAN_DRIVER := true
-WLAN_ENABLE_WAPI := true
-
-WLAN_SET_PLATFORM := u8500
-
-ifeq ($(WLAN_ENABLE_OPEN_MAC_SOLUTION), true)
-WIFI_DRIVER_MODULE_PATH := /system/lib/modules/%s/kernel/net/compat-wireless-openmac/drivers/staging/cw1200/%s.ko
-WLAN_SET_DRIVER_MODULE_CORE_NAME := cw1200_core
-else
-WIFI_DRIVER_MODULE_PATH := /system/lib/modules/%s/extra/%s.ko
-endif
-
-WIFI_DRIVER_MODULE_NAME := cw1200_wlan
-WIFI_TEST_INTERFACE := wlan0
-WLAN_ENABLE_FEATURE_CSPSA := true
-WLAN_SET_DUALBAND := false
 
 # ISSW Configuration
 #ISSW_ENABLE_FEATURE_SIGN_IMAGES ?= false
@@ -596,3 +512,76 @@ BLUETOOTH_ENABLE_FEATURE_SAP_BACKEND := MAL
 #	 USB_PC_DRIVERS_SET_DRIVERS=$(USB_PC_DRIVERS_SET_DRIVERS) \
 #	 DEFAULT_CSPSA_IMAGES=$(subst $(COLLECT_LOADMODULES_DELIMITER) ,$(COLLECT_LOADMODULES_DELIMITER),$(addsuffix $(COLLECT_LOADMODULES_DELIMITER),$(CSPSA_SET_DEFAULT_CSPSA_IMAGES))) \
 #	 DELIMITER=$(COLLECT_LOADMODULES_DELIMITER)
+
+# Select u-boot configuration
+#ENABLE_BUILD_UBOOT := false
+
+#ifeq ($(ENABLE_FEATURE_BUILD_HBTS),true)
+#UBOOT_DEFCONFIG := u8500_hbts_config
+#else
+#UBOOT_DEFCONFIG ?= u8500_def_config
+#endif
+#UBOOT_SET_SPLASH_IMAGE := $(BOOT_PATH)/u-boot/tools/logos/stericsson.bmp
+# Set input and output variables for u-boot environment parameter image
+#BUILD_UBOOT_ENV_IMG_INPUT := $(TOP)/vendor/st-ericsson/u8500/uboot_envparameters_android.cfg
+#BUILD_UBOOT_ENV_IMG_OUTPUT := $(UBOOT_OUTPUT)/u-boot-env.bin
+
+# Set input and output variables for lk environment parameter image
+#BUILD_LK_ENV_IMG_INPUT := $(TOP)/vendor/st-ericsson/u8500/lk_envparameters_android.cfg
+#BUILD_LK_ENV_IMG_OUTPUT := $(LK_OUTPUT)/lk_env.bin
+#BUILD_LK_TARGET := href500
+####################################################################
+
+####################################################################
+# KERNEL, WLAN, UBOOT & LK OUTPUT dirs
+
+#KERNEL_OUTPUT_RELATIVE := $(TARGET_OUT_INTERMEDIATES)/kernel
+#KERNEL_OUTPUT := $(abspath $(KERNEL_OUTPUT_RELATIVE))
+#UBOOT_OUTPUT := $(TARGET_OUT_INTERMEDIATES)/uboot
+#LK_OUTPUT := $(TARGET_OUT_INTERMEDIATES)/lk
+# If the UBOOT_SPLASH_IMAGE_OUTPUT variable is changed the copy
+# in ste_uxx00.mk (vendor/st-ericsson/products) also needs to be updated
+#UBOOT_SPLASH_IMAGE_OUTPUT := splash.bin
+#WLAN_OUTPUT = $(abspath $(TARGET_OUT_INTERMEDIATES)/wlan)
+####################################################################
+
+###############################################################################
+## FLASHKIT SETTINGS
+#FLASHKIT_ENABLE_ST_ERICSSON_FLASHKIT := true
+#FLASHKIT_INSTALL_PATH := $(PRODUCT_OUT)
+#FLASHKIT_INSTALL_BASE := $(abspath $(FLASHKIT_INSTALL_PATH))
+#FLASHKIT_RELATIVE_SPLASHPATH := $(UBOOT_SPLASH_IMAGE_OUTPUT)
+#FLASHKIT_RELATIVE_MODEMDIRPATH := ../../modem_images/
+#FLASHKIT_ENABLE_MODEMINFILELIST := true
+#FLASHKIT_CONFIG_PATH ?= $(TOP)/vendor/st-ericsson/u8500/flashconfig
+#ANT_HOME=$(abspath $(TOOLS_PATH)/community/apache_ant)
+#ANT4ECLIPSE_HOME=$(abspath $(TOOLS_PATH)/community/ant4eclipse)
+################################################################################
+
+################################################################################
+
+
+
+# For boot.img:
+# Kernel will be loaded to this address + 0x00008000
+# Ramdisk will be loaded to this address + 0x02000000
+#BOARD_KERNEL_BASE := 0
+
+
+
+###############################################################################
+
+## Module configuration flags ##
+
+#<MODULE_NAME>_ENABLE_FEATURE_<FEATURE_NAME_u8500> := true
+
+# Enable signature verification features necessary for production fused hw
+#ifeq (true,$(ENABLE_FEATURE_SIGNATURE_VERIFICATION))
+#Add signature verification related module flags
+#ISSW_ENABLE_FEATURE_SIGN_IMAGES := true
+#UBOOT_ENABLE_FEATURE_SECBOOT := true
+#endif
+
+# Kernel configuration
+#KERNEL_DEFCONFIG ?= ux500_ux540_defconfig
+
