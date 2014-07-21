@@ -8,14 +8,14 @@ include $(MMROOT)/shared/makefiles/Make.config
 
 CPPFLAGS+= -I$(MMROOT)/imaging/include -I../common -I$(MMROOT)/shared/omxil
 CPPFLAGS+= -I./include
-CPPFLAGS+= -I$(ANDROID_BSP_ROOT)/kernel/include
+CPPFLAGS+= -I$(ANDROID_BSP_ROOT)/kernel/snda/u8500/include
 CPPFLAGS += -DCONFIG_DEBUG -DCONFIG_DEBUG_AUTOVAR -DDBGT_VAR=mDebugTraceVarMMIOCamera
 
 ifeq ($(MMSYSTEM),linux)
 ## Below to get KERNEL_BUILD_DIR defined in MMD environment
 -include $(MMROOT)/linux/kernel/Make.config
 
-CPPFLAGS+= -I$(KERNEL_BUILD_DIR)/include/../../kernel/include
+CPPFLAGS+= -I$(KERNEL_BUILD_DIR)/include/../../kernel/snda/u8500/include
 endif
 
 #Uncomment below line to enable PMIC sequence operation
