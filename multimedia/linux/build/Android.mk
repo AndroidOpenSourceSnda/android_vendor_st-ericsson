@@ -72,8 +72,8 @@ PRIVATE_MM_ARGS += MMIO_ENABLE_NEW_IF=$(MMIO_ENABLE_NEW_IF)
 endif
 
 ## KERNEL_OUTPUT is directory where kernel output files have been generated when specified
-ifneq ($(KERNEL_OUTPUT),)
-  PRIVATE_MM_ARGS += KERNEL_BUILD_DIR=$(KERNEL_OUTPUT)
+ifneq ($(TARGET_KERNEL_SOURCE),)
+  PRIVATE_MM_ARGS += KERNEL_BUILD_DIR=$(ANDROID_BUILD_TOP)/$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ
 endif
 
 ifneq ($(SHOW_COMMANDS),)
