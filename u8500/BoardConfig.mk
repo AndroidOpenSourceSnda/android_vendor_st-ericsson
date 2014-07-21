@@ -25,7 +25,15 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE :=
 BOARD_FORCE_RAMDISK_ADDRESS := 0x02000000
 
-#MM_PACKAGE ?= $(ANDROID_BUILD_TOP)/vendor/st-ericsson/u8500/restricted
+# ST-Ericsson Hardware
+BOARD_USES_STE_HARDWARE := true
+COMMON_GLOBAL_CFLAGS += -DSTE_HARDWARE
+COMMON_GLOBAL_CFLAGS += -DSTE_AUDIO
+
+BOARD_USES_STE_FM := true
+COMMON_GLOBAL_CFLAGS += -DSTE_FM
+
+MM_PACKAGE ?= $(ANDROID_BUILD_TOP)/vendor/st-ericsson/u8500/restricted
 
 TARGET_SHELL := ash
 
@@ -34,16 +42,16 @@ WITH_DEXPREOPT := false
 endif
 
 # Build OpenGLES emulation guest and host libraries
-BUILD_EMULATOR_OPENGL := true
+#BUILD_EMULATOR_OPENGL := true
 
 USE_OPENGL_RENDERER := true
 
-ifeq ($(ENABLE_FEATURE_BUILD_HBTS),true)
-TARGET_USE_ST_ERICSSON_MULTIMEDIA := false
-else
+#ifeq ($(ENABLE_FEATURE_BUILD_HBTS),true)
+#TARGET_USE_ST_ERICSSON_MULTIMEDIA := false
+#else
 # Set to true where MM is to be build
 TARGET_USE_ST_ERICSSON_MULTIMEDIA := true
-endif
+#endif
 
 # Set to true for platforms with 32 byte L2 cache line.
 # Set to false for platforms with 64 byte L2 cache line.
@@ -110,7 +118,7 @@ GRALLOC_PATH := $(HARDWARE_PATH)/libgralloc
 # If the UBOOT_SPLASH_IMAGE_OUTPUT variable is changed the copy
 # in ste_uxx00.mk (vendor/st-ericsson/products) also needs to be updated
 #UBOOT_SPLASH_IMAGE_OUTPUT := splash.bin
-WLAN_OUTPUT = $(abspath $(TARGET_OUT_INTERMEDIATES)/wlan)
+#WLAN_OUTPUT = $(abspath $(TARGET_OUT_INTERMEDIATES)/wlan)
 ####################################################################
 
 ###############################################################################
