@@ -20,7 +20,7 @@
 #include <sys/mman.h>
 #include <unistd.h>
 #ifndef WORKSTATION
-#include <trace/stm.h>
+#include "trace/stm.h"
 #endif
 
 /* implement ee.api.semaphore.itf */
