@@ -27,7 +27,7 @@ LOCAL_SHARED_LIBRARIES := \
 
 LOCAL_C_INCLUDES := $(KERNEL_HEADERS) $(TOP)/hardware/libhardware/include/hardware $(TOP)/vendor/st-ericsson/hardware/ste_fmradio_cg2900/
 
-LOCAL_CFLAGS += -iquote $(TOP)/kernel/include
+LOCAL_CFLAGS += -iquote $(TOP)/kernel/snda/u8500/include
 
 ifeq ($(FMRADIO_CG2900_SET_RX_ONLY), true)
   LOCAL_CFLAGS += -DFMRADIO_CG2900_SET_RX_ONLY

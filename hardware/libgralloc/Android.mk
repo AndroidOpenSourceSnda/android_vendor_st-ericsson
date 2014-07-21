@@ -25,7 +25,7 @@ LOCAL_SHARED_LIBRARIES := liblog libcutils libGLESv1_CM
 LOCAL_SRC_FILES := 	\
 	hwmem_gralloc.c hwmem_gralloc_pmem.c hwmem_gralloc_framebuffer.c
 
-LOCAL_C_INCLUDES += $(MULTIMEDIA_PATH)/linux/b2r2lib/include kernel/include/video/
+LOCAL_C_INCLUDES += $(MULTIMEDIA_PATH)/linux/b2r2lib/include kernel/snda/u8500/include/video/
 LOCAL_MODULE := gralloc.$(TARGET_BOARD_PLATFORM)
 LOCAL_MODULE_TAGS := optional
 LOCAL_CFLAGS:= -DLOG_TAG=\"gralloc\"
