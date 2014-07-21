@@ -19,6 +19,7 @@ INSTALL_HEADER = stm-trace.h
 LIBNAME = trace
 
 CPPFLAGS += -I../../api
+CPPFLAGS += -I$(ANDROID_BSP_ROOT)/kernel/snda/u8500/include
 
 LIBOBJ = trace
 
