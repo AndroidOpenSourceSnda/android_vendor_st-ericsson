@@ -23,7 +23,8 @@ INSTALL_LIB  = libst_mmhwbuffer.a
 LIBNAME      = st_mmhwbuffer
 
 ifeq ($(MYMMSYSTEM),android)
-CPPFLAGS += -I$(ANDROID_BUILD_TOP)/frameworks/base/include \
+CPPFLAGS += -I$(ANDROID_BSP_ROOT)/kernel/snda/u8500/include \
+            -I$(ANDROID_BUILD_TOP)/frameworks/base/include \
             -I$(ANDROID_BUILD_TOP)/frameworks/native/include \
             -I$(ANDROID_BUILD_TOP)/frameworks/native/include/media/hardware \
             -I$(ANDROID_BUILD_TOP)/hardware/libhardware/include \
