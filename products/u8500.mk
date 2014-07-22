@@ -450,8 +450,8 @@ PRODUCT_COPY_FILES += \
 # Copy the U-Boot splash screen
 # If the U-boot splash image output path need is changed, the UBOOT_SPLASH_IMAGE_OUTPUT variable
 # in BoardConfig.mk (vendor/st-ericsson/uxx00) also needs to be updated
-PRODUCT_COPY_FILES += \
-    vendor/snda/products/logos/boot-snda.bmp:splash.bin
+#PRODUCT_COPY_FILES += \
+#    vendor/snda/products/logos/boot-snda.bmp:splash.bin
 
 # keyboard layouts
 PRODUCT_COPY_FILES += \
@@ -483,8 +483,8 @@ PRODUCT_COPY_FILES += \
 
 # Bluetooth configs
 PRODUCT_COPY_FILES += \
-    system/bluetooth/data/qos_role_switch_blacklist.conf:system/etc/bluetooth/qos_role_switch_blacklist.conf \
     system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf
+#    system/bluetooth/data/qos_role_switch_blacklist.conf:system/etc/bluetooth/qos_role_switch_blacklist.conf \
 
 # charge resource
 PRODUCT_COPY_FILES += \
@@ -497,22 +497,22 @@ PRODUCT_COPY_FILES += \
     vendor/st-ericsson/u8500/charge/snda.rle:/system/usr/share/charge/res/snda.rle
 
 # AVAHI configuration
-AVAHI_ENABLE_FEATURE_DAEMON_CONF := false
-AVAHI_ENABLE_FEATURE_AUTOIP_ACTION := false
+#AVAHI_ENABLE_FEATURE_DAEMON_CONF := false
+#AVAHI_ENABLE_FEATURE_AUTOIP_ACTION := false
 
 # Windows USB Host Drivers
-USB_PC_DRIVERS_SET_DRIVERS := STE-Linux-platform-usb-drivers-windows.zip
+#USB_PC_DRIVERS_SET_DRIVERS := STE-Linux-platform-usb-drivers-windows.zip
 
 # Neven data
 PRODUCT_COPY_FILES += \
     external/neven/Embedded/common/data/APIEm/Modules/RFFprec_501.bmd:system/usr/share/bmd/RFFprec_501.bmd
 
 # Copy files for modules
-$(call inherit-product-if-exists, vendor/st-ericsson/access_services/modem_adaptations/modem-supervisor/copy_files.mk)
-$(call inherit-product-if-exists, vendor/st-ericsson/external/DNSmulticast/avahi/avahi-autoipd/copy_files.mk)
-$(call inherit-product-if-exists, vendor/st-ericsson/external/DNSmulticast/avahi/avahi-daemon/copy_files.mk)
-$(call inherit-product-if-exists, vendor/st-ericsson/tools/platform/USB-PC-drivers/Windows/copy_files.mk)
-$(call inherit-product-if-exists, vendor/st-ericsson/base_utilities/core/utilities/lua/copy_files.mk)
+#$(call inherit-product-if-exists, vendor/st-ericsson/access_services/modem_adaptations/modem-supervisor/copy_files.mk)
+#$(call inherit-product-if-exists, vendor/st-ericsson/external/DNSmulticast/avahi/avahi-autoipd/copy_files.mk)
+#$(call inherit-product-if-exists, vendor/st-ericsson/external/DNSmulticast/avahi/avahi-daemon/copy_files.mk)
+#$(call inherit-product-if-exists, vendor/st-ericsson/tools/platform/USB-PC-drivers/Windows/copy_files.mk)
+#$(call inherit-product-if-exists, vendor/st-ericsson/base_utilities/core/utilities/lua/copy_files.mk)
 
 # Google Mobile Services (GMS)
-$(call inherit-product-if-exists, vendor/google/products/gms.mk)
+#$(call inherit-product-if-exists, vendor/google/products/gms.mk)
