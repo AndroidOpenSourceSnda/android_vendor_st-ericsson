@@ -363,7 +363,7 @@ endif
 endif
 
 # Pick up some sounds
-include frameworks/base/data/sounds/OriginalAudio.mk
+#include frameworks/base/data/sounds/OriginalAudio.mk
 
 # Added resources for TextToSpeech utility.
 include external/svox/pico/lang/all_pico_languages.mk

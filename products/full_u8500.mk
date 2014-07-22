@@ -1,6 +1,9 @@
 # Inherit from u8500 device
 $(call inherit-product, vendor/st-ericsson/products/u8500.mk)
 
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+
 # Overrides
 PRODUCT_BRAND := Bambookphone
 PRODUCT_NAME := full_u8500
