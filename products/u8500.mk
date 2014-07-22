@@ -273,8 +273,14 @@ PRODUCT_PACKAGES += \
     libarchive \
     libarchive_fe \
 
-
 PRODUCT_PACKAGES += \
+    e2fsck \
+    libext2fs \
+    libext2_blkid \
+    libext2_uuid \
+    libext2_profile \
+    libext2_com_err \
+    libext2_e2p \
     libasound_module_pcm_steiop \
     libasound_module_pcm_bluetooth \
     libasound_module_ctl_bluetooth \
