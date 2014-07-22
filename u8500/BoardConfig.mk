@@ -3,13 +3,17 @@ ENABLE_ST_ERICSSON_BUILD := true
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := vendor/st-ericsson/include
 
+# Assert
+TARGET_OTA_ASSERT_DEVICE := u8500,s1w_u8500
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := vendor/st-ericsson/u8500/releasetools/snda_ota_from_target_files
+
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := montblanc
+TARGET_NO_BOOTLOADER := true
+TARGET_NO_RADIOIMAGE := true
 
 # Platform
 TARGET_BOARD_PLATFORM := montblanc
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_RADIOIMAGE := true
 
 # Architecture
 TARGET_ARCH := arm
