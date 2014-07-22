@@ -486,6 +486,16 @@ PRODUCT_COPY_FILES += \
     system/bluetooth/data/qos_role_switch_blacklist.conf:system/etc/bluetooth/qos_role_switch_blacklist.conf \
     system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf
 
+# charge resource
+PRODUCT_COPY_FILES += \
+    vendor/st-ericsson/u8500/charge/pic_0.rle:/system/usr/share/charge/res/pic_0.rle \
+    vendor/st-ericsson/u8500/charge/pic_1.rle:/system/usr/share/charge/res/pic_1.rle \
+    vendor/st-ericsson/u8500/charge/pic_2.rle:/system/usr/share/charge/res/pic_2.rle \
+    vendor/st-ericsson/u8500/charge/pic_3.rle:/system/usr/share/charge/res/pic_3.rle \
+    vendor/st-ericsson/u8500/charge/pic_4.rle:/system/usr/share/charge/res/pic_4.rle \
+    vendor/st-ericsson/u8500/charge/pic_5.rle:/system/usr/share/charge/res/pic_5.rle \
+    vendor/st-ericsson/u8500/charge/snda.rle:/system/usr/share/charge/res/snda.rle
+
 # AVAHI configuration
 AVAHI_ENABLE_FEATURE_DAEMON_CONF := false
 AVAHI_ENABLE_FEATURE_AUTOIP_ACTION := false
