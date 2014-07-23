@@ -338,7 +338,8 @@ int audiomodem_driver::openModemFd(bool modemReboot, bool checkStatus)
     int32_t netlnk_error = 0;
     int32_t ShmSocketFd = -1;
     netlnk_error = netlnk_socket_create(&ShmSocketFd);
-    if (netlnk_error < 0 || ShmSocketFd ==-1)
+    if (0)
+    //if (netlnk_error < 0 || ShmSocketFd ==-1)
     {
       ALOGE("audiomodem_driver: Error: Unable to open the SHM netlnk\n");
       close(amh->mAudioModemFd);
@@ -347,6 +348,7 @@ int audiomodem_driver::openModemFd(bool modemReboot, bool checkStatus)
     else
     {
       amh->mShmSocketFd = ShmSocketFd;
+      ALOGE("audiomodem_driver : open the SHM netlnk\n");
     }
   }
 #endif

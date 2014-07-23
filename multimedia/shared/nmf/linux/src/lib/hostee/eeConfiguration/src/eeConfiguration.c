@@ -62,7 +62,8 @@ static void setschedparam(int priority)
 	int err = 0;
 
 	if (priority < 100) {
-		if (has_capabilities(1 << CAP_SYS_NICE)) {
+		if (1) {
+		//if (has_capabilities(1 << CAP_SYS_NICE)) {
 			/* Real-Time prio */
 			struct sched_param sched_param;
 
