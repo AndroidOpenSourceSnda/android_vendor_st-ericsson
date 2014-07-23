@@ -15,6 +15,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     media.aac_51_output_enabled=1 \
     qemu.hw.mainkeys=1
 
+# Enable Debug mode
+ADDITIONAL_DEFAULT_PROPERTIES += ro.debuggable=1
+ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
+ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
+ADDITIONAL_DEFAULT_PROPERTIES += persist.service.adb.enable=1
+
 ## Product configration flags ##
 
 # Enable features for signing verification needed on production fused hw
