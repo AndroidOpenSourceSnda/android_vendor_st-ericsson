@@ -55,28 +55,28 @@ LOCAL_MODULE_TAGS := optional
 include $(BUILD_EXECUTABLE)
 
 
-include $(CLEAR_VARS)
-
-LOCAL_MODULE := trace_auto.conf
-LOCAL_MODULE_TAGS := optional
-LOCAL_SRC_FILES := $(LOCAL_MODULE)
-LOCAL_MODULE_CLASS := DATA
-LOCAL_MODULE_PATH := $(PRODUCT_OUT)/data/misc
+#include $(CLEAR_VARS)
+#
+#LOCAL_MODULE := trace_auto.conf
+#LOCAL_MODULE_TAGS := optional
+#LOCAL_SRC_FILES := $(LOCAL_MODULE)
+#LOCAL_MODULE_CLASS := DATA
+#LOCAL_MODULE_PATH := $(PRODUCT_OUT)/data/misc
 
 # Make a symlink from /etc/trace_auto.conf to /data/misc/mlr/trace_auto.conf
-SYMLINKS := $(TARGET_OUT)/etc/trace_auto.conf
-$(SYMLINKS): TRACE_AUTO_CONF := /data/misc/$(LOCAL_MODULE)
-$(SYMLINKS): $(LOCAL_INSTALLED_MODULE) $(LOCAL_PATH)/Android.mk
-	@echo "Symlink: $@ -> $(TRACE_AUTO_CONF)"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf $(TRACE_AUTO_CONF) $@
-
-ALL_DEFAULT_INSTALLED_MODULES += $(SYMLINKS)
-
+#SYMLINKS := $(TARGET_OUT)/etc/trace_auto.conf
+#$(SYMLINKS): TRACE_AUTO_CONF := /data/misc/$(LOCAL_MODULE)
+#$(SYMLINKS): $(LOCAL_INSTALLED_MODULE) $(LOCAL_PATH)/Android.mk
+#	@echo "Symlink: $@ -> $(TRACE_AUTO_CONF)"
+#	@mkdir -p $(dir $@)
+#	@rm -rf $@
+#	$(hide) ln -sf $(TRACE_AUTO_CONF) $@
+#
+#ALL_DEFAULT_INSTALLED_MODULES += $(SYMLINKS)
+#
 # We need this so that the installed files could be picked up based on the
 # local module name
-ALL_MODULES.$(LOCAL_MODULE).INSTALLED := \
-       $(ALL_MODULES.$(LOCAL_MODULE).INSTALLED) $(SYMLINKS)
-
-include $(BUILD_PREBUILT)
+#ALL_MODULES.$(LOCAL_MODULE).INSTALLED := \
+#       $(ALL_MODULES.$(LOCAL_MODULE).INSTALLED) $(SYMLINKS)
+#
+#include $(BUILD_PREBUILT)
