@@ -125,8 +125,13 @@ TARGET_USE_VENDOR_RIL := true
 # Init
 TARGET_PROVIDES_INIT_RC := true
 
+# Vold
+BOARD_VOLD_MAX_PARTITIONS := 8
+
 # Recovery information
 TARGET_PROVIDES_RECOVERY_INIT_RC := true
+
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/soc0/musb-ux500.0/musb-hdrc/gadget/lun%d/file"
 
 MM_PACKAGE ?= $(ANDROID_BUILD_TOP)/vendor/st-ericsson/u8500/restricted
 
