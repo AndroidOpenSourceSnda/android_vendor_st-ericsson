@@ -383,7 +383,7 @@ endif
 #include frameworks/base/data/sounds/OriginalAudio.mk
 
 # Added resources for TextToSpeech utility.
-include external/svox/pico/lang/all_pico_languages.mk
+#include external/svox/pico/lang/all_pico_languages.mk
 
 # Copy input device configurations
 PRODUCT_COPY_FILES += \
