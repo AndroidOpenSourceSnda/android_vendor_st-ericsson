@@ -273,6 +273,11 @@ PRODUCT_PACKAGES += \
     libarchive \
     libarchive_fe \
 
+# Root
+PRODUCT_PACKAGES += \
+    Superuser \
+    su
+
 PRODUCT_PACKAGES += \
     e2fsck \
     libext2fs \
@@ -501,6 +506,15 @@ PRODUCT_COPY_FILES += \
     vendor/st-ericsson/u8500/charge/pic_4.rle:/system/usr/share/charge/res/pic_4.rle \
     vendor/st-ericsson/u8500/charge/pic_5.rle:/system/usr/share/charge/res/pic_5.rle \
     vendor/st-ericsson/u8500/charge/snda.rle:/system/usr/share/charge/res/snda.rle
+
+# init.d support
+PRODUCT_COPY_FILES += \
+    vendor/st-ericsson/u8500/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
+    vendor/st-ericsson/u8500/prebuilt/common/bin/sysinit:system/bin/sysinit
+
+# Don't export PS1 in /system/etc/mkshrc.
+PRODUCT_COPY_FILES += \
+    vendor/st-ericsson/u8500/prebuilt/common/etc/mkshrc:system/etc/mkshrc
 
 # AVAHI configuration
 #AVAHI_ENABLE_FEATURE_DAEMON_CONF := false
