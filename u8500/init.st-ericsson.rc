@@ -297,7 +297,7 @@ service phonet-netdev /system/bin/ifconfig upnlink0 up
 # Copy RF trim data from CSPSA, and start the Modem Storage Agent (MSA) service
 service modem /system/bin/sh /system/etc/ste_modem.sh
     class modem-u8500
-    user radio
+    user root
     group radio system
     capability NET_ADMIN
 
