@@ -210,11 +210,11 @@ PRODUCT_PACKAGES += \
     libmal \
     libapdu \
     libpc \
-    cat \
     tapdu \
     tcat \
     tuicc \
     uicc \
+#    cat \
 
 # SMS
 PRODUCT_PACKAGES += \
