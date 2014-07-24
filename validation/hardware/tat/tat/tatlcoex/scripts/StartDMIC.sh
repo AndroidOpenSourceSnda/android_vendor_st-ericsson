@@ -1,6 +1,0 @@
-#!/bin/sh
-
-echo "Start all micros"
-sk-ab W 0xD06 0xFC
-sk-ab W 0xD3F 0xFE
-exit

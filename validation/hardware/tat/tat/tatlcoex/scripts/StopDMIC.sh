@@ -1,6 +1,0 @@
-#!/bin/sh
-
-echo "Stop all micros"
-sk-ab W 0xD06 0x00
-sk-ab W 0xD3F 0x00
-exit

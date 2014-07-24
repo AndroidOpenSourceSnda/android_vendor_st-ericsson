@@ -1,3 +1,0 @@
-do $(IMG_SCRIPT)/unitary/statemachine/network_executing_to_idle.ite
-
-echo File_saved

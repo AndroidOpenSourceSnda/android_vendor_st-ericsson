@@ -1,4 +1,0 @@
-cd /
-umount /mnt/dth
-pkill sl3d
-

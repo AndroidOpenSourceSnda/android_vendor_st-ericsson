@@ -1,4 +1,0 @@
-echo "===================="
-grep -m 3 ">MODEM" /var/log/messages | cut -d">" -f2
-echo "===================="
-

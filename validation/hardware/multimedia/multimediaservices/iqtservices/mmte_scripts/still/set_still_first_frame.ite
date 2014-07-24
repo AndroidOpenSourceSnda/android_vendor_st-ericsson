@@ -1,4 +1,0 @@
-# sets the first frames id to save
-alias STILL_SAVE_FIRST_FRAME	$1
-
-echo File_saved
