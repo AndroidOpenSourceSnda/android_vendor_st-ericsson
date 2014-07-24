@@ -38,9 +38,6 @@ PRODUCT_PACKAGES += \
     admsrv \
     adm.sqlite \
     adm.sqlite-u8500_ab8500 \
-    adm.sqlite-u8520_ab8505_v1 \
-    adm.sqlite-u8520_ab8505_v2 \
-    adm.sqlite-u9540_ab9540_v1 \
     adm-asound.conf \
     audio_policy.montblanc \
     audio.primary.montblanc \
@@ -55,22 +52,25 @@ PRODUCT_PACKAGES += \
     tinymix \
     mmprobed \
     preload_adm.txt
+#    adm.sqlite-u8520_ab8505_v1 \
+#    adm.sqlite-u8520_ab8505_v2 \
+#    adm.sqlite-u9540_ab9540_v1 \
 
 # Display
 PRODUCT_PACKAGES += \
     copybit.montblanc \
     gralloc.montblanc \
-    overlay.montblanc \
     hwcomposer.montblanc \
     libblt_hw
+#    overlay.montblanc \
 
 # Sensors
 PRODUCT_PACKAGES += \
     sensors.montblanc
 
 # Power
-PRODUCT_PACKAGES += \
-    power.montblanc
+#PRODUCT_PACKAGES += \
+#    power.montblanc
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -95,7 +95,7 @@ PRODUCT_PACKAGES += \
     libstagefrighthw \
     libstagefright_soft_ste_aacdec \
     libstagefright_soft_ste_mp3dec \
-    libstagefright_soft_ste_wmapro_v10
+#    libstagefright_soft_ste_wmapro_v10
 
 # RIL
 PRODUCT_PACKAGES += \
@@ -111,16 +111,16 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libbassapp \
     libtee \
-    smcl_ta
+#    smcl_ta
 
 # Cops
 PRODUCT_PACKAGES += \
     copsdaemon \
     cops_cmd \
-    cops_data \
     libcops \
-    COPS_DATA_0.csd \
     cops_ta
+#    cops_data \
+#    COPS_DATA_0.csd \
 
 # filesystem
 PRODUCT_PACKAGES += \
@@ -132,57 +132,57 @@ PRODUCT_PACKAGES += \
     cspsa.conf \
     cspsa-cmd \
     libcspsa \
-    libcspsa-core \
-    libcspsa-ll-file \
-    pff2cspsa \
-    cspsalist \
-    cspsa2nwm \
-    nwm2cspsa \
-    cspsa2qstore \
-    cspsa_image
+#    libcspsa-core \
+#    libcspsa-ll-file \
+#    pff2cspsa \
+#    cspsalist \
+#    cspsa2nwm \
+#    nwm2cspsa \
+#    cspsa2qstore \
+#    cspsa_image
 
 # Modem lib
 PRODUCT_PACKAGES += \
     libmalcs \
-    libmalcs.so \
     libmalgpds \
-    libmalgpds.so \
     libmalgss \
-    libmalgss.so \
     libmalmce \
-    libmalmce.so \
     libmalmis \
-    libmalmis.so \
     libmalnet \
-    libmalnet.so \
     libmalnvd \
-    libmalnvd.so \
     libmalpipe \
-    libmalpipe.so \
     libmalsms \
-    libmalsms.so \
     libmaluicc \
-    libmaluicc.so \
     libmalutil \
     libmalrf \
-    libmalrf.so \
     libmalftd \
-    libmalftd.so \
     libmalmon \
-    libmalmon.so \
     libmalmte \
-    libmalmte.so \
     libisimessage \
-    libisimessage.so \
     libphonet \
-    libphonet.so
+#    libphonet.so
+#    libmalcs.so \
+#    libmalgpds.so \
+#    libmalgss.so \
+#    libmalmce.so \
+#    libmalmis.so \
+#    libmalnet.so \
+#    libmalnvd.so \
+#    libmalpipe.so \
+#    libmalsms.so \
+#    libmaluicc.so \
+#    libmalrf.so \
+#    libmalftd.so \
+#    libmalmon.so \
+#    libmalmte.so \
+#    libisimessage.so \
 
 # Modem
 PRODUCT_PACKAGES +=  \
     modem-supervisor \
     ste_mad \
     telephony_log_levels \
-    libmlr
+#    libmlr
 #    trace_auto.conf \
 
 # AT-Core
@@ -201,27 +201,27 @@ PRODUCT_PACKAGES += \
 
 # SIM
 PRODUCT_PACKAGES += \
-    libsim \
-    libsimcom \
-    libsimpb \
     simd \
     simpbd \
-    libmsl \
-    libmal \
-    libapdu \
-    libpc \
-    tapdu \
-    tcat \
-    tuicc \
-    uicc \
+#    libsim \
+#    libsimcom \
+#    libsimpb \
+#    libmsl \
+#    libmal \
+#    libapdu \
+#    libpc \
+#    tapdu \
+#    tcat \
+#    tuicc \
+#    uicc \
 #    cat \
 
 # SMS
 PRODUCT_PACKAGES += \
     libsms_server \
     sms_server \
-    sms_test_harness \
-    sms_stub \
+#    sms_test_harness \
+#    sms_stub \
 
 # Psdata
 PRODUCT_PACKAGES += \
@@ -244,9 +244,9 @@ PRODUCT_PACKAGES += \
 # Tools
 PRODUCT_PACKAGES += \
     stedump \
-    autologcat \
-    autologcat.conf \
     modem_log_relay
+#    autologcat \
+#    autologcat.conf \
 
 # Network
 PRODUCT_PACKAGES += \
@@ -269,9 +269,9 @@ PRODUCT_PACKAGES += \
     85-regulatory.rules
 
 # Rs
-PRODUCT_PACKAGES += \
-    libRS \
-    librs_jni
+#PRODUCT_PACKAGES += \
+#    libRS \
+#    librs_jni
 
 # External
 PRODUCT_PACKAGES += \
@@ -284,6 +284,7 @@ PRODUCT_PACKAGES += \
     Superuser \
     su
 
+# Filesystem management tools
 PRODUCT_PACKAGES += \
     e2fsck \
     libext2fs \
@@ -292,60 +293,59 @@ PRODUCT_PACKAGES += \
     libext2_profile \
     libext2_com_err \
     libext2_e2p \
-    libasound_module_pcm_steiop \
-    libasound_module_pcm_bluetooth \
-    libasound_module_ctl_bluetooth \
-
 
 PRODUCT_PACKAGES += \
-    STEBluetooth \
-    LiveWallpapersPicker \
-    LiveWallpapers \
-    MagicSmokeWallpapers \
-    VisualizationWallpapers \
     ATService \
     Stk \
-    libaccsutil_log \
-    libaccsutil_security \
-    libaccsutil_char_conv \
-    libaccsutil_predial_checks \
-    liblcsclient \
-    libamilclient \
-    rt_tables \
-    ip \
-    gen_sipc \
-    nwm2gdf \
-    gdflist \
-    gdf2pff \
-    libcalcdigest \
-    libverify \
-    sap \
-    libsap_pts \
-    libsbc \
-    wfa_ca \
-    wfa_dut \
-    libwfa \
-    libwfa_ca \
-    libwfa_dut \
     st-ericsson-multimedia-package \
-    modemfs.img \
-    bsdtar \
     chargemode \
-    factoryreset \
-    battery_params \
-    busybox \
-    drmserver \
-    libdrmframework \
-    libdrmframework_jni \
-    make_ext4fs \
-    libsrec_jni \
-    libthermal \
-    ThermalService \
-    sensormonitor \
-    thermaltest \
-    thermald \
-    thermal.conf
+    battery_params
 
+#    LiveWallpapersPicker \
+#    LiveWallpapers \
+#    MagicSmokeWallpapers \
+#    VisualizationWallpapers \
+#    libasound_module_pcm_steiop \
+#    libasound_module_pcm_bluetooth \
+#    libasound_module_ctl_bluetooth \
+#    STEBluetooth \
+#    libaccsutil_log \
+#    libaccsutil_security \
+#    libaccsutil_char_conv \
+#    libaccsutil_predial_checks \
+#    liblcsclient \
+#    libamilclient \
+ #   rt_tables \
+#    ip \
+#    gen_sipc \
+#    nwm2gdf \
+#    gdflist \
+#    gdf2pff \
+#    libcalcdigest \
+#    libverify \
+#    sap \
+#    libsap_pts \
+#    libsbc \
+#    wfa_ca \
+#    wfa_dut \
+#    libwfa \
+#    libwfa_ca \
+#    libwfa_dut \
+#    modemfs.img \
+#    bsdtar \
+#    drmserver \
+#    libdrmframework \
+#    libdrmframework_jni \
+#    make_ext4fs \
+#    libsrec_jni \
+#    busybox \
+#    factoryreset \
+#    libthermal \
+#    ThermalService \
+#    sensormonitor \
+#    thermaltest \
+#    thermald \
+#    thermal.conf
 #    rtc_calibration \
 #    cw1200_wlan.ko \
 #    libhdmi_service \
