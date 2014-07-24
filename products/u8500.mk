@@ -182,8 +182,8 @@ PRODUCT_PACKAGES +=  \
     modem-supervisor \
     ste_mad \
     telephony_log_levels \
-    trace_auto.conf \
-    libmlr \
+    libmlr
+#    trace_auto.conf \
 
 # AT-Core
 PRODUCT_PACKAGES += \
@@ -299,17 +299,12 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     STEBluetooth \
-    STErilOemService \
     LiveWallpapersPicker \
     LiveWallpapers \
     MagicSmokeWallpapers \
     VisualizationWallpapers \
     ATService \
     Stk \
-    STMPE-keypad.kcm \
-    tc3589x-keypad.kcm \
-    ux500-ske-keypad.kcm \
-    ux500-ske-keypad-qwertz.kcm \
     libaccsutil_log \
     libaccsutil_security \
     libaccsutil_char_conv \
@@ -332,27 +327,36 @@ PRODUCT_PACKAGES += \
     libwfa \
     libwfa_ca \
     libwfa_dut \
-    libthermal \
-    ThermalService \
-    rtc_calibration \
     st-ericsson-multimedia-package \
-    cw1200_wlan.ko \
     modemfs.img \
     bsdtar \
     chargemode \
     factoryreset \
-    hdmi_service_st \
-    hdmid \
     battery_params \
     busybox \
-    libhdmi_service \
     drmserver \
     libdrmframework \
     libdrmframework_jni \
-    RXN_IntApp \
     make_ext4fs \
-    libsrec_jni
+    libsrec_jni \
+    libthermal \
+    ThermalService \
+    sensormonitor \
+    thermaltest \
+    thermald \
+    thermal.conf
 
+#    rtc_calibration \
+#    cw1200_wlan.ko \
+#    libhdmi_service \
+#    hdmi_service_st \
+#    hdmid \
+#    RXN_IntApp \
+#    STErilOemService \
+#    STMPE-keypad.kcm \
+#    tc3589x-keypad.kcm \
+#    ux500-ske-keypad.kcm \
+#    ux500-ske-keypad-qwertz.kcm \
 #    com.stericsson.ril.oem \
 #    com.stericsson.ril.oem.xml \
 #    uImage \
