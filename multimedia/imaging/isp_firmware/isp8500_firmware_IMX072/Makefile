@@ -199,12 +199,6 @@ fw_build:
 	@echo "*** Source and Header Files generated ***"
 	@echo
 
-ifeq ($(ENABLE_FEATURE_BUILD_HATS),true)
-	@echo "*** get map file for IQT ***"
-	mkdir -p $(INSTALL_ROOTFS_DIR)/$(MMVALIDROOT)/$(MY_MODULE)/device_params
-	cp -rf $(MAP_DEVICEPARAMS_DIR)/DeviceParams/*.map $(INSTALL_ROOTFS_DIR)/$(MMVALIDROOT)/$(MY_MODULE)/device_params
-endif
-
 # Making our own target like fw_clean is necessary to "extend" the default clean.
 clean: fw_clean
 

@@ -16,10 +16,6 @@ CPPFLAGS += -I$(MMROOT)/linux/bellagio_omxcore/libomxil-bellagio/src
 
 SOLIBNAMES+=ste_ensloader
 
-ifeq ($(ENABLE_FEATURE_BUILD_HATS),true)
-CPPFLAGS+= -DENABLE_FEATURE_BUILD_HATS
-endif
-
 LIBOBJ_ste_ensloader = ste_ensloader
 
 EXTRALIBS_ste_ensloader = st_enswrapper st_ensfsm_host \

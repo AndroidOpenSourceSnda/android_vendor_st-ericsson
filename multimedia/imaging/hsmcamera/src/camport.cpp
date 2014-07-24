@@ -203,12 +203,8 @@ if((mParamPortDefinition.format.video.eColorFormat != portdef.format.video.eColo
 
     bIsOverScanned= false;
 #ifdef STAB
-#if defined(ENABLE_FEATURE_BUILD_HATS)
-    if((bOneShot==OMX_FALSE)     /* overscan systematically in case of video mode */
-#else
 /*Always overscan preview buffer - CR438048*/
     if(((portdef.nPortIndex == CAMERA_PORT_OUT0)||(portdef.nPortIndex == CAMERA_PORT_OUT2))
-#endif
         && (mParamPortDefinition.format.video.eColorFormat != OMX_COLOR_FormatRawBayer8bit)
         && (mParamPortDefinition.format.video.eColorFormat != OMX_COLOR_FormatRawBayer10bit)
         && (mParamPortDefinition.format.video.eColorFormat !=(OMX_COLOR_FORMATTYPE)OMX_SYMBIAN_COLOR_FormatRawBayer12bit)) 

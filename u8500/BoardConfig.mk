@@ -404,9 +404,6 @@ STE_CG29XX_CTRL_ENABLE_FEATURE_STE_CG29XX_CTRL := true
 CSPSA_SET_DEFAULT_CSPSA_IMAGES := u8500_default_cspsa.bin u8500_default_cspsa.gdf
 CSPSA_IMAGE_ENABLE_MODEM_PARAMETERS ?= true
 
-# Test tool configuration
-ENABLE_FEATURE_BUILD_HATS ?= false
-
 # Pickup the right bluetooth's Sim Access Profile backend driver
 # Available values: MAL, CAIF
 BLUETOOTH_ENABLE_FEATURE_SAP_BACKEND := MAL

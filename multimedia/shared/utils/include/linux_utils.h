@@ -19,22 +19,7 @@
 #define LOG_TAG "?"
 #endif
 
-#if defined(ENABLE_FEATURE_BUILD_HATS)
-
-#include <stdio.h>
-#include <stdlib.h>
-#define LOGE(...) printf("E/" LOG_TAG ": " __VA_ARGS__)
-#define LOGI(...) printf("I/" LOG_TAG ": " __VA_ARGS__)
-#define LOGD(...) printf("D/" LOG_TAG ": " __VA_ARGS__)
-#define LOGV(...) printf("V/" LOG_TAG ": " __VA_ARGS__)
-#define LOGW(...) printf("W/" LOG_TAG ": " __VA_ARGS__)
-#define ALOGE(...) printf("E/" LOG_TAG ": " __VA_ARGS__)
-#define ALOGI(...) printf("I/" LOG_TAG ": " __VA_ARGS__)
-#define ALOGD(...) printf("D/" LOG_TAG ": " __VA_ARGS__)
-#define ALOGV(...) printf("V/" LOG_TAG ": " __VA_ARGS__)
-#define ALOGW(...) printf("W/" LOG_TAG ": " __VA_ARGS__)
-
-#elif defined(ANDROID) && !defined(ENABLE_FEATURE_BUILD_HATS)
+#ifdef ANDROID
 
 #include <cutils/log.h>
 #undef LOGE
@@ -74,50 +59,6 @@ extern void __do_stelp_print_backtrace();
 extern int stelp_get_timeofday(char *buffer, size_t size);
 extern unsigned long long stelp_get_timestamp(void); // returns uptime in us on linux 
 __END_DECLS
-
-#else  /* !defined(ANDROID) && !defined(ENABLE_FEATURE_BUILD_HATS) */
-
-#include <stdlib.h>
-#ifndef LOG_NDEBUG
-#define LOG_NDEBUG 1
-#endif
-
-#ifndef ANDROID_LOG_DEBUG
-#define ANDROID_LOG_DEBUG 0
-#endif
-
-#define LOGE(...) __DO_LOG("E " LOG_TAG ": " __VA_ARGS__)
-#define LOGI(...) __DO_LOG("I " LOG_TAG ": " __VA_ARGS__)
-#define LOGD(...) __DO_LOG("D " LOG_TAG ": " __VA_ARGS__)
-#define LOGW(...) __DO_LOG("W " LOG_TAG ": " __VA_ARGS__)
-
-#define ALOGE(...) __DO_LOG("E" LOG_TAG ": " __VA_ARGS__)
-#define ALOGI(...) __DO_LOG("I" LOG_TAG ": " __VA_ARGS__)
-#define ALOGD(...) __DO_LOG("D" LOG_TAG ": " __VA_ARGS__)
-#define ALOGV(...) __DO_LOG("V" LOG_TAG ": " __VA_ARGS__)
-#define ALOGW(...) __DO_LOG("W" LOG_TAG ": " __VA_ARGS__)
-
-#if LOG_NDEBUG
-#define LOGV(...) ((void)0)
-#else
-#define LOGV(...) __DO_LOG("V " LOG_TAG ": " __VA_ARGS__)
-#endif
-
-#define __DO_LOG(fmt, args ...)  do { __do_stelp_log(fmt, ## args); } while (0)
-
-#include <sys/cdefs.h>
-
-__BEGIN_DECLS
-
-extern void __do_stelp_log(const char *fmt, ...);
-extern int stelp_get_timeofday(char *buffer, size_t size);
-extern unsigned long long stelp_get_timestamp(void); // returns uptime in us on linux 
-extern int stelp_get_timeofday(char *buffer, size_t size);
-
-__END_DECLS
-
-/* FIXME: kept for legacy reasons */
-#include <string.h>
 
 #endif
 
