@@ -348,7 +348,6 @@ int audiomodem_driver::openModemFd(bool modemReboot, bool checkStatus)
     else
     {
       amh->mShmSocketFd = ShmSocketFd;
-      ALOGE("audiomodem_driver : open the SHM netlnk\n");
     }
   }
 #endif
