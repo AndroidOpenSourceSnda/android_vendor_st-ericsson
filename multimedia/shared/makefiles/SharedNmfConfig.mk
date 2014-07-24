@@ -46,9 +46,10 @@ CPPFLAGS   += $(FIXED_CPPFLAGS)
 
 ifeq ($(CORE),arm)
   ifneq ($(findstring x86,$(MMPROCESSOR)),x86)
-    ifneq ($(MMENV_SYSTEM),android)
+    ifeq ($(MMENV_SYSTEM),android)
       ## Include kernel headers
-      CPPFLAGS += -I$(MMBUILDIN)/$(HEADER_DIR_NAME)/$(PLATFORM)/kernel
+      CPPFLAGS += -I$(ANDROID_BSP_ROOT)/kernel/snda/u8500/include
+      #CPPFLAGS += -I$(MMBUILDIN)/$(HEADER_DIR_NAME)/$(PLATFORM)/kernel
     endif
   endif
 endif
