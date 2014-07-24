@@ -540,5 +540,7 @@ PRODUCT_COPY_FILES += \
 #$(call inherit-product-if-exists, vendor/st-ericsson/tools/platform/USB-PC-drivers/Windows/copy_files.mk)
 #$(call inherit-product-if-exists, vendor/st-ericsson/base_utilities/core/utilities/lua/copy_files.mk)
 
+$(call inherit-product-if-exists, vendor/st-ericsson/processing/security_framework/bass_app/libbassapp/ta/copy_files.mk)
+
 # Google Mobile Services (GMS)
 #$(call inherit-product-if-exists, vendor/google/products/gms.mk)
