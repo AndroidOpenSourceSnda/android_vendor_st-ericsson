@@ -1,3 +1,3 @@
 
 PRODUCT_MAKEFILES := \
-	$(LOCAL_DIR)/full_u8500.mk
+	$(LOCAL_DIR)/s1w_u8500.mk

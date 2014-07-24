@@ -12,8 +12,8 @@
 
 T=$(gettop)
 if [ -e $T/vendor/st-ericsson/u8500/BoardConfig.mk ] || [ -e $T/device/st-ericsson/u8500/BoardConfig.mk ]; then
-  add_lunch_combo full_u8500-eng
-  add_lunch_combo full_u8500-user
+  add_lunch_combo s1w_u8500-eng
+  add_lunch_combo s1w_u8500-user
 fi
 
 # Verify that all required tools and packages to build the ST-Ericsson platform are installed on host.

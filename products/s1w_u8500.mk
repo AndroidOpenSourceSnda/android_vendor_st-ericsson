@@ -6,7 +6,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Overrides
 PRODUCT_BRAND := Bambookphone
-PRODUCT_NAME := full_u8500
+PRODUCT_NAME := s1w_u8500
 PRODUCT_DEVICE := u8500
 PRODUCT_MANUFACTURER := Bambookphone
 PRODUCT_MODEL := Bambook S1
