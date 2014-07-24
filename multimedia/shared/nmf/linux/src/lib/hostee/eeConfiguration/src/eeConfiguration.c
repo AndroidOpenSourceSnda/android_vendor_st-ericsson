@@ -78,8 +78,8 @@ static void setschedparam(int priority)
 	} else {
 		err = setpriority(PRIO_PROCESS, 0, priority - 120);
 	}
-	if (err)
-		NMF_LOG("HostEE: can not set scheduling param when starting thread  (error: %s (%d))\n", strerror(errno), errno);
+	//if (err)
+	//	NMF_LOG("HostEE: can not set scheduling param when starting thread  (error: %s (%d))\n", strerror(errno), errno);
 }
 
 static struct th_config *get_cfg_for_prio(int priority)
