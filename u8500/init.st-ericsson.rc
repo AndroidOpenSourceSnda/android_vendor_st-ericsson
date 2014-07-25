@@ -224,8 +224,8 @@ on boot
     # Define interface name for wlan
     setprop wifi.interface wlan0
 
-    # Install cw1200_core WLAN module (openMAC solution only)
-    insmod /system/lib/modules/3.4.0+/kernel/net/compat-wireless-openmac/drivers/staging/cw1200/cw1200_core.ko
+    # Install cw1200_core WLAN module
+    insmod /system/lib/modules/cw1200_core.ko
 
     # Modem
     class_start modem
