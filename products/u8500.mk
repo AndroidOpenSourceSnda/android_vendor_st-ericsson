@@ -423,6 +423,10 @@ PRODUCT_COPY_FILES += \
     vendor/st-ericsson/u8500/cacert.txt:system/etc/cacert.txt \
     vendor/st-ericsson/u8500/LbsPltConfig.cfg:system/etc/LbsPltConfig.cfg
 
+# WI-FI configuration
+PRODUCT_COPY_FILES += \
+    vendor/st-ericsson/u8500/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+
 # Added platform feature permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
