@@ -19,6 +19,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0
 
+# Set Language
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.timezone=Asia/Shanghai \
+    persist.sys.language=zh \
+    persist.sys.country=CN
+
 # Enable Debug mode
 ADDITIONAL_DEFAULT_PROPERTIES += ro.debuggable=1
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
