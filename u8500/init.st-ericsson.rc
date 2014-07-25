@@ -222,7 +222,7 @@ on boot
     setprop icc.hotswap supported
 
     # Define interface name for wlan
-    setprop wifi.interface wlan0
+    #setprop wifi.interface wlan0
 
     # Install cw1200_core WLAN module
     insmod /system/lib/modules/cw1200_core.ko

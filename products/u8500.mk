@@ -13,7 +13,11 @@ PRODUCT_PROPERTY_OVERRIDES := \
 # Enable AAC 5.1 channel output
 PRODUCT_PROPERTY_OVERRIDES += \
     media.aac_51_output_enabled=1 \
-    qemu.hw.mainkeys=1
+#    qemu.hw.mainkeys=1
+
+# WI-FI interface
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0
 
 # Enable Debug mode
 ADDITIONAL_DEFAULT_PROPERTIES += ro.debuggable=1
