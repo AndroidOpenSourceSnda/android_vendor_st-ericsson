@@ -1,3 +1,18 @@
+ACCESS_SERVICES_PATH := $(TOP)/vendor/st-ericsson/access_services
+CONNECTIVITY_PATH := $(TOP)/vendor/st-ericsson/connectivity
+MULTIMEDIA_PATH := $(TOPDIR)vendor/st-ericsson/multimedia
+PROCESSING_PATH := $(TOP)/vendor/st-ericsson/processing
+STORAGE_PATH := $(TOP)/vendor/st-ericsson/storage
+#BOOT_PATH := $(TOP)/vendor/st-ericsson/boot
+BASE_UTILITIES_PATH := $(TOP)/vendor/st-ericsson/base_utilities
+TOOLS_PATH := $(TOP)/vendor/st-ericsson/tools
+BUILD_PATH := $(TOP)/vendor/st-ericsson/build
+APPS_PATH := $(TOP)/vendor/st-ericsson/apps
+HARDWARE_PATH := $(TOP)/vendor/st-ericsson/hardware
+EXTERNAL_PATH := $(TOP)/vendor/st-ericsson/external
+MODEM_PATH :=$(TOP)/modem/u8500
+GRALLOC_PATH := $(HARDWARE_PATH)/libgralloc
+
 ENABLE_ST_ERICSSON_BUILD := true
 
 # Include path
@@ -69,6 +84,12 @@ LIBLIGHTS_SET_PLATFORM := u8500
 
 # Media
 TARGET_USE_ST_ERICSSON_MULTIMEDIA := true
+ifeq ($(TARGET_USE_ST_ERICSSON_MULTIMEDIA),true)
+
+MULTIMEDIA_SET_PLATFORM := u8500
+include $(MULTIMEDIA_PATH)/linux/build/Defs.mk
+
+endif
 
 # Sensors
 LIBSENSORS_SET_PLATFORM := u8500
@@ -165,23 +186,6 @@ LIBCUTILS_MEMSET32_NEON_DIVIDER := 158
 
 CROSS_COMPILE := arm-eabi-
 
-#####################################################################
-# STELP paths
-
-ACCESS_SERVICES_PATH := $(TOP)/vendor/st-ericsson/access_services
-CONNECTIVITY_PATH := $(TOP)/vendor/st-ericsson/connectivity
-MULTIMEDIA_PATH := $(TOPDIR)vendor/st-ericsson/multimedia
-PROCESSING_PATH := $(TOP)/vendor/st-ericsson/processing
-STORAGE_PATH := $(TOP)/vendor/st-ericsson/storage
-#BOOT_PATH := $(TOP)/vendor/st-ericsson/boot
-BASE_UTILITIES_PATH := $(TOP)/vendor/st-ericsson/base_utilities
-TOOLS_PATH := $(TOP)/vendor/st-ericsson/tools
-BUILD_PATH := $(TOP)/vendor/st-ericsson/build
-APPS_PATH := $(TOP)/vendor/st-ericsson/apps
-HARDWARE_PATH := $(TOP)/vendor/st-ericsson/hardware
-EXTERNAL_PATH := $(TOP)/vendor/st-ericsson/external
-MODEM_PATH :=$(TOP)/modem/u8500
-GRALLOC_PATH := $(HARDWARE_PATH)/libgralloc
 
 # Dumpstate
 BOARD_LIB_DUMPSTATE=libdumpstate
@@ -208,16 +212,6 @@ KERNEL_FIRMWARE_ENABLE_FEATURE_BT := true
 KERNEL_FIRMWARE_ENABLE_FEATURE_FM := true
 KERNEL_FIRMWARE_ENABLE_FEATURE_WLAN := true
 KERNEL_FIRMWARE_ENABLE_FEATURE_HDMI := true
-
-ifeq ($(TARGET_USE_ST_ERICSSON_MULTIMEDIA),true)
-
-  # Set Multimdia platform
-  MULTIMEDIA_SET_PLATFORM := u8500
-
-  # Get some useful variables to build
-  include $(MULTIMEDIA_PATH)/linux/build/Defs.mk
-
-endif
 
 # RIL configuration
 RIL_ENABLE_FEATURE_RIL := true
