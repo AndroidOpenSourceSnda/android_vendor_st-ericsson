@@ -39,7 +39,7 @@ ADDITIONAL_DEFAULT_PROPERTIES += persist.service.adb.enable=1
 ## Product configration flags ##
 
 # Enable features for signing verification needed on production fused hw
-ENABLE_FEATURE_SIGNATURE_VERIFICATION ?= false
+#ENABLE_FEATURE_SIGNATURE_VERIFICATION ?= false
 
 ## end Product configuration flags ##
 
@@ -456,13 +456,12 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml \
     frameworks/native/data/etc/com.stericsson.hardware.fm.receiver.xml:system/etc/permissions/com.stericsson.hardware.fm.receiver.xml \
     frameworks/native/data/etc/com.stericsson.hardware.fm.transmitter.xml:system/etc/permissions/com.stericsson.hardware.fm.transmitter.xml
-
+#    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
 # Copy ALSA configuration files to rootfs
 PRODUCT_COPY_FILES += \
     external/alsa-lib/src/conf/alsa.conf:system/usr/share/alsa/alsa.conf \
