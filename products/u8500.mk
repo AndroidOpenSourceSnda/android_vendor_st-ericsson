@@ -25,6 +25,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.language=zh \
     persist.sys.country=CN
 
+# Disable red border
+PRODUCT_PROPERTY_OVERRIDES += \
+   persist.sys.strictmode.disable=1 \
+   persist.sys.strictmode.visual=0
+
 # Enable Debug mode
 ADDITIONAL_DEFAULT_PROPERTIES += ro.debuggable=1
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
