@@ -365,10 +365,10 @@ service RXN_IntApp /system/bin/RXN_IntApp
 on property:dev.bootcomplete=1
     start RXN_IntApp
 
-service thermald /system/bin/thermald
-    class main
-    user root
-    group root dbus_access
+#service thermald /system/bin/thermald
+#    class main
+#    user root
+#    group root dbus_access
 
 service wpa_supplicant /system/bin/wpa_supplicant -dd -Dnl80211 -i wlan0 -c/data/misc/wifi/wpa_supplicant.conf
     class main
