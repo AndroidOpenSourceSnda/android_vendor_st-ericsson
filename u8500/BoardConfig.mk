@@ -135,7 +135,7 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/soc0/musb-ux500.0/musb-hdrc/gad
 
 MM_PACKAGE ?= $(ANDROID_BUILD_TOP)/vendor/st-ericsson/u8500/restricted
 
-TARGET_SHELL := ash
+#TARGET_SHELL := ash
 
 ifeq ($(HOST_OS),linux)
 WITH_DEXPREOPT := false
