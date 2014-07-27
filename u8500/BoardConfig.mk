@@ -3,7 +3,6 @@ CONNECTIVITY_PATH := $(TOP)/vendor/st-ericsson/connectivity
 MULTIMEDIA_PATH := $(TOPDIR)vendor/st-ericsson/multimedia
 PROCESSING_PATH := $(TOP)/vendor/st-ericsson/processing
 STORAGE_PATH := $(TOP)/vendor/st-ericsson/storage
-#BOOT_PATH := $(TOP)/vendor/st-ericsson/boot
 BASE_UTILITIES_PATH := $(TOP)/vendor/st-ericsson/base_utilities
 TOOLS_PATH := $(TOP)/vendor/st-ericsson/tools
 BUILD_PATH := $(TOP)/vendor/st-ericsson/build
@@ -46,7 +45,6 @@ BOARD_KERNEL_CMDLINE := androidboot.hardware=st-ericsson
 BOARD_FORCE_RAMDISK_ADDRESS := 0x02000000
 TARGET_KERNEL_SOURCE := kernel/snda/u8500
 TARGET_KERNEL_CONFIG := cm_u8500_defconfig
-#TARGET_USE_ST_ERICSSON_KERNEL := true
 
 # ST-Ericsson Hardware
 BOARD_USES_STE_HARDWARE := true
@@ -60,7 +58,6 @@ COMMON_GLOBAL_CFLAGS += -DSTE_AUDIO
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
-#BOARD_HAVE_STE_BLUETOOTH := true
 
 # Camera
 USE_CAMERA_STUB := false
@@ -76,8 +73,6 @@ COMMON_GLOBAL_CFLAGS += -DSTE_FM
 
 # Graphics
 USE_OPENGL_RENDERER := true
-# Build OpenGLES emulation guest and host libraries
-#BUILD_EMULATOR_OPENGL := true
 
 # Lights
 LIBLIGHTS_SET_PLATFORM := u8500
@@ -112,14 +107,8 @@ WIFI_DRIVER_MODULE_NAME := cw1200_wlan
 WIFI_DRIVER_MODULE_PATH := /system/lib/modules/cw1200_wlan.ko
 WIFI_DRIVER_LOADER_DELAY := 1000000
 
-#WLAN_ENABLE_OPEN_MAC_SOLUTION := true
-#STE_WLAN_DRIVER := true
-#WLAN_ENABLE_WAPI := true
+# Wifi Pcsc
 WLAN_SET_PLATFORM := u8500
-#WLAN_SET_DRIVER_MODULE_CORE_NAME := cw1200_core
-#WIFI_TEST_INTERFACE := wlan0
-#WLAN_ENABLE_FEATURE_CSPSA := true
-#WLAN_SET_DUALBAND := false
 
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -185,7 +174,6 @@ BIONIC_MEMSET_NEON_DIVIDER := 132
 LIBCUTILS_MEMSET32_NEON_DIVIDER := 158
 
 CROSS_COMPILE := arm-eabi-
-
 
 # Dumpstate
 BOARD_LIB_DUMPSTATE=libdumpstate
@@ -360,35 +348,11 @@ SF_ENABLE_FEATURE_FB_ROTATION := true
 # Enable tripple buffered main display frame buffer
 BOARD_NUM_FRAME_BUFFERS := 3
 
-# Set hwconfig to use in flashkit
-#FLASHKIT_SET_HWCONFIG := u8500
-
-# set TARGET_HW to use in sign_tool_cli
-#TARGET_HW:=hrefp_v22_v1x_db8500b0_secst_1ghz_glacier_hz3
-
 # Enable build of fm radio vendor library
 FMRADIO_CG2900_ENABLE_FEATURE_VENDOR_DRIVE := true
 
-
-
-# ISSW Configuration
-#ISSW_ENABLE_FEATURE_SIGN_IMAGES ?= false
-
-# XLOADER settings
-#XLOADER_SET_PLATFORM := u8500
-
-# SOC-SETTINGS settings
-#SOC_SETTINGS_SET_PLATFORM := u8500
-
-# Documentation settings
-#REFMAN_ENABLE_FEATURE_REFMAN_GEN := true
-#REFMAN_SET_UML_EXPORT_XML := $(abspath $(TOP)/vendor/st-ericsson/u8500/uml-export/ste-uml-export.xml)
-
 # CG29XX Configuration
 STE_CG29XX_CTRL_ENABLE_FEATURE_STE_CG29XX_CTRL := true
-
-# Windows USB Host Drivers
-#USB_PC_DRIVERS_SET_DRIVERS := STE-Linux-platform-usb-drivers-windows.zip
 
 # CSPSA settings
 CSPSA_SET_DEFAULT_CSPSA_IMAGES := u8500_default_cspsa.bin u8500_default_cspsa.gdf
@@ -397,188 +361,3 @@ CSPSA_IMAGE_ENABLE_MODEM_PARAMETERS ?= true
 # Pickup the right bluetooth's Sim Access Profile backend driver
 # Available values: MAL, CAIF
 BLUETOOTH_ENABLE_FEATURE_SAP_BACKEND := MAL
-
-#####################################################################
-# Add/remove/etc. files just prior to generating Android's file system images
-
-#PATCHTOP := $(BUILD_PATH)/ste_image/fs_patches
-#APPLY_FS_PATCHES := $(BUILD_PATH)/ste_image/apply_fs_patches.sh
-
-#PATCH_VARS += TOPLEVEL=$(realpath $(TOP)) KERNELDIR=kernel INSTALL_MOD_PATH=$(PRODUCT_OUT)/system KERNEL_OUTPUT=$(KERNEL_OUTPUT)
-
-#patch-systemimage:
-#	$(hide) $(APPLY_FS_PATCHES) PATCHDIR=$(PATCHTOP)/system VOLUMEDIR=$(PRODUCT_OUT)/system $(PATCH_VARS)
-
-#patch-userdataimage:
-#	$(hide) $(APPLY_FS_PATCHES) PATCHDIR=$(PATCHTOP)/userdata VOLUMEDIR=$(PRODUCT_OUT)/userdata $(PATCH_VARS)
-
-#patch-ramdiskimage:
-#	$(hide) $(APPLY_FS_PATCHES) PATCHDIR=$(PATCHTOP)/ramdisk VOLUMEDIR=$(PRODUCT_OUT)/ramdisk $(PATCH_VARS)
-#
-#patch-cacheimage:
-#	$(hide) $(APPLY_FS_PATCHES) PATCHDIR=$(PATCHTOP)/cache VOLUMEDIR=$(PRODUCT_OUT)/cache $(PATCH_VARS)
-
-#####################################################################
-
-# Create cache.img and misc.img
-#droidcore: cacheimage miscimage
-
-# Create misc.img
-#.PHONY: miscimage
-#miscimage: $(PRODUCT_OUT)/misc.img
-
-#$(PRODUCT_OUT)/misc.img:
-#	dd if=/dev/zero of=$(PRODUCT_OUT)/misc.img bs=$(BOARD_MISCIMAGE_PARTITION_SIZE) count=1
-
-# setup flash configuration files
-#CREATE_FILELISTS := $(FLASHKIT_CONFIG_PATH)/createfilelists.sh
-#CREATE_FILELISTS_FLASHER := $(FLASHKIT_CONFIG_PATH)/createfilelists-flasher.sh
-
-#.PHONY: setup-flashconfig
-#setup-flashconfig:
-#	cp -f $(FLASHKIT_CONFIG_PATH)/config.list $(FLASHKIT_INSTALL_BASE)/
-#	cp -f $(FLASHKIT_CONFIG_PATH)/flasharchive.xml $(FLASHKIT_INSTALL_BASE)/
-#	cp -f $(FLASHKIT_CONFIG_PATH)/flashlayout.txt $(FLASHKIT_INSTALL_BASE)/
-#Create paths for flashkit, first for old flashkit scripts solution and then for new "flasher" script.
-#The paths only differ in that the old scripts needs "../../" first
-#	$(CREATE_FILELISTS) -d $(FLASHKIT_INSTALL_BASE) -p ../../$(FLASHKIT_RELATIVE_SPLASHPATH) -n $(FLASHKIT_ENABLE_MODEMINFILELIST) -a ../../$(filter %.bin,$(CSPSA_SET_DEFAULT_CSPSA_IMAGES))
-#	$(CREATE_FILELISTS_FLASHER) -d $(FLASHKIT_INSTALL_BASE) -p ./$(FLASHKIT_RELATIVE_SPLASHPATH) -n $(FLASHKIT_ENABLE_MODEMINFILELIST) -a $(filter %.bin,$(CSPSA_SET_DEFAULT_CSPSA_IMAGES))
-
-#st-ericsson-flashkit: setup-flashconfig
-
-#ifeq ($(FLASHKIT_ENABLE_ST_ERICSSON_FLASHKIT), true)
-#systemimage: st-ericsson-flashkit
-#endif
-
-#$(PRODUCT_OUT)/kernel: $(PRODUCT_OUT)/uImage
-#	ln -sf zImage $@
-
-# Collect loadmodules and flashkit and place them nicely in a common directory
-
-#systemimage: collect-loadmodules
-
-#files: init-symlinks
-#init-symlinks:
-#	@echo "Symlink: $(TARGET_ROOT_OUT)/ueventd.st-ericssonmop500platform.rc -> ./ueventd.st-ericsson.rc"
-#	@mkdir -p $(TARGET_ROOT_OUT)
-#	$(hide) ln -sf ./ueventd.st-ericsson.rc $(TARGET_ROOT_OUT)/ueventd.st-ericssonmop500platform.rc
-#	@echo "Symlink: $(TARGET_ROOT_OUT)/ueventd.st-ericssonu8500platformhrefv60.rc -> ./ueventd.st-ericsson.rc"
-#	$(hide) ln -sf ./ueventd.st-ericsson.rc $(TARGET_ROOT_OUT)/ueventd.st-ericssonu8500platformhrefv60.rc
-#	@echo "Symlink: $(TARGET_ROOT_OUT)/ueventd.st-ericssona9500platform.rc -> ./ueventd.st-ericsson.rc"
-#	$(hide) ln -sf ./ueventd.st-ericsson.rc $(TARGET_ROOT_OUT)/ueventd.st-ericssona9500platform.rc
-#	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssonmop500platform.rc -> ./init.st-ericsson.rc"
-#	$(hide) ln -sf ./init.st-ericsson.rc $(TARGET_ROOT_OUT)/init.st-ericssonmop500platform.rc
-#	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssonu8500platformhrefv60.rc -> ./init.st-ericsson.rc"
-#	$(hide) ln -sf ./init.st-ericsson.rc $(TARGET_ROOT_OUT)/init.st-ericssonu8500platformhrefv60.rc
-#	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssona9500platform.rc -> ./init.st-ericsson.rc"
-#	$(hide) ln -sf ./init.st-ericsson.rc $(TARGET_ROOT_OUT)/init.st-ericssona9500platform.rc
-#	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssonmop500platform.usb.rc -> ./init.st-ericsson.usb.rc"
-#	$(hide) ln -sf ./init.st-ericsson.usb.rc $(TARGET_ROOT_OUT)/init.st-ericssonmop500platform.usb.rc
-#	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssonu8500platformhrefv60.usb.rc -> ./init.st-ericsson.usb.rc"
-#	$(hide) ln -sf ./init.st-ericsson.usb.rc $(TARGET_ROOT_OUT)/init.st-ericssonu8500platformhrefv60.usb.rc
-#	@echo "Symlink: $(TARGET_ROOT_OUT)/init.st-ericssona9500platform.usb.rc -> ./init.st-ericsson.usb.rc"
-#	$(hide) ln -sf ./init.st-ericsson.usb.rc $(TARGET_ROOT_OUT)/init.st-ericssona9500platform.usb.rc
-
-
-
-#COLLECT_LOADMODULES := $(BUILD_PATH)/ste_image/collect-loadmodules.sh
-#COLLECT_LOADMODULES_DELIMITER := :
-
-#.PHONY: collect-loadmodules
-#collect-loadmodules: $(PRODUCT_OUT)/system.img $(PRODUCT_OUT)/boot.img $(PRODUCT_OUT)/recovery.img $(PRODUCT_OUT)/misc.img
-#	$(hide) $(COLLECT_LOADMODULES) PRODUCT_OUT=$(PRODUCT_OUT) TOP=$(TOP) \
-#	 KERNEL_OUTPUT=$(KERNEL_OUTPUT_RELATIVE) \
-#	 UBOOT_OUTPUT=$(UBOOT_OUTPUT) \
-#	 LK_OUTPUT=$(LK_OUTPUT) \
-#	 KERNEL_DEFCONFIG=$(KERNEL_DEFCONFIG) \
-#	 FLASHKIT_INSTALL_PATH=$(FLASHKIT_INSTALL_PATH) \
-#	 SPLASH_IMAGE_PATH=${UBOOT_SPLASH_IMAGE_OUTPUT} \
-#	 USB_PC_DRIVERS_SET_DRIVERS=$(USB_PC_DRIVERS_SET_DRIVERS) \
-#	 DEFAULT_CSPSA_IMAGES=$(subst $(COLLECT_LOADMODULES_DELIMITER) ,$(COLLECT_LOADMODULES_DELIMITER),$(addsuffix $(COLLECT_LOADMODULES_DELIMITER),$(CSPSA_SET_DEFAULT_CSPSA_IMAGES))) \
-#	 DELIMITER=$(COLLECT_LOADMODULES_DELIMITER)
-
-#.PHONY: collect-loadmodules-nodeps
-#collect-loadmodules-nodeps: systemimage-nodeps
-#	$(hide) $(COLLECT_LOADMODULES) PRODUCT_OUT=$(PRODUCT_OUT) TOP=$(TOP) \
-#	 KERNEL_OUTPUT=$(KERNEL_OUTPUT_RELATIVE) \
-#	 UBOOT_OUTPUT=$(UBOOT_OUTPUT) \
-#	 LK_OUTPUT=$(LK_OUTPUT) \
-#	 KERNEL_DEFCONFIG=$(KERNEL_DEFCONFIG) \
-#	 FLASHKIT_INSTALL_PATH=$(FLASHKIT_INSTALL_PATH) \
-#	 SPLASH_IMAGE_PATH=${UBOOT_SPLASH_IMAGE_OUTPUT} \
-#	 USB_PC_DRIVERS_SET_DRIVERS=$(USB_PC_DRIVERS_SET_DRIVERS) \
-#	 DEFAULT_CSPSA_IMAGES=$(subst $(COLLECT_LOADMODULES_DELIMITER) ,$(COLLECT_LOADMODULES_DELIMITER),$(addsuffix $(COLLECT_LOADMODULES_DELIMITER),$(CSPSA_SET_DEFAULT_CSPSA_IMAGES))) \
-#	 DELIMITER=$(COLLECT_LOADMODULES_DELIMITER)
-
-# Select u-boot configuration
-#ENABLE_BUILD_UBOOT := false
-
-#ifeq ($(ENABLE_FEATURE_BUILD_HBTS),true)
-#UBOOT_DEFCONFIG := u8500_hbts_config
-#else
-#UBOOT_DEFCONFIG ?= u8500_def_config
-#endif
-#UBOOT_SET_SPLASH_IMAGE := $(BOOT_PATH)/u-boot/tools/logos/stericsson.bmp
-# Set input and output variables for u-boot environment parameter image
-#BUILD_UBOOT_ENV_IMG_INPUT := $(TOP)/vendor/st-ericsson/u8500/uboot_envparameters_android.cfg
-#BUILD_UBOOT_ENV_IMG_OUTPUT := $(UBOOT_OUTPUT)/u-boot-env.bin
-
-# Set input and output variables for lk environment parameter image
-#BUILD_LK_ENV_IMG_INPUT := $(TOP)/vendor/st-ericsson/u8500/lk_envparameters_android.cfg
-#BUILD_LK_ENV_IMG_OUTPUT := $(LK_OUTPUT)/lk_env.bin
-#BUILD_LK_TARGET := href500
-####################################################################
-
-####################################################################
-# KERNEL, WLAN, UBOOT & LK OUTPUT dirs
-
-#KERNEL_OUTPUT_RELATIVE := $(TARGET_OUT_INTERMEDIATES)/kernel
-#KERNEL_OUTPUT := $(abspath $(KERNEL_OUTPUT_RELATIVE))
-#UBOOT_OUTPUT := $(TARGET_OUT_INTERMEDIATES)/uboot
-#LK_OUTPUT := $(TARGET_OUT_INTERMEDIATES)/lk
-# If the UBOOT_SPLASH_IMAGE_OUTPUT variable is changed the copy
-# in ste_uxx00.mk (vendor/st-ericsson/products) also needs to be updated
-#UBOOT_SPLASH_IMAGE_OUTPUT := splash.bin
-#WLAN_OUTPUT = $(abspath $(TARGET_OUT_INTERMEDIATES)/wlan)
-####################################################################
-
-###############################################################################
-## FLASHKIT SETTINGS
-#FLASHKIT_ENABLE_ST_ERICSSON_FLASHKIT := true
-#FLASHKIT_INSTALL_PATH := $(PRODUCT_OUT)
-#FLASHKIT_INSTALL_BASE := $(abspath $(FLASHKIT_INSTALL_PATH))
-#FLASHKIT_RELATIVE_SPLASHPATH := $(UBOOT_SPLASH_IMAGE_OUTPUT)
-#FLASHKIT_RELATIVE_MODEMDIRPATH := ../../modem_images/
-#FLASHKIT_ENABLE_MODEMINFILELIST := true
-#FLASHKIT_CONFIG_PATH ?= $(TOP)/vendor/st-ericsson/u8500/flashconfig
-#ANT_HOME=$(abspath $(TOOLS_PATH)/community/apache_ant)
-#ANT4ECLIPSE_HOME=$(abspath $(TOOLS_PATH)/community/ant4eclipse)
-################################################################################
-
-################################################################################
-
-
-
-# For boot.img:
-# Kernel will be loaded to this address + 0x00008000
-# Ramdisk will be loaded to this address + 0x02000000
-#BOARD_KERNEL_BASE := 0
-
-
-
-###############################################################################
-
-## Module configuration flags ##
-
-#<MODULE_NAME>_ENABLE_FEATURE_<FEATURE_NAME_u8500> := true
-
-# Enable signature verification features necessary for production fused hw
-#ifeq (true,$(ENABLE_FEATURE_SIGNATURE_VERIFICATION))
-#Add signature verification related module flags
-#ISSW_ENABLE_FEATURE_SIGN_IMAGES := true
-#UBOOT_ENABLE_FEATURE_SECBOOT := true
-#endif
-
-# Kernel configuration
-#KERNEL_DEFCONFIG ?= ux500_ux540_defconfig
-
