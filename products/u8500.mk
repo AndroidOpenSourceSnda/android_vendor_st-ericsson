@@ -378,11 +378,6 @@ PRODUCT_PACKAGES += \
 #    u-boot.bin \
 #    u-boot-env.bin \
 
-#Include the libaudiopolicy for legacy Audio HAL
-ifneq ($(BOARD_USES_C_AUDIO_HAL), true)
-    PRODUCT_PACKAGES += libaudiopolicy
-endif
-
 # FM Radio library name is dependent on whether it is RX+TX/RX/TX
 # set one of these to true to get RX or TX only
 FMRADIO_CG2900_SET_TX_ONLY := false
