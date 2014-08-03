@@ -13,7 +13,6 @@ PRODUCT_PROPERTY_OVERRIDES := \
 # Enable AAC 5.1 channel output
 PRODUCT_PROPERTY_OVERRIDES += \
     media.aac_51_output_enabled=1 \
-#    qemu.hw.mainkeys=1
 
 # WI-FI interface
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -36,18 +35,6 @@ ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
 ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
 ADDITIONAL_DEFAULT_PROPERTIES += persist.service.adb.enable=1
 
-## Product configration flags ##
-
-# Enable features for signing verification needed on production fused hw
-#ENABLE_FEATURE_SIGNATURE_VERIFICATION ?= false
-
-## end Product configuration flags ##
-
-# Add packages to build.
-# Module names for lights, sensors, gps, gralloc, overlay, copybit, audio_policy, and
-# audio.primary should always be hard coded to match TARGET_BOARD_PLATFORM in
-# vendor/st-ericsson/u8500/BoardConfig.mk
-
 # Audio
 PRODUCT_PACKAGES += \
     admsrv \
@@ -67,9 +54,6 @@ PRODUCT_PACKAGES += \
     tinymix \
     mmprobed \
     preload_adm.txt
-#    adm.sqlite-u8520_ab8505_v1 \
-#    adm.sqlite-u8520_ab8505_v2 \
-#    adm.sqlite-u9540_ab9540_v1 \
 
 # Display
 PRODUCT_PACKAGES += \
@@ -77,15 +61,10 @@ PRODUCT_PACKAGES += \
     gralloc.montblanc \
     hwcomposer.montblanc \
     libblt_hw
-#    overlay.montblanc \
 
 # Sensors
 PRODUCT_PACKAGES += \
     sensors.montblanc
-
-# Power
-#PRODUCT_PACKAGES += \
-#    power.montblanc
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -110,7 +89,6 @@ PRODUCT_PACKAGES += \
     libstagefrighthw \
     libstagefright_soft_ste_aacdec \
     libstagefright_soft_ste_mp3dec \
-#    libstagefright_soft_ste_wmapro_v10
 
 # RIL
 PRODUCT_PACKAGES += \
@@ -125,8 +103,7 @@ PRODUCT_PACKAGES += \
 # Bass app
 PRODUCT_PACKAGES += \
     libbassapp \
-    libtee \
-#    smcl_ta
+    libtee
 
 # Cops
 PRODUCT_PACKAGES += \
@@ -134,8 +111,6 @@ PRODUCT_PACKAGES += \
     cops_cmd \
     libcops \
     cops_ta
-#    cops_data \
-#    COPS_DATA_0.csd \
 
 # filesystem
 PRODUCT_PACKAGES += \
@@ -146,15 +121,7 @@ PRODUCT_PACKAGES += \
     cspsa-server \
     cspsa.conf \
     cspsa-cmd \
-    libcspsa \
-#    libcspsa-core \
-#    libcspsa-ll-file \
-#    pff2cspsa \
-#    cspsalist \
-#    cspsa2nwm \
-#    nwm2cspsa \
-#    cspsa2qstore \
-#    cspsa_image
+    libcspsa
 
 # Modem lib
 PRODUCT_PACKAGES += \
@@ -174,38 +141,20 @@ PRODUCT_PACKAGES += \
     libmalmon \
     libmalmte \
     libisimessage \
-    libphonet \
-#    libphonet.so
-#    libmalcs.so \
-#    libmalgpds.so \
-#    libmalgss.so \
-#    libmalmce.so \
-#    libmalmis.so \
-#    libmalnet.so \
-#    libmalnvd.so \
-#    libmalpipe.so \
-#    libmalsms.so \
-#    libmaluicc.so \
-#    libmalrf.so \
-#    libmalftd.so \
-#    libmalmon.so \
-#    libmalmte.so \
-#    libisimessage.so \
+    libphonet
 
 # Modem
 PRODUCT_PACKAGES +=  \
     modem-supervisor \
     ste_mad \
-    telephony_log_levels \
-#    libmlr
-#    trace_auto.conf \
+    telephony_log_levels
 
 # AT-Core
 PRODUCT_PACKAGES += \
     at_core \
     system_id.cfg \
     manuf_id.cfg \
-    model_id.cfg \
+    model_id.cfg
 
 # Call-Network
 PRODUCT_PACKAGES += \
@@ -217,26 +166,12 @@ PRODUCT_PACKAGES += \
 # SIM
 PRODUCT_PACKAGES += \
     simd \
-    simpbd \
-#    libsim \
-#    libsimcom \
-#    libsimpb \
-#    libmsl \
-#    libmal \
-#    libapdu \
-#    libpc \
-#    tapdu \
-#    tcat \
-#    tuicc \
-#    uicc \
-#    cat \
+    simpbd
 
 # SMS
 PRODUCT_PACKAGES += \
     libsms_server \
-    sms_server \
-#    sms_test_harness \
-#    sms_stub \
+    sms_server
 
 # Psdata
 PRODUCT_PACKAGES += \
@@ -260,20 +195,18 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     stedump \
     modem_log_relay
-#    autologcat \
-#    autologcat.conf \
 
 # Network
 PRODUCT_PACKAGES += \
-    libnl \
+    libnl
 
 # Common
 PRODUCT_PACKAGES += \
-    libstecom \
+    libstecom
 
 # CG2900 GPS/WIFI/FM UART
 PRODUCT_PACKAGES += \
-    ste-cg29xx_ctrl \
+    ste-cg29xx_ctrl
 
 # CRDA
 PRODUCT_PACKAGES += \
@@ -283,16 +216,11 @@ PRODUCT_PACKAGES += \
     regulatory.bin \
     85-regulatory.rules
 
-# Rs
-#PRODUCT_PACKAGES += \
-#    libRS \
-#    librs_jni
-
 # External
 PRODUCT_PACKAGES += \
     libasf \
     libarchive \
-    libarchive_fe \
+    libarchive_fe
 
 # Root
 PRODUCT_PACKAGES += \
@@ -307,76 +235,13 @@ PRODUCT_PACKAGES += \
     libext2_uuid \
     libext2_profile \
     libext2_com_err \
-    libext2_e2p \
+    libext2_e2p
 
 PRODUCT_PACKAGES += \
-    ATService \
     Stk \
     st-ericsson-multimedia-package \
     chargemode \
     battery_params
-
-#    LiveWallpapersPicker \
-#    LiveWallpapers \
-#    MagicSmokeWallpapers \
-#    VisualizationWallpapers \
-#    libasound_module_pcm_steiop \
-#    libasound_module_pcm_bluetooth \
-#    libasound_module_ctl_bluetooth \
-#    STEBluetooth \
-#    libaccsutil_log \
-#    libaccsutil_security \
-#    libaccsutil_char_conv \
-#    libaccsutil_predial_checks \
-#    liblcsclient \
-#    libamilclient \
- #   rt_tables \
-#    ip \
-#    gen_sipc \
-#    nwm2gdf \
-#    gdflist \
-#    gdf2pff \
-#    libcalcdigest \
-#    libverify \
-#    sap \
-#    libsap_pts \
-#    libsbc \
-#    wfa_ca \
-#    wfa_dut \
-#    libwfa \
-#    libwfa_ca \
-#    libwfa_dut \
-#    modemfs.img \
-#    bsdtar \
-#    drmserver \
-#    libdrmframework \
-#    libdrmframework_jni \
-#    make_ext4fs \
-#    libsrec_jni \
-#    busybox \
-#    factoryreset \
-#    libthermal \
-#    ThermalService \
-#    sensormonitor \
-#    thermaltest \
-#    thermald \
-#    thermal.conf
-#    rtc_calibration \
-#    cw1200_wlan.ko \
-#    libhdmi_service \
-#    hdmi_service_st \
-#    hdmid \
-#    RXN_IntApp \
-#    STErilOemService \
-#    STMPE-keypad.kcm \
-#    tc3589x-keypad.kcm \
-#    ux500-ske-keypad.kcm \
-#    ux500-ske-keypad-qwertz.kcm \
-#    com.stericsson.ril.oem \
-#    com.stericsson.ril.oem.xml \
-#    uImage \
-#    u-boot.bin \
-#    u-boot-env.bin \
 
 # FM Radio library name is dependent on whether it is RX+TX/RX/TX
 # set one of these to true to get RX or TX only
@@ -392,12 +257,6 @@ else
     PRODUCT_PACKAGES += libfmradio.cg2900
 endif
 endif
-
-# Pick up some sounds
-#include frameworks/base/data/sounds/OriginalAudio.mk
-
-# Added resources for TextToSpeech utility.
-#include external/svox/pico/lang/all_pico_languages.mk
 
 # Copy input device configurations
 PRODUCT_COPY_FILES += \
@@ -457,6 +316,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.stericsson.hardware.fm.receiver.xml:system/etc/permissions/com.stericsson.hardware.fm.receiver.xml \
     frameworks/native/data/etc/com.stericsson.hardware.fm.transmitter.xml:system/etc/permissions/com.stericsson.hardware.fm.transmitter.xml
 #    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
+
 # Copy ALSA configuration files to rootfs
 PRODUCT_COPY_FILES += \
     external/alsa-lib/src/conf/alsa.conf:system/usr/share/alsa/alsa.conf \
@@ -480,12 +340,6 @@ PRODUCT_COPY_FILES += \
 # Copy the APN configuration file
 PRODUCT_COPY_FILES += \
     vendor/st-ericsson/u8500/apns_u8500.xml:system/etc/apns-conf.xml
-
-# Copy the U-Boot splash screen
-# If the U-boot splash image output path need is changed, the UBOOT_SPLASH_IMAGE_OUTPUT variable
-# in BoardConfig.mk (vendor/st-ericsson/uxx00) also needs to be updated
-#PRODUCT_COPY_FILES += \
-#    vendor/snda/products/logos/boot-snda.bmp:splash.bin
 
 # keyboard layouts
 PRODUCT_COPY_FILES += \
@@ -518,7 +372,6 @@ PRODUCT_COPY_FILES += \
 # Bluetooth configs
 PRODUCT_COPY_FILES += \
     system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf
-#    system/bluetooth/data/qos_role_switch_blacklist.conf:system/etc/bluetooth/qos_role_switch_blacklist.conf \
 
 # charge resource
 PRODUCT_COPY_FILES += \
@@ -539,25 +392,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/st-ericsson/u8500/prebuilt/common/etc/mkshrc:system/etc/mkshrc
 
-# AVAHI configuration
-#AVAHI_ENABLE_FEATURE_DAEMON_CONF := false
-#AVAHI_ENABLE_FEATURE_AUTOIP_ACTION := false
-
-# Windows USB Host Drivers
-#USB_PC_DRIVERS_SET_DRIVERS := STE-Linux-platform-usb-drivers-windows.zip
-
 # Neven data
 PRODUCT_COPY_FILES += \
     external/neven/Embedded/common/data/APIEm/Modules/RFFprec_501.bmd:system/usr/share/bmd/RFFprec_501.bmd
 
 # Copy files for modules
-#$(call inherit-product-if-exists, vendor/st-ericsson/access_services/modem_adaptations/modem-supervisor/copy_files.mk)
-#$(call inherit-product-if-exists, vendor/st-ericsson/external/DNSmulticast/avahi/avahi-autoipd/copy_files.mk)
-#$(call inherit-product-if-exists, vendor/st-ericsson/external/DNSmulticast/avahi/avahi-daemon/copy_files.mk)
-#$(call inherit-product-if-exists, vendor/st-ericsson/tools/platform/USB-PC-drivers/Windows/copy_files.mk)
-#$(call inherit-product-if-exists, vendor/st-ericsson/base_utilities/core/utilities/lua/copy_files.mk)
-
 $(call inherit-product-if-exists, vendor/st-ericsson/processing/security_framework/bass_app/libbassapp/ta/copy_files.mk)
-
-# Google Mobile Services (GMS)
-#$(call inherit-product-if-exists, vendor/google/products/gms.mk)
