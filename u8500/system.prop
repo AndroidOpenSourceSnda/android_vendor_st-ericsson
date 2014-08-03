@@ -12,12 +12,6 @@ ro.sf.hwrotation=0
 # This is a 16.16 fixed point number
 ro.opengles.version=131072
 
-# Enable RecoverySystem to emit "factory-reset" reset string
-# instead of "recovery" when doing a factory reset. This is
-# useful when implementing factory reset without the entire
-# recovery framework.
-ro.factoryresetwithoutrecovery=true
-
 # debug.sf.hw=0 Use b2r2 as compositor in SurfaceFlinger
 # debug.sf.hw=1 Use Mali as compositor in SurfaceFlinger
 debug.sf.hw=1
