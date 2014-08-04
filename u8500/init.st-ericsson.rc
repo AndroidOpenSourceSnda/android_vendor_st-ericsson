@@ -242,11 +242,6 @@ service admsrv /system/bin/logwrapper /system/bin/admsrv
     ioprio rt 4
     capability NET_ADMIN NET_RAW SYS_NICE
 
-#service stedump /system/bin/logwrapper /system/bin/stedump
-#    class main
-#    user system
-#    group system audio inet net_bt net_bt_admin net_raw shell
-
 service ste-cg29xx_ctrl /system/bin/logwrapper /system/xbin/ste-cg29xx_ctrl -b 115200 -p 6 -l 23 -i /system/bin/cg2900-channel_init.sh /dev/ttyAMA0
     class main
     user root
