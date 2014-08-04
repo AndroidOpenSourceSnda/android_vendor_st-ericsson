@@ -1,18 +1,6 @@
-# NOTE: This file contains ST-Ericsson related additions/modifications/deletions to init.rc
-#       Commented out lines are kept for reference.
-
-import /init.${ro.hardware}.usb.rc
-
-on early-init
-
-    # Set init and its forked children's oom_adj.
-    write /proc/1/oom_score_adj -16
+import init.${ro.hardware}.usb.rc
 
 on init
-
-    # setup the global environment
-    export PATH /system/sbin:/system/bin:/system/xbin:/sbin:/bin:/vendor/bin
-    export LD_LIBRARY_PATH /system/lib:/lib:/usr/lib:/system/lib/ste_omxcomponents/:/vendor/lib
     export EXTERNAL_STORAGE /storage/sdcard0
     export OMX_STE_ENS_COMPONENTS_DIR /system/lib/ste_omxcomponents/
     export OMX_BELLAGIO_LOADER_REGISTRY /system/omxloaders
@@ -22,7 +10,6 @@ on init
     symlink /storage/sdcard0 /sdcard
     symlink /storage/sdcard0 /mnt/sdcard
 
-    mkdir /system 0775 system system
     mkdir /modemfs 0771 system system
 
     # Shared memory file system
@@ -49,7 +36,6 @@ on fs
     # checks the factory reset triggers in sysfs and CSPSA and then formats
     # the block device belonging to /data.
     start cspsa
-    exec /system/bin/logwrapper /system/bin/factoryreset -f /sys/devices/soc0/reset_reason -r factory-reset -c CSPSA0 -p 0xfffffffc:31 /dev/block/mmcblk0p5
 
     # Once any factory reset is completed (this is why exec is used above) it is
     # OK to mount the remaining file system volumes.
@@ -58,11 +44,6 @@ on fs
     mount ext4 /dev/block/mmcblk0p1 /modemfs nosuid nodev
 
 on post-fs
-
-    # once everything is setup, no need to modify /
-    chown system system /system
-    chmod 0775 /system
-
     chown radio radio /modemfs
     chmod 0770 /modemfs
     chown radio radio /modemfs/CONF
@@ -79,15 +60,6 @@ on post-fs
     chmod 0644 /modemfs/PERM/PROT/LABEP.CFG
     chown radio radio /modemfs/PERM/PROT/PPVALUES.DAT
     chmod 0644 /modemfs/PERM/PROT/PPVALUES.DAT
-
-    # Set permissions for wake locks before services are launched that use them
-    chown system system /sys/power/state
-    chown system system /sys/power/wakeup_count
-    chown radio system /sys/power/wake_lock
-    chown radio system /sys/power/wake_unlock
-    chmod 0660 /sys/power/state
-    chmod 0660 /sys/power/wake_lock
-    chmod 0660 /sys/power/wake_unlock
 
 on post-fs-data
 
@@ -147,28 +119,14 @@ on post-fs-data
     chown system system /dev/dbx500_mloader_fw
     chmod 0600 /dev/dbx500_mloader_fw
 
-    # create var/run, var/lib for avahi
-    mkdir /var
-    mkdir /var/run
-    mkdir /var/lib
-
-    # create directory for RXN MSL
-    mkdir /data/RXN 0774 root root
-
     # Change permissions for modem_log_relay config file
     chmod 666 /data/misc/trace_auto.conf
-
-    # Set permission rights for ping
-    chmod 4755 /system/bin/ping
 
     # set proper access to modem storage pipe
     chown radio radio /dev/rpc
     chmod 0600 /dev/rpc
 
 on early-boot
-
-    # Enable line below if you want console in charging mode
-#    start console
 
     # Launch core services in case charging mode is entered
     start watchdog-kicker
@@ -186,15 +144,16 @@ on boot
     # Set timeout value for rmnet stats.
     write /sys/devices/virtual/net/rmnet0/timeout_suspend 5000000
 
-    chown system system /sys/class/leds/lp5521_pri:channel0/brightness
-    chown system system /sys/class/leds/lp5521_pri:channel1/brightness
-    chown system system /sys/class/leds/lp5521_pri:channel2/brightness
-    chown system system /sys/class/leds/lp5521_pri:channel0/device/engine1_load
-    chown system system /sys/class/leds/lp5521_pri:channel0/device/engine2_load
-    chown system system /sys/class/leds/lp5521_pri:channel0/device/engine3_load
-    chown system system /sys/class/leds/lp5521_pri:channel0/device/engine1_mode
-    chown system system /sys/class/leds/lp5521_pri:channel0/device/engine2_mode
-    chown system system /sys/class/leds/lp5521_pri:channel0/device/engine3_mode
+    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-0019/iio:device0/sampling_frequency
+    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-0019/iio:device0/mode
+    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-0019/iio:device0/in_accel_x_raw
+    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-0068/iio:device1/range
+    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-001e/iio:device2/mode
+    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-001e/iio:device2/mode
+    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-001e/iio:device2/in_magn_x_scale
+    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-001e/iio:device2/in_magn_y_scale
+    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-001e/iio:device2/in_magn_z_scale
+
     chown system system /sys/class/i2c-dev/i2c-2/device/2-005c/enable
     chown system system /sys/class/i2c-dev/i2c-2/device/2-0029/power_state
     chown system system /sys/class/i2c-dev/i2c-2/device/2-001e/iio:device2/mode
@@ -222,9 +181,6 @@ on boot
     # Define support for SIM card hot swap
     setprop icc.hotswap supported
 
-    # Define interface name for wlan
-    #setprop wifi.interface wlan0
-
     # Install cw1200_core WLAN module
     insmod /system/lib/modules/cw1200_core.ko
 
@@ -237,45 +193,6 @@ on boot
 
     # Create Directory for Caching files for camera
     mkdir /data/tuning 0700 media camera
-
-service console /system/bin/sh
-    class core
-    console
-#   disabled
-#    user shell
-#    group log
-
-service netd /system/bin/netd
-    class main
-    socket netd stream 0660 root system dbus_access
-    socket dnsproxyd stream 0660 root inet
-    socket mdns stream 0660 root system
-
-service media /system/bin/logwrapper /system/bin/mediaserver
-    class main
-    user media
-    group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc
-    ioprio rt 4
-
-service dbus /system/bin/logwrapper /system/bin/dbus-daemon --system --nofork
-    class main
-    socket dbus stream 660 bluetooth bluetooth
-    socket dbus_ste stream 660 bluetooth dbus_access
-    user bluetooth
-    group bluetooth net_bt_admin dbus_access
-
-service bluetoothd /system/bin/logwrapper /system/bin/bluetoothd -d -n
-    class main
-    socket bluetooth stream 660 bluetooth bluetooth
-    socket dbus_bluetooth stream 660 bluetooth bluetooth
-    # init.rc does not yet support applying capabilities, so run as root and
-    # let bluetoothd drop uid to bluetooth with the right linux capabilities
-    group bluetooth net_bt_admin misc radio
-    disabled
-
-service flash_recovery /system/bin/logwrapper /system/etc/install-recovery.sh
-    class main
-    oneshot
 
 # Crash Safe Parameter Storage Area, serving production parameter requests from clients.
 # Configuration is read from file "/etc/cspsa.conf" and each found area spawns a CSPSA server
@@ -338,9 +255,7 @@ service ste-cg29xx_ctrl /system/bin/logwrapper /system/xbin/ste-cg29xx_ctrl -b 1
 
 # DHCP client for Bluetooth PANU
 service dhcpcd_bnep0 /system/bin/logwrapper /system/bin/dhcpcd -dABKL
-# -o domain_name_servers
     class main
-    #group dhcp
     disabled
     oneshot
 
@@ -358,20 +273,6 @@ service lbsd /system/bin/lbsd
 on property:dev.bootcomplete=1
     start lbsd
 
-service RXN_IntApp /system/bin/RXN_IntApp
-    class main
-    user root
-    disabled
-    group radio
-
-on property:dev.bootcomplete=1
-    start RXN_IntApp
-
-#service thermald /system/bin/thermald
-#    class main
-#    user root
-#    group root dbus_access
-
 service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -Dnl80211 -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf -dd
     class main
     socket wpa_wlan0 dgram 660 wifi wifi
@@ -385,9 +286,7 @@ service softap /system/bin/logwrapper /system/bin/wpa_supplicant -Dnl80211 -iwla
     oneshot
 
 service dhcpcd_wlan0 /system/bin/logwrapper /system/bin/dhcpcd -dABKL
-# -o domain_name_servers
     class main
-    #group dhcp
     disabled
     oneshot
 
@@ -459,21 +358,6 @@ service mad /system/bin/ste_mad
     user radio
     group radio dbus_access misc
 
-# Avahi Autoip daemon
-service avahi-autoipd /system/bin/avahi-autoipd usb0 -D
-    class main
-    user root
-
-# Avahi daemon
-service avahi-daemon /system/bin/avahi-daemon
-    class main
-    user root
-
-# Avahi-publish
-service avahi-publish /system/bin/avahi-publish -s READY _mobile._tcp 5353
-    class main
-    user root
-
 service watchdog-kicker /system/xbin/watchdog-kicker -d /dev/watchdog -t 120
     class main
     oneshot
@@ -487,10 +371,6 @@ service battery_params /system/xbin/battery_params
 service usbid_init /system/bin/usbid_init.sh
     class main
     oneshot
-
-# RTC Calibration daemon
-service rtc_calibration /system/bin/rtc_calibration
-    user root
 
 service zram_config /system/bin/sh /system/etc/zram_config.sh
     class main

@@ -5,9 +5,13 @@
 #
 
 import /init.${ro.hardware}.rc
+import /init.usb.rc
 import /init.trace.rc
 
 on early-init
+    # Set init and its forked children's oom_adj.
+    write /proc/1/oom_adj -16
+
     start ueventd
 
 # create mountpoints
@@ -20,13 +24,15 @@ sysclktz 0
 loglevel 3
 
 # setup the global environment
+    export PATH /system/sbin:/system/bin:/system/xbin:/sbin:/bin:/vendor/bin
+    export LD_LIBRARY_PATH /system/lib:/lib:/usr/lib:/system/lib/ste_omxcomponents/:/vendor/lib
     export ANDROID_BOOTLOGO 1
     export ANDROID_ROOT /system
     export ANDROID_ASSETS /system/app
     export ANDROID_DATA /data
     export ASEC_MOUNTPOINT /mnt/asec
     export LOOP_MOUNTPOINT /mnt/obb
-    export BOOTCLASSPATH /system/framework/core.jar:/system/framework/core-junit.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/framework2.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/apache-xml.jar
+    export BOOTCLASSPATH /system/framework/core.jar:/system/framework/core-junit.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/apache-xml.jar
 
 # Backward compatibility
     symlink /system/etc /etc
@@ -41,6 +47,7 @@ loglevel 3
     mount cgroup none /acct cpuacct
     mkdir /acct/uid
 
+    mkdir /system
     mkdir /data 0771 system system
     mkdir /cache 0770 system cache
     mkdir /config 0500 root root
@@ -67,12 +74,15 @@ loglevel 3
     write /proc/sys/kernel/hung_task_timeout_secs 0
     write /proc/cpu/alignment 4
     write /proc/sys/kernel/sched_latency_ns 10000000
+    write /proc/sys/kernel/sched_wakeup_granularity_ns 2000000
     write /proc/sys/kernel/sched_compat_yield 1
     write /proc/sys/kernel/sched_child_runs_first 0
     write /proc/sys/kernel/randomize_va_space 2
     write /proc/sys/kernel/kptr_restrict 2
     write /proc/sys/kernel/dmesg_restrict 1
     write /proc/sys/vm/mmap_min_addr 32768
+    write /proc/sys/kernel/sched_rt_runtime_us 950000
+    write /proc/sys/kernel/sched_rt_period_us 1000000
 
 # Create cgroup mount points for process groups
     mkdir /dev/cpuctl
@@ -105,8 +115,15 @@ loglevel 3
 
 on fs
 # mount mtd partitions
+    # Mount /system rw first to give the filesystem a chance to save a checkpoint
+    mount yaffs2 mtd@system /system
+    mount yaffs2 mtd@system /system ro remount
+    mount yaffs2 mtd@userdata /data nosuid nodev
+    mount yaffs2 mtd@cache /cache nosuid nodev
 
 on post-fs
+    # once everything is setup, no need to modify /
+    mount rootfs rootfs / ro remount
 
     # We chown/chmod /cache again so because mount is run as root + defaults
     chown system cache /cache
@@ -160,6 +177,7 @@ on post-fs-data
     mkdir /data/misc/systemkeys 0700 system system
     # give system access to wpa_supplicant.conf for backup and restore
     mkdir /data/misc/wifi 0770 wifi wifi
+    chmod 0660 /data/misc/wifi/wpa_supplicant.conf
     mkdir /data/local 0751 root root
 
     # For security reasons, /data/local/tmp should always be empty.
@@ -188,8 +206,6 @@ on post-fs-data
     # the following directory.
     mkdir /data/drm 0770 drm drm
 
-    # create /data/offlinelog
-    mkdir /data/offlinelog 0770 root log 
     # If there is no fs-post-data action in the init.<device>.rc file, you
     # must uncomment this line, otherwise encrypted filesystems
     # won't work.
@@ -225,6 +241,13 @@ on boot
     chown radio system /sys/android_power/acquire_full_wake_lock
     chown radio system /sys/android_power/acquire_partial_wake_lock
     chown radio system /sys/android_power/release_wake_lock
+    chown system system /sys/power/state
+    chown system system /sys/power/wakeup_count
+    chown radio system /sys/power/wake_lock
+    chown radio system /sys/power/wake_unlock
+    chmod 0660 /sys/power/state
+    chmod 0660 /sys/power/wake_lock
+    chmod 0660 /sys/power/wake_unlock
 
     chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
@@ -272,23 +295,6 @@ on boot
     chown system system /sys/kernel/ipv4/tcp_rmem_def
     chown system system /sys/kernel/ipv4/tcp_rmem_max
     chown root radio /proc/cmdline
-
-# ST-Ericsson Set radio device and parameters permissions
-    chown system system /sys/module/radio_cg2900/parameters/band
-    chown system system /sys/module/radio_cg2900/parameters/grid
-    chmod 0660 /sys/module/radio_cg2900/parameters/band
-    chmod 0660 /sys/module/radio_cg2900/parameters/grid
-
-#add by dyron
-    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-0019/iio:device0/sampling_frequency
-    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-0019/iio:device0/mode
-    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-0019/iio:device0/in_accel_x_raw
-    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-0068/iio:device1/range
-    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-001e/iio:device2/mode
-    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-001e/iio:device2/mode
-    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-001e/iio:device2/in_magn_x_scale
-    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-001e/iio:device2/in_magn_y_scale
-    chown system system /sys/devices/nmk-i2c.2/i2c-2/2-001e/iio:device2/in_magn_z_scale
 
 # Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
@@ -341,8 +347,15 @@ service ueventd /sbin/ueventd
     class core
     critical
 
-#on property:ro.debuggable=1
-#   start console
+service console /system/bin/sh
+    class core
+    console
+    disabled
+    user shell
+    group log
+
+on property:ro.debuggable=1
+    start console
 
 # adbd is controlled via property triggers in init.<platform>.usb.rc
 service adbd /sbin/adbd
@@ -368,38 +381,11 @@ service vold /system/bin/vold
     socket vold stream 0660 root mount
     ioprio be 2
 
-service AP_offline_log /system/bin/sh /system/etc/run_app_offline_log.sh
-	oneshot
-
-service mainlog /system/bin/logcat -f /data/offlinelog/main -v threadtime -n 20 -r 1024
-	user log
-	group system log
-
-service radiolog /system/bin/logcat -f /data/offlinelog/radio -b radio -v time -n 20 -r 1024
-	user log
-	group system log
-
-service kernellog /system/bin/logcat -f /data/offlinelog/kernel -b kmsg -v time -n 20 -r 1024
-	user root
-	group system log
-
-on property:persist.service.mainlog.enable=1
-	start mainlog
-
-on property:persist.service.mainlog.enable=0
-	stop mainlog
-
-on property:persist.service.radiolog.enable=1
-	start radiolog
-
-on property:persist.service.radiolog.enable=0
-	stop radiolog
-
-on property:persist.service.kernellog.enable=1
-	start kernellog
-
-on property:persist.service.kernellog.enable=0
-	stop kernellog
+service netd /system/bin/netd
+    class main
+    socket netd stream 0660 root system dbus_access
+    socket dnsproxyd stream 0660 root inet
+    socket mdns stream 0660 root system
 
 service debuggerd /system/bin/debuggerd
     class main
@@ -430,25 +416,34 @@ service drm /system/bin/drmserver
     user drm
     group drm system inet drmrpc sdcard_r
 
+service media /system/bin/logwrapper /system/bin/mediaserver
+    class main
+    user media
+    group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc
+    ioprio rt 4
+
 service bootanim /system/bin/bootanimation
     class main
     user graphics
     group graphics
     disabled
     oneshot
-    
-service shutdownanim /system/bin/shutdownanimation
-    class main
-    user graphics
-    group graphics
-    disabled
-    oneshot
 
-service ste-cg29xx_ctrl /system/bin/logwrapper /system/xbin/ste-cg29xx_ctrl -b 115200 -p 6 -l 23 -i /system/bin/cg2900-channel_init.sh /dev/ttyAMA0
+service dbus /system/bin/logwrapper /system/bin/dbus-daemon --system --nofork
     class main
-    user root
-    group bluetooth net_bt_admin misc root
-    oneshot
+    socket dbus stream 660 bluetooth bluetooth
+    socket dbus_ste stream 660 bluetooth dbus_access
+    user bluetooth
+    group bluetooth net_bt_admin dbus_access
+
+service bluetoothd /system/bin/logwrapper /system/bin/bluetoothd -d -n
+    class main
+    socket bluetooth stream 660 bluetooth bluetooth
+    socket dbus_bluetooth stream 660 bluetooth bluetooth
+    # init.rc does not yet support applying capabilities, so run as root and
+    # let bluetoothd drop uid to bluetooth with the right linux capabilities
+    group bluetooth net_bt_admin misc radio
+    disabled
 
 service installd /system/bin/installd
     class main
@@ -493,5 +488,3 @@ service mdnsd /system/bin/mdnsd
     socket mdnsd stream 0660 mdnsr inet
     disabled
     oneshot
-
-
