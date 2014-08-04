@@ -13,13 +13,14 @@ on init
     # setup the global environment
     export PATH /system/sbin:/system/bin:/system/xbin:/sbin:/bin:/vendor/bin
     export LD_LIBRARY_PATH /system/lib:/lib:/usr/lib:/system/lib/ste_omxcomponents/:/vendor/lib
-    export EXTERNAL_STORAGE /mnt/sdcard
+    export EXTERNAL_STORAGE /storage/sdcard0
     export OMX_STE_ENS_COMPONENTS_DIR /system/lib/ste_omxcomponents/
     export OMX_BELLAGIO_LOADER_REGISTRY /system/omxloaders
 
     # create mountpoints
-    mkdir /mnt/sdcard 0000 system system
-    symlink /mnt/sdcard /sdcard
+    mkdir /storage/sdcard0 0000 system system
+    symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard0 /mnt/sdcard
 
     mkdir /system 0775 system system
     mkdir /modemfs 0771 system system
