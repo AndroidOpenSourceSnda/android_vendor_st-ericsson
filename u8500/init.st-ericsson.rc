@@ -352,6 +352,10 @@ service battery_params /system/xbin/battery_params
     group system
     oneshot
 
+service startup /system/bin/logwrapper /system/bin/startup
+    class main
+    oneshot
+
 service usbid_init /system/bin/usbid_init.sh
     class main
     oneshot

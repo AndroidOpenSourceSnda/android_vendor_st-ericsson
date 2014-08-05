@@ -220,7 +220,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libasf \
     libarchive \
-    libarchive_fe
+    libarchive_fe \
+    startup
 
 # Root
 PRODUCT_PACKAGES += \
@@ -264,7 +265,6 @@ PRODUCT_COPY_FILES += \
     vendor/st-ericsson/u8500/bu21013_ts.idc:system/usr/idc/bu21013_ts.idc \
     vendor/st-ericsson/u8500/cyttsp-spi.idc:system/usr/idc/cyttsp-spi.idc \
     vendor/st-ericsson/u8500/tp_ft5306.idc:system/usr/idc/tp_ft5306.idc
-
 
 # Copy the blue-up.sh script to system/bin
 PRODUCT_COPY_FILES += \
