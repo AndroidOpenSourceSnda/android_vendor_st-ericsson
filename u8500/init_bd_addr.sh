@@ -4,8 +4,8 @@
 
 # NB: temporary solution
 
-ADDRFILE=/etc/bd_addr
-PARMFILE=/sys/module/ste_conn/parameters/ste_conn_bd_address
+ADDRFILE=/data/etc/bd_addr
+PARMFILE=/sys/module/cg2900_core/parameters/bd_address
 
 if [ ! -w $PARMFILE ] ; then
     echo "Can't find parameter file, module not loaded?";
