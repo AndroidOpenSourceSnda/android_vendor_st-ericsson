@@ -1,17 +1,3 @@
-ACCESS_SERVICES_PATH := $(TOP)/vendor/st-ericsson/access_services
-CONNECTIVITY_PATH := $(TOP)/vendor/st-ericsson/connectivity
-MULTIMEDIA_PATH := $(TOPDIR)vendor/st-ericsson/multimedia
-PROCESSING_PATH := $(TOP)/vendor/st-ericsson/processing
-STORAGE_PATH := $(TOP)/vendor/st-ericsson/storage
-BASE_UTILITIES_PATH := $(TOP)/vendor/st-ericsson/base_utilities
-TOOLS_PATH := $(TOP)/vendor/st-ericsson/tools
-#BUILD_PATH := $(TOP)/vendor/st-ericsson/build
-APPS_PATH := $(TOP)/vendor/st-ericsson/apps
-HARDWARE_PATH := $(TOP)/vendor/st-ericsson/hardware
-EXTERNAL_PATH := $(TOP)/vendor/st-ericsson/external
-MODEM_PATH :=$(TOP)/modem/u8500
-GRALLOC_PATH := $(HARDWARE_PATH)/libgralloc
-
 ENABLE_ST_ERICSSON_BUILD := true
 
 # Include path
@@ -80,19 +66,29 @@ USE_OPENGL_RENDERER := true
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
+# Path
+#ACCESS_SERVICES_PATH := $(TOP)/vendor/st-ericsson/access_services
+#CONNECTIVITY_PATH := $(TOP)/vendor/st-ericsson/connectivity
+MULTIMEDIA_PATH := $(TOPDIR)vendor/st-ericsson/multimedia
+#PROCESSING_PATH := $(TOP)/vendor/st-ericsson/processing
+#STORAGE_PATH := $(TOP)/vendor/st-ericsson/storage
+#BASE_UTILITIES_PATH := $(TOP)/vendor/st-ericsson/base_utilities
+#TOOLS_PATH := $(TOP)/vendor/st-ericsson/tools
+#APPS_PATH := $(TOP)/vendor/st-ericsson/apps
+#HARDWARE_PATH := $(TOP)/vendor/st-ericsson/hardware
+#EXTERNAL_PATH := $(TOP)/vendor/st-ericsson/external
+#MODEM_PATH :=$(TOP)/modem/u8500
+#GRALLOC_PATH := $(HARDWARE_PATH)/libgralloc
+
 # Media
 TARGET_USE_ST_ERICSSON_MULTIMEDIA := true
-ifeq ($(TARGET_USE_ST_ERICSSON_MULTIMEDIA),true)
-
 MULTIMEDIA_SET_PLATFORM := u8500
-include $(MULTIMEDIA_PATH)/linux/build/Defs.mk
-
-endif
+include vendor/st-ericsson/multimedia/linux/build/Defs.mk
 
 # GPS
-BOARD_GPS_LIBRARIES := libgps
+#BOARD_GPS_LIBRARIES := libgps
 
-# Enable STE WiFi Tethering/SoftAPController
+# WiFi Tethering
 WLAN_ENABLE_STE_WIFI_TETHERING := true
 
 # WiFi Configuration
@@ -139,13 +135,11 @@ TARGET_PROVIDES_RECOVERY_INIT_RC := true
 
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/soc0/musb-ux500.0/musb-hdrc/gadget/lun%d/file"
 
-MM_PACKAGE ?= $(ANDROID_BUILD_TOP)/vendor/st-ericsson/u8500/restricted
+#MM_PACKAGE ?= $(ANDROID_BUILD_TOP)/vendor/st-ericsson/u8500/restricted
 
-#TARGET_SHELL := ash
-
-ifeq ($(HOST_OS),linux)
-WITH_DEXPREOPT := false
-endif
+#ifeq ($(HOST_OS),linux)
+#WITH_DEXPREOPT := false
+#endif
 
 # Set to true for platforms with 32 byte L2 cache line.
 # Set to false for platforms with 64 byte L2 cache line.
@@ -175,28 +169,18 @@ LIBCUTILS_MEMSET32_NEON_DIVIDER := 158
 
 CROSS_COMPILE := arm-eabi-
 
-################################################################################
 ## PV/MediaPlayer related settings
 BUILD_PV_VIDEO_ENCODERS:=1
 BUILD_PV_2WAY:=1
 BUILD_PV_TEST_APPS:=1
 BUILD_WITHOUT_PV:=false
 
-################################################################################
 ## ENABLE STAGEFRIGHT and STE CODECS IN STAGEFRIGHT
 BUILD_WITH_FULL_STAGEFRIGHT:=true
 STE_CODECS_IN_STAGEFRIGHT:=true
 
-################################################################################
-
 # To enable AT parser plugin
 AT_PLUGIN_ON := false
-
-# Kernel firmware settings
-KERNEL_FIRMWARE_ENABLE_FEATURE_BT := true
-KERNEL_FIRMWARE_ENABLE_FEATURE_FM := true
-KERNEL_FIRMWARE_ENABLE_FEATURE_WLAN := true
-KERNEL_FIRMWARE_ENABLE_FEATURE_HDMI := false
 
 # RIL configuration
 RIL_ENABLE_FEATURE_RIL := true
@@ -350,11 +334,3 @@ FMRADIO_CG2900_ENABLE_FEATURE_VENDOR_DRIVE := true
 
 # CG29XX Configuration
 STE_CG29XX_CTRL_ENABLE_FEATURE_STE_CG29XX_CTRL := true
-
-# CSPSA settings
-#CSPSA_SET_DEFAULT_CSPSA_IMAGES := u8500_default_cspsa.bin u8500_default_cspsa.gdf
-#CSPSA_IMAGE_ENABLE_MODEM_PARAMETERS ?= true
-
-# Pickup the right bluetooth's Sim Access Profile backend driver
-# Available values: MAL, CAIF
-#BLUETOOTH_ENABLE_FEATURE_SAP_BACKEND := MAL

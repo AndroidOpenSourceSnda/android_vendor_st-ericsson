@@ -1,7 +1,6 @@
 import /init.${ro.hardware}.usb.rc
 
 on init
-
     # setup the global environment
     export OMX_STE_ENS_COMPONENTS_DIR /system/lib/ste_omxcomponents/
     export OMX_BELLAGIO_LOADER_REGISTRY /system/omxloaders
@@ -23,7 +22,7 @@ on init
     write /proc/sys/kernel/sched_rt_runtime_us 9500000
 
     # create /tmp directory needed by psccd and CSPSA
-    mkdir /tmp
+    symlink /dev/socket /tmp
 
     # mount debugfs in order for Audio ADM component to retrieve debug information
     mkdir /debug
@@ -69,12 +68,9 @@ on post-fs
     chmod 0660 /sys/power/wake_unlock
 
 on post-fs-data
-
     # create basic filesystem structure
     mkdir /data/misc/hcid 0770 bluetooth bluetooth
     mkdir /data/misc/psdata
-    mkdir /data/misc/wifi/sockets 0770 wifi wifi
-    chmod 0770 /data/misc/wifi/wpa_supplicant.conf
 
     # Create directory for STE OMX debug logs
     mkdir /data/ste-debug 0777 root root
@@ -82,6 +78,8 @@ on post-fs-data
     # Setup paths used for socket communication with the wpa supplicant.
     mkdir /data/system 0775 system system
     chown system system /data/system
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    chmod 0770 /data/misc/wifi/wpa_supplicant.conf
 
     # Setup paths used for socket communication with the dhcp daemon(dhcpd)
     mkdir /data/misc/dhcp 0770 dhcp dhcp
@@ -158,9 +156,6 @@ on boot
     # Define support for SIM card hot swap
     setprop icc.hotswap supported
 
-    # Install cw1200_core WLAN module
-    #insmod /system/lib/modules/cw1200_core.ko
-
     # Modem
     class_start modem
     class_start default
@@ -205,8 +200,7 @@ service phonet-netdev /system/bin/ifconfig upnlink0 up
 service modem /system/bin/sh /system/etc/ste_modem.sh
     class modem-u8500
     user root
-    group radio system
-    capability NET_ADMIN
+    group radio
 
 # Modem-supervisor
 service modem-supervisor /system/bin/modem-supervisor -r -f /dev/dbx500_mloader_fw -i /sys/devices/platform/ab8500-i2c.0/chip_id -c monitor
@@ -224,6 +218,12 @@ service modem_log_relay /system/bin/modem_log_relay --ctrl_port=2001 --data_port
     class modem
     user root
 
+on property:persist.modem.log.service=1
+    start modem_log_relay
+
+on property:persist.modem.log.service=0
+    stop modem_log_relay
+
 service admsrv /system/bin/logwrapper /system/bin/admsrv
     class main
     user root
@@ -234,17 +234,13 @@ service admsrv /system/bin/logwrapper /system/bin/admsrv
 service ste-cg29xx_ctrl /system/bin/logwrapper /system/xbin/ste-cg29xx_ctrl -b 115200 -p 6 -l 23 -i /system/bin/cg2900-channel_init.sh /dev/ttyAMA0
     class main
     user root
-    group bluetooth net_bt_admin misc root system
+    group bluetooth net_bt_admin misc root
     oneshot
 
-# DHCP client for Bluetooth PANU
-service dhcpcd_bnep0 /system/bin/logwrapper /system/bin/dhcpcd -dABKL
+service pand /system/bin/logwrapper /system/bin/pand -s -n -M -A -E -r NAP -u /system/bin/blue-up.sh
     class main
-    disabled
-    oneshot
-
-service iprenew_bnep0 /system/bin/logwrapper /system/bin/dhcpcd -n
-    class main
+    user root
+    group bluetooth net_bt_admin misc
     disabled
     oneshot
 
@@ -263,9 +259,26 @@ service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -Dnl802
     disabled
     oneshot
 
+service p2p_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -Dnl80211 -iwlan0 -c/data/misc/wifi/p2p_supplicant.conf -dd
+    class main
+    socket wpa_wlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
 service softap /system/bin/logwrapper /system/bin/wpa_supplicant -Dnl80211 -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf -dd
     class main
     socket wpa_wlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
+# DHCP client for Bluetooth PANU
+service dhcpcd_bnep0 /system/bin/logwrapper /system/bin/dhcpcd -dABKL
+    class main
+    disabled
+    oneshot
+
+service iprenew_bnep0 /system/bin/logwrapper /system/bin/dhcpcd -n
+    class main
     disabled
     oneshot
 
