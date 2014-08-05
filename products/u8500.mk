@@ -369,6 +369,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/st-ericsson/u8500/vold.fstab:system/etc/vold.fstab
 
+# Fstab files
+PRODUCT_COPY_FILES += \
+    vendor/st-ericsson/u8500/fstab.st-ericsson:root/fstab.st-ericsson
+
 # Bluetooth configs
 PRODUCT_COPY_FILES += \
     system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf

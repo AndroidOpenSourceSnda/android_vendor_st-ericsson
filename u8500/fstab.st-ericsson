@@ -1,0 +1,6 @@
+# Android fstab file.
+
+/dev/block/mmcblk0p1  /modemfs ext4  nosuid,nodev                                     wait,check
+/dev/block/mmcblk0p2  /system  ext4  rw                                               wait
+/dev/block/mmcblk0p5  /data    ext4  nosuid,nodev,nodelalloc,noauto_da_alloc,discard  wait,check
+/dev/block/mmcblk0p4  /cache   ext4  nosuid,nodev,nodelalloc,noauto_da_alloc,discard  wait,check

@@ -30,18 +30,12 @@ on fs
 
     # mount mtd partitions
     # Mount /system rw first to give the filesystem a chance to save a checkpoint
-    mount ext4 /dev/block/mmcblk0p2 /system ro
+    mount_all fstab.st-ericsson
 
     # Start CSPSA before synchronously running the factory reset utility that
     # checks the factory reset triggers in sysfs and CSPSA and then formats
     # the block device belonging to /data.
     start cspsa
-
-    # Once any factory reset is completed (this is why exec is used above) it is
-    # OK to mount the remaining file system volumes.
-    mount ext4 /dev/block/mmcblk0p4 /cache nosuid nodev nodelalloc,noauto_da_alloc,discard
-    mount ext4 /dev/block/mmcblk0p5 /data nosuid nodev nodelalloc,noauto_da_alloc,discard
-    mount ext4 /dev/block/mmcblk0p1 /modemfs nosuid nodev
 
 on post-fs
     chown radio radio /modemfs
