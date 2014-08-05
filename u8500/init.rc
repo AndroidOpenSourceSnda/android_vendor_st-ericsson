@@ -395,7 +395,7 @@ service ril-daemon /system/bin/rild
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_r sdcard_rw log
+    group radio cache inet misc audio sdcard_r sdcard_rw log dbus_access
 
 service surfaceflinger /system/bin/surfaceflinger
     class main
@@ -419,7 +419,7 @@ service drm /system/bin/drmserver
 service media /system/bin/logwrapper /system/bin/mediaserver
     class main
     user media
-    group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc
+    group system audio camera inet net_bt net_bt_admin net_bw_acct drmrpc input sdcard_rw shell
     ioprio rt 4
 
 service bootanim /system/bin/bootanimation
@@ -436,7 +436,7 @@ service dbus /system/bin/logwrapper /system/bin/dbus-daemon --system --nofork
     user bluetooth
     group bluetooth net_bt_admin dbus_access
 
-service bluetoothd /system/bin/logwrapper /system/bin/bluetoothd -d -n
+service bluetoothd /system/bin/logwrapper /system/bin/bluetoothd -n
     class main
     socket bluetooth stream 660 bluetooth bluetooth
     socket dbus_bluetooth stream 660 bluetooth bluetooth
