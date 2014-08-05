@@ -67,6 +67,9 @@ CAMERA_SET_SECONDARY_SENSOR ?= MT9V113
 CAMERA_PRIMARY_TYPE = YUV
 CAMERA_SECONDARY_TYPE = YUV
 
+# Dumpstate
+BOARD_LIB_DUMPSTATE := libdumpstate.montblanc
+
 # FM
 BOARD_USES_STE_FM := true
 COMMON_GLOBAL_CFLAGS += -DSTE_FM
@@ -171,9 +174,6 @@ BIONIC_MEMSET_NEON_DIVIDER := 132
 LIBCUTILS_MEMSET32_NEON_DIVIDER := 158
 
 CROSS_COMPILE := arm-eabi-
-
-# Dumpstate
-BOARD_LIB_DUMPSTATE=libdumpstate
 
 ################################################################################
 ## PV/MediaPlayer related settings
@@ -352,9 +352,9 @@ FMRADIO_CG2900_ENABLE_FEATURE_VENDOR_DRIVE := true
 STE_CG29XX_CTRL_ENABLE_FEATURE_STE_CG29XX_CTRL := true
 
 # CSPSA settings
-CSPSA_SET_DEFAULT_CSPSA_IMAGES := u8500_default_cspsa.bin u8500_default_cspsa.gdf
-CSPSA_IMAGE_ENABLE_MODEM_PARAMETERS ?= true
+#CSPSA_SET_DEFAULT_CSPSA_IMAGES := u8500_default_cspsa.bin u8500_default_cspsa.gdf
+#CSPSA_IMAGE_ENABLE_MODEM_PARAMETERS ?= true
 
 # Pickup the right bluetooth's Sim Access Profile backend driver
 # Available values: MAL, CAIF
-BLUETOOTH_ENABLE_FEATURE_SAP_BACKEND := MAL
+#BLUETOOTH_ENABLE_FEATURE_SAP_BACKEND := MAL
