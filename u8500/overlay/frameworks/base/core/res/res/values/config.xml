@@ -121,10 +121,15 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>50</item>
-        <item>800</item>
-        <item>2000</item>
-        <item>5000</item>
+        <item>75</item>
+        <item>100</item>
+        <item>420</item>
+        <item>673</item>
+        <item>1248</item>
+        <item>2099</item>
+        <item>4422</item>
+        <item>10724</item>
+        <item>16724</item>
     </integer-array>
 
 
