@@ -67,18 +67,18 @@ USE_OPENGL_RENDERER := true
 TARGET_PROVIDES_LIBLIGHT := true
 
 # Path
-#ACCESS_SERVICES_PATH := $(TOP)/vendor/st-ericsson/access_services
-#CONNECTIVITY_PATH := $(TOP)/vendor/st-ericsson/connectivity
+ACCESS_SERVICES_PATH := $(TOP)/vendor/st-ericsson/access_services
+CONNECTIVITY_PATH := $(TOP)/vendor/st-ericsson/connectivity
 MULTIMEDIA_PATH := $(TOPDIR)vendor/st-ericsson/multimedia
-#PROCESSING_PATH := $(TOP)/vendor/st-ericsson/processing
-#STORAGE_PATH := $(TOP)/vendor/st-ericsson/storage
-#BASE_UTILITIES_PATH := $(TOP)/vendor/st-ericsson/base_utilities
-#TOOLS_PATH := $(TOP)/vendor/st-ericsson/tools
-#APPS_PATH := $(TOP)/vendor/st-ericsson/apps
-#HARDWARE_PATH := $(TOP)/vendor/st-ericsson/hardware
-#EXTERNAL_PATH := $(TOP)/vendor/st-ericsson/external
-#MODEM_PATH :=$(TOP)/modem/u8500
-#GRALLOC_PATH := $(HARDWARE_PATH)/libgralloc
+PROCESSING_PATH := $(TOP)/vendor/st-ericsson/processing
+STORAGE_PATH := $(TOP)/vendor/st-ericsson/storage
+BASE_UTILITIES_PATH := $(TOP)/vendor/st-ericsson/base_utilities
+TOOLS_PATH := $(TOP)/vendor/st-ericsson/tools
+APPS_PATH := $(TOP)/vendor/st-ericsson/apps
+HARDWARE_PATH := $(TOP)/vendor/st-ericsson/hardware
+EXTERNAL_PATH := $(TOP)/vendor/st-ericsson/external
+MODEM_PATH :=$(TOP)/modem/u8500
+GRALLOC_PATH := $(HARDWARE_PATH)/libgralloc
 
 # Media
 TARGET_USE_ST_ERICSSON_MULTIMEDIA := true
