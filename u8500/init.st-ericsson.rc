@@ -100,6 +100,8 @@ on post-fs-data
     # Create Directory for Caching files for camera
     mkdir /data/tuning 0700 media camera
 
+    mkdir /data/etc 0660 system system
+
 on early-boot
     # Start the offline charging
     exec /system/bin/chargemode
