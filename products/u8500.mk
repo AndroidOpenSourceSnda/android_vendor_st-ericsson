@@ -194,7 +194,6 @@ PRODUCT_PACKAGES += \
 
 # Tools
 PRODUCT_PACKAGES += \
-    stedump \
     modem_log_relay
 
 # Network

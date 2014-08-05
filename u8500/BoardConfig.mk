@@ -299,7 +299,7 @@ ADM_VERSION := u8500
 
 ## Set true to exclude ADM cscall functionality
 ## Set false to include ADM cscall functionality
-ADM_DISABLE_FEATURE_CSCALL := false
+ADM_DISABLE_FEATURE_CSCALL := true
 
 # Set u8500 as platform type in COPS
 COPS_PLATFORM_TYPE := 8500
@@ -333,8 +333,8 @@ LBS_SET_GNSSCHIP_VER := CG2900
 
 # Enable speech and audio probes
 # WARNING: This feature should be disabled (set to false) in production software
-MMPROBE_ENABLE_FEATURE_MMPROBE := true
-CSCALL_ENABLE_SILENT_REBOOT_SUPPORT := true
+MMPROBE_ENABLE_FEATURE_MMPROBE := false
+CSCALL_ENABLE_SILENT_REBOOT_SUPPORT := false
 
 # SurfaceFlinger configuration
 # Enable dim with texture
