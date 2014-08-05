@@ -29,6 +29,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
    persist.sys.strictmode.disable=1 \
    persist.sys.strictmode.visual=0
 
+# Enabled Mass Storage Mode
+PRODUCT_PROPERTY_OVERRIDES += \
+   persist.sys.usb.config=mass_storage,acm,adb
+
 # Enable Debug mode
 ADDITIONAL_DEFAULT_PROPERTIES += ro.debuggable=1
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
@@ -243,6 +247,14 @@ PRODUCT_PACKAGES += \
     st-ericsson-multimedia-package \
     chargemode \
     battery_params
+
+# Torch
+PRODUCT_PACKAGES += \
+   Torch
+
+# Misc
+PRODUCT_PACKAGES += \
+   com.android.future.usb.accessory
 
 # FM Radio library name is dependent on whether it is RX+TX/RX/TX
 # set one of these to true to get RX or TX only
