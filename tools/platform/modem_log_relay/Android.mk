@@ -39,6 +39,7 @@ LOCAL_SRC_FILES:= \
 	rilhandler.c
 
 LOCAL_SHARED_LIBRARIES := \
+	libcutils \
 	libutils \
 	libphonet \
 	libmalmon \

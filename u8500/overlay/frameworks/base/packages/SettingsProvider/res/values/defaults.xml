@@ -20,4 +20,7 @@
 	<!-- screen brightness automatic mode  -->
     <bool name="def_screen_brightness_automatic_mode">true</bool>
 
+    <fraction name="def_window_animation_scale">100%</fraction>
+    <fraction name="def_window_transition_scale">100%</fraction>
+
 </resources>
