@@ -275,10 +275,11 @@ PRODUCT_COPY_FILES += \
     vendor/st-ericsson/u8500/media_profiles_u8500.xml:system/etc/media_profiles.xml \
     vendor/st-ericsson/u8500/media_codecs_u8500.xml:system/etc/media_codecs.xml
 
-# Install WLAN BT Addr script
+# Install script
 PRODUCT_COPY_FILES += \
     vendor/st-ericsson/u8500/install_bt_core.sh:system/etc/install_bt_core.sh \
-    vendor/st-ericsson/u8500/install_wlan_core.sh:system/etc/install_wlan_core.sh
+    vendor/st-ericsson/u8500/install_wlan_core.sh:system/etc/install_wlan_core.sh \
+    vendor/st-ericsson/u8500/install_script.sh:system/etc/install_script.sh
 
 # CG2900 initialization script
 PRODUCT_COPY_FILES += \

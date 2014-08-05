@@ -76,36 +76,8 @@ on post-fs-data
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     chmod 0770 /data/misc/wifi/wpa_supplicant.conf
 
-    # give system access to ril_config
-    cp -f /system/etc/ril_config /data/misc/ril_config
-    chmod 0660 /data/misc/ril_config
-    chown root radio /data/misc/ril_config
-
     # Create directory for STE OMX debug logs
     mkdir /data/ste-debug 0777 root root
-
-    # give system access to sterc_script when enabling usb nap
-    cp -f /system/etc/psdata/sterc_conf /data/misc/psdata/sterc_conf
-    cp -f /system/etc/psdata/sterc_script_connect /data/misc/psdata/sterc_script_connect
-    cp -f /system/etc/psdata/sterc_script_disconnect /data/misc/psdata/sterc_script_disconnect
-    cp -f /system/etc/psdata/sterc_conf_alt /data/misc/psdata/sterc_conf_alt
-    cp -f /system/etc/psdata/sterc_script_connect_alt /data/misc/psdata/sterc_script_connect_alt
-    cp -f /system/etc/psdata/sterc_script_connect_dun /data/misc/psdata/sterc_script_connect_dun
-    cp -f /system/etc/psdata/sterc_script_disconnect_dun /data/misc/psdata/sterc_script_disconnect_dun
-    chmod 0660 /data/misc/psdata/sterc_conf
-    chmod 0500 /data/misc/psdata/sterc_script_connect
-    chmod 0500 /data/misc/psdata/sterc_script_disconnect
-    chmod 0660 /data/misc/psdata/sterc_conf_alt
-    chmod 0500 /data/misc/psdata/sterc_script_connect_alt
-    chmod 0500 /data/misc/psdata/sterc_script_connect_dun
-    chmod 0500 /data/misc/psdata/sterc_script_disconnect_dun
-    chown root radio /data/misc/psdata/sterc_conf
-    chown root radio /data/misc/psdata/sterc_conf_alt
-
-    # give system access to stepscc_conf
-    cp -f /system/etc/psdata/stepscc_conf /data/misc/psdata/stepscc_conf
-    chmod 0660 /data/misc/psdata/stepscc_conf
-    chown root radio /data/misc/psdata/stepscc_conf
 
     # Setup paths used for socket communication with the wpa supplicant.
     mkdir /data/system 0775 system system
@@ -120,9 +92,6 @@ on post-fs-data
     chmod 0600 /dev/db8500-modem-trace
     chown system system /dev/dbx500_mloader_fw
     chmod 0600 /dev/dbx500_mloader_fw
-
-    # Change permissions for modem_log_relay config file
-    chmod 666 /data/misc/trace_auto.conf
 
     # set proper access to modem storage pipe
     chown radio radio /dev/rpc
@@ -204,6 +173,11 @@ service wlan_core /system/bin/sh /system/etc/install_wlan_core.sh
 
 # Install BT Addr
 service bt_core /system/bin/sh /system/etc/install_bt_core.sh
+    user root
+    oneshot
+
+# Install script
+service script /system/bin/sh /system/etc/install_script.sh
     user root
     oneshot
 
