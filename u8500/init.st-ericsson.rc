@@ -1,12 +1,15 @@
 import /init.${ro.hardware}.usb.rc
 
 on init
-    export EXTERNAL_STORAGE /storage/sdcard0
+
+    # setup the global environment
     export OMX_STE_ENS_COMPONENTS_DIR /system/lib/ste_omxcomponents/
     export OMX_BELLAGIO_LOADER_REGISTRY /system/omxloaders
 
     # create mountpoints
-    mkdir /storage/sdcard0 0000 system system
+    export EXTERNAL_STORAGE /storage/sdcard0
+    mkdir /storage 0775 system system
+    mkdir /storage/sdcard0 0775 system system
     symlink /storage/sdcard0 /sdcard
     symlink /storage/sdcard0 /mnt/sdcard
 
