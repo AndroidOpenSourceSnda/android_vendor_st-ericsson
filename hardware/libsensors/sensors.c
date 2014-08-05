@@ -53,17 +53,7 @@
 #include <string.h>
 #include <errno.h>
 
-#ifdef SENSORS_U8500
 #include "sensors_u8500.h"
-#endif
-
-#ifdef SENSORS_U5500
-#include "sensors_u5500.h"
-#endif
-
-#ifdef SENSORS_U9540
-#include "sensors_u9540.h"
-#endif
 #include "Tsl27713.h"
 
 static unsigned int count_mag;
@@ -114,11 +104,6 @@ char orien_thread_exit;
 char prox_thread_exit  = 1;
 char lux_thread_exit;
 char press_thread_exit;
-
-#ifdef SENSORS_U9540
-void *pressure_getdata();
-char pres_thread_exit;
-#endif
 
 static Sensor_data sensor_data;
 
@@ -582,53 +567,6 @@ static int activate_orientation(int enable)
 	return ret;
 }
 
-#ifdef SENSORS_U9540
-static int activate_pressure(int enable)
-{
-	int ret = -1;
-	pthread_attr_t attr;
-	pthread_t thread = -1;
-
-	if (enable) {
-		if (count_pressure == 0) {
-			/*
-			 * check for the file path
-			 * Initialize pres_thread_exit flag
-			 * every time thread is created
-			 */
-			ret = write_cmd(PATH_MODE_PRS, LPS331AP_ENABLE , 2);
-			if (ret != -ENODEV) {
-			  pres_thread_exit = 0;
-			  pthread_attr_init(&attr);
-			  /*
-			   * Create thread in detached state, so that we
-			   * need not join to clear its resources
-			   */
-			  pthread_attr_setdetachstate(&attr,
-					PTHREAD_CREATE_DETACHED);
-			  ret = pthread_create(&thread, &attr,
-					pressure_getdata, NULL);
-			  pthread_attr_destroy(&attr);
-			  count_pressure++;
-			}
-		} else {
-			count_pressure++;
-		}
-	} else {
-		if (count_pressure == 0)
-			return 0;
-		count_pressure--;
-		if (count_pressure == 0) {
-			/*
-			 * Enable pres_thread_exit to exit the thread
-			 */
-			pres_thread_exit = 1;
-			write_cmd(PATH_MODE_PRS, LPS331AP_DISABLE , 2);
-		}
-	}
-	return ret;
-}
-#else
 static int activate_pressure(int enable)
 {
 	int ret = 0;
@@ -668,7 +606,6 @@ static int activate_pressure(int enable)
 	}
 	return ret;
 }
-#endif
 
 static int poll_accelerometer(sensors_event_t *values)
 {
@@ -1271,52 +1208,6 @@ void *lux_getdata()
 	return NULL;
 }
 
-
-
-#ifdef SENSORS_U9540
-void *pressure_getdata()
-{
-	int fd = -1,retval = -1;
-	fd_set read_set;
-	struct input_event ev;
-	struct timeval tv;
-	int size = sizeof(struct input_event);
-	sensors_event_t data;
-
-	/* Initialize the structures */
-	memset(&ev, 0x00, sizeof(ev));
-	memset(&tv, 0x00, sizeof(tv));
-	/* open input device */
-	if ((fd = open(PATH_DATA_PRS, O_RDONLY)) > 0) {
-		while (!pres_thread_exit) {
-			/* Intialize the read descriptor */
-			FD_ZERO(&read_set);
-			FD_SET(fd,&read_set);
-			/* Wait up to 0.5 seconds. */
-			tv.tv_sec = 0 ;
-			tv.tv_usec = 500000;
-			retval = select(fd+1, &read_set, NULL, NULL, &tv);
-			if ((retval > 0) && count_pressure) {
-				/* FD_ISSET(0, &rfds) will be true. */
-				if (FD_ISSET(fd, &read_set)) {
-					read(fd, &ev, size );
-					if (ABS_PRESSURE == ev.code) {
-						/* normalize the pressure - shouldn't this be done via sensors.conf? */
-						data.pressure = ev.value/4096;
-						data.sensor = HANDLE_PRESSURE;
-						data.type = SENSOR_TYPE_PRESSURE;
-						data.version = sizeof(struct sensors_event_t);
-						/* queue the element */
-						add_queue(HANDLE_PRESSURE, data);
-					}
-				}
-			}
-		}
-		close(fd);
-	}
-	return NULL;
-}
-#else
 static int poll_pressure(sensors_event_t *values)
 {
 	int fd;
@@ -1360,7 +1251,6 @@ void *press_getdata()
 	}
 	return NULL;
 }
-#endif
 
 static void set_accel_path()
 {
@@ -1368,7 +1258,7 @@ static void set_accel_path()
 	 * check the board and Accelerometer CHIP ID
 	 * and set the paths accordingly
 	 */
-	#if defined SENSORS_U8500 || defined SENSORS_U9540
+#ifdef SENSORS_U8500
 	if (acc_id == LSM303DLH_CHIP_ID) {
 		strncpy(sensor_data.path_mode, PATH_MODE_ACC, (MAX_LENGTH - 1));
 		strncpy(sensor_data.path_range, PATH_RANGE_ACC, (MAX_LENGTH - 1));
@@ -1381,13 +1271,7 @@ static void set_accel_path()
 		strncpy(sensor_data.path_data, PATH_DATA_DLHC_ACC, (MAX_LENGTH - 1));
 		strcpy(sensor_data.magn_range, LSM303DLHC_M_RANGE_4_0G);
 	}
-	#endif
-	#ifdef SENSORS_U5500
-	strncpy(sensor_data.path_mode, PATH_MODE_ACC, (MAX_LENGTH - 1));
-	strncpy(sensor_data.path_range, PATH_RANGE_ACC, (MAX_LENGTH - 1));
-	strncpy(sensor_data.path_data, PATH_DATA_ACC, (MAX_LENGTH - 1));
-	strcpy(sensor_data.magn_range, LSM303DLH_M_RANGE_4_0G);
-	#endif
+#endif
 }
 
 static int m_open_sensors(const struct hw_module_t *module,
