@@ -188,7 +188,7 @@ on boot
     setprop icc.hotswap supported
 
     # Install cw1200_core WLAN module
-    insmod /system/lib/modules/cw1200_core.ko
+    #insmod /system/lib/modules/cw1200_core.ko
 
     # Modem
     class_start modem
@@ -196,6 +196,16 @@ on boot
 
     # Enable wide-band speech for Bluetooth
     setprop bt.hfp.wideband 1
+
+# Install CW1200 WLAN core driver
+service wlan_core /system/bin/sh /system/etc/install_wlan_core.sh
+    user root
+    oneshot
+
+# Install BT Addr
+service bt_core /system/bin/sh /system/etc/install_bt_core.sh
+    user root
+    oneshot
 
 # Crash Safe Parameter Storage Area, serving production parameter requests from clients.
 # Configuration is read from file "/etc/cspsa.conf" and each found area spawns a CSPSA server
