@@ -341,7 +341,7 @@ PRODUCT_PACKAGES += \
     libnlcom \
     libpscc \
     libsterc \
-    libstecom
+    libstecom \
     ppp_sterc \
     psccd \
     stercd \
