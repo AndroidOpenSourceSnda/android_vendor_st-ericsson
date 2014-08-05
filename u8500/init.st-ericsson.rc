@@ -1,4 +1,4 @@
-import init.${ro.hardware}.usb.rc
+import /init.${ro.hardware}.usb.rc
 
 on init
     export EXTERNAL_STORAGE /storage/sdcard0
@@ -38,6 +38,7 @@ on fs
     start cspsa
 
 on post-fs
+
     chown radio radio /modemfs
     chmod 0770 /modemfs
     chown radio radio /modemfs/CONF
@@ -54,6 +55,15 @@ on post-fs
     chmod 0644 /modemfs/PERM/PROT/LABEP.CFG
     chown radio radio /modemfs/PERM/PROT/PPVALUES.DAT
     chmod 0644 /modemfs/PERM/PROT/PPVALUES.DAT
+
+    # Set permissions for wake locks before services are launched that use them
+    chown system system /sys/power/state
+    chown system system /sys/power/wakeup_count
+    chown radio system /sys/power/wake_lock
+    chown radio system /sys/power/wake_unlock
+    chmod 0660 /sys/power/state
+    chmod 0660 /sys/power/wake_lock
+    chmod 0660 /sys/power/wake_unlock
 
 on post-fs-data
 
@@ -119,6 +129,8 @@ on post-fs-data
     mkdir /data/tuning 0700 media camera
 
 on early-boot
+    # Start the offline charging
+    exec /system/bin/chargemode
 
     # Launch core services in case charging mode is entered
     start watchdog-kicker
@@ -129,8 +141,6 @@ on early-boot
 
     # Enable autonomous power management in CM
     write /sys/module/cm/parameters/enable_auto_pm 1
-
-    exec /system/bin/chargemode
 
 on boot
 
