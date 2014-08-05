@@ -249,8 +249,8 @@ PRODUCT_PACKAGES += \
     battery_params
 
 # Torch
-PRODUCT_PACKAGES += \
-   Torch
+#PRODUCT_PACKAGES += \
+#   Torch
 
 # Misc
 PRODUCT_PACKAGES += \
