@@ -372,7 +372,7 @@ PRODUCT_PACKAGES += \
 # Misc
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
-    Stk
+    Stk \
     Superuser \
     su
 
