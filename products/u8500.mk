@@ -147,7 +147,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES +=  \
     modem-supervisor \
     ste_mad \
-    telephony_log_levels
+    telephony_log_levels \
+    trace_auto.conf
 
 # AT-Core
 PRODUCT_PACKAGES += \
