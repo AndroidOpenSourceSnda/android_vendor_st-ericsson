@@ -23,11 +23,11 @@
 #include "AFM_Utils.h"
 
 
-#ifdef MMPROBE_ENABLED
+//#ifdef MMPROBE_ENABLED
 // MMProbe framework
 #include "t_mm_probe.h"
 #include "r_mm_probe.h"
-#endif
+//#endif
 
 // OST framework
 #include "OstTraceDefinitions_ste.h"

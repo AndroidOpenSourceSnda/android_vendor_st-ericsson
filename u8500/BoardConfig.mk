@@ -3,6 +3,20 @@ ENABLE_ST_ERICSSON_BUILD := true
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := vendor/st-ericsson/include
 
+# Path
+ACCESS_SERVICES_PATH := $(TOP)/vendor/st-ericsson/access_services
+CONNECTIVITY_PATH := $(TOP)/vendor/st-ericsson/connectivity
+MULTIMEDIA_PATH := $(TOPDIR)vendor/st-ericsson/multimedia
+PROCESSING_PATH := $(TOP)/vendor/st-ericsson/processing
+STORAGE_PATH := $(TOP)/vendor/st-ericsson/storage
+BASE_UTILITIES_PATH := $(TOP)/vendor/st-ericsson/base_utilities
+TOOLS_PATH := $(TOP)/vendor/st-ericsson/tools
+APPS_PATH := $(TOP)/vendor/st-ericsson/apps
+HARDWARE_PATH := $(TOP)/vendor/st-ericsson/hardware
+EXTERNAL_PATH := $(TOP)/vendor/st-ericsson/external
+MODEM_PATH :=$(TOP)/modem/u8500
+GRALLOC_PATH := $(HARDWARE_PATH)/libgralloc
+
 # Assert
 TARGET_OTA_ASSERT_DEVICE := u8500,s1w_u8500
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := vendor/st-ericsson/u8500/releasetools/snda_ota_from_target_files
@@ -65,20 +79,6 @@ USE_OPENGL_RENDERER := true
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
-
-# Path
-ACCESS_SERVICES_PATH := $(TOP)/vendor/st-ericsson/access_services
-CONNECTIVITY_PATH := $(TOP)/vendor/st-ericsson/connectivity
-MULTIMEDIA_PATH := $(TOPDIR)vendor/st-ericsson/multimedia
-PROCESSING_PATH := $(TOP)/vendor/st-ericsson/processing
-STORAGE_PATH := $(TOP)/vendor/st-ericsson/storage
-BASE_UTILITIES_PATH := $(TOP)/vendor/st-ericsson/base_utilities
-TOOLS_PATH := $(TOP)/vendor/st-ericsson/tools
-APPS_PATH := $(TOP)/vendor/st-ericsson/apps
-HARDWARE_PATH := $(TOP)/vendor/st-ericsson/hardware
-EXTERNAL_PATH := $(TOP)/vendor/st-ericsson/external
-MODEM_PATH :=$(TOP)/modem/u8500
-GRALLOC_PATH := $(HARDWARE_PATH)/libgralloc
 
 # Media
 TARGET_USE_ST_ERICSSON_MULTIMEDIA := true
@@ -318,7 +318,7 @@ LBS_SET_GNSSCHIP_VER := CG2900
 # Enable speech and audio probes
 # WARNING: This feature should be disabled (set to false) in production software
 MMPROBE_ENABLE_FEATURE_MMPROBE := false
-CSCALL_ENABLE_SILENT_REBOOT_SUPPORT := false
+CSCALL_ENABLE_SILENT_REBOOT_SUPPORT := true
 
 # SurfaceFlinger configuration
 # Enable dim with texture
