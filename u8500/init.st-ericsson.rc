@@ -376,3 +376,16 @@ service usbid_init /system/bin/usbid_init.sh
 service zram_config /system/bin/sh /system/etc/zram_config.sh
     class main
     oneshot
+
+# Regulatory domain handling
+service initial_regdom /system/bin/iw reg set US
+    disabled
+    oneshot
+
+# To prevent connection to channel 12, 13 in flight mode/no coverage/no sim case at startup.
+on property:wlan.driver.status=ok
+   start initial_regdom
+
+# To prevent connection to channel 12, 13 in flight mode
+on property:init.svc.wpa_supplicant=stopped
+   start initial_regdom

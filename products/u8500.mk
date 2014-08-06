@@ -195,7 +195,8 @@ PRODUCT_PACKAGES += \
 
 # Network
 PRODUCT_PACKAGES += \
-    libnl
+    libnl \
+    iw
 
 # WIFi crda
 PRODUCT_PACKAGES += \
