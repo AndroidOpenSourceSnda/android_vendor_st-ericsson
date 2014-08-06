@@ -203,8 +203,8 @@ PRODUCT_PACKAGES += \
     crda \
     regdbdump \
     regulatory.bin \
-#    85-regulatory.rules
-#    intersect \
+    linville.key.pub.pem \
+    85-regulatory.rules
 
 # Camera
 PRODUCT_PACKAGES += \
